@@ -1,0 +1,25 @@
+package comIheritance.java;
+
+class Flower{ // hybrid inheritance
+	void print() {
+		System.out.println("There are different flowers that have different colors");
+	}}
+class Rose extends Flower{
+	String color1 = "Red";}
+
+	class Tulip extends Rose{    // Multilevel inheritance
+		String color2 = "Yellow";	}
+class Hydrangea extends Flower{     // Heirarchical inheritance
+String color3 = "Purple";}
+
+public class Sara {
+	public static void main(String[] args) {
+	Flower k= new Flower();
+	k.print();
+	Tulip obj = new Tulip();
+	Hydrangea h=new Hydrangea();
+	
+		System.out.println("Roses are "+ obj.color1);
+		System.out.println("Tulips are "+ obj.color2);
+		System.out.println("Hydrangeas are "+ h.color3);		
+}}
