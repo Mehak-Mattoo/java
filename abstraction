@@ -1,0 +1,41 @@
+package comIheritance.java;
+
+abstract class School{ 
+	abstract void print();
+
+void print1() {
+}}
+class Teacher extends School{
+	void print() {
+		System.out.println("Hello to everyone");}
+		void print1() {
+			 System.out.println("Welcome to our school");}}
+
+public class Sara {
+public static void main(String[] args) {
+		Teacher s = new Teacher ();
+		s.print();
+		s.print1();		
+	}}
+
+Interface
+package comIheritance.java;
+
+interface Animal{ 
+	 void print();
+}
+interface Panda{
+	void print1();
+	}
+class Tiger implements Animal, Panda {
+public void print() {
+	System.out.println("Pandas are big and black and white in color");}
+	public void print1() {
+		System.out.println("Tigers are orange with black stripes");	}}
+
+public class Sara {
+public static void main(String[] args) {
+		Tiger s = new Tiger ();
+		s.print();
+		s.print1();		
+}}
