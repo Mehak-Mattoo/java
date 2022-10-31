@@ -8,17 +8,17 @@ class Grandparents{
 		System.out.println("I have 2 grandparents ");
 		}
 	}
-class Uncles{
-	void print() {
+class Uncles extends Grandparents{
+	void print(){
 		System.out.println("I have 3 uncles");
 		}
 }
-class Cousins{
+class Cousins extends Uncles{
 void print() {
 	System.out.println("I have 5 cousins ");
 	}
 }
-public class Sara {
+public class Sara extends Cousins {
 	public static void main(String[] args) {
 //Familymembers s= new Familymembers();
 //Grandparents k=  new Grandparents();
