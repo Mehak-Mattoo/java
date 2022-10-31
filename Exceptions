@@ -1,0 +1,28 @@
+	//IOException
+  public static void main(String[] args) throws Exception {	
+	try {
+		File obj = new File("Documents");
+				
+		FileInputStream obj1=  new FileInputStream(obj);
+		System.out.println(obj1.read());
+	}
+	catch(IOException e) {
+		System.out.println("Check file path");;
+    
+    
+    // Arithmetic Exception
+    try {
+			int num1 = 9;
+			int num2 = 0;
+			int result = num1/num2;
+			System.out.println(result);}
+		
+		catch(Exception e) {
+			System.out.println("Check numbers");
+		
+		}
+		finally {
+			System.out.println("Rest of the code");
+		}
+	}}
+
