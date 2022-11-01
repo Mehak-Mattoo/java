@@ -39,3 +39,26 @@ public static void main(String[] args) {
 		s.print();
 		s.print1();		
 }}
+
+
+another example
+
+interface Vegetables{
+	String name1= "Brinjal";
+}
+interface Fruits{
+	String name = "Peach";
+}
+class Tomato implements Vegetables, Fruits{
+	public void run() {
+		System.out.println("Tomato is both");
+	}}
+
+public class Zen {
+public static void main(String[] args) {
+Fruits v = new Tomato();
+Vegetables w= new Tomato();
+Tomato b = new Tomato();
+b.run();
+System.out.println(b.name1 + " is a fruit. "  +b.name+ " is a vegetable");
+}}
