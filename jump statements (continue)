@@ -1,0 +1,24 @@
+class Sum{
+	void run() {
+		for (int j =0;j<=5;j++) {
+	
+		if (j==3) {
+			continue;}
+
+	System.out.println("i is " +j);}}
+}
+public class Zen {
+public static void main(String[] args) {
+	Sum s= new Sum();
+	s.run();
+int i = 0;
+	while(i <= 5) {	i++;
+		
+		if (i ==3) {
+		
+			continue;}
+		
+		System.out.println("value of i is " +i);
+
+	}
+}}
