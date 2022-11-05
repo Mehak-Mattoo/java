@@ -112,3 +112,196 @@ else {
 		  }
 	
 }}
+
+Another approach
+
+package com.Self.java;
+
+import java.util.Scanner;
+
+public class Database {
+	public static void main(String[] args) {
+		int score ;
+	String House;
+	int array[]= {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44};
+		int AttendanceCount;
+		Scanner s = new Scanner(System.in);
+		System.out.println("Enter any student id: ");
+		int i = s.nextInt();
+		
+switch (i) {
+	case 1: {
+		System.out.println("Studnet Name: Arjun Kumar. Roll.Number: "+ array[0]);break;}
+	
+case 2: {
+		System.out.println("Abhishek Kumar. Roll.Number: "+ array[1]);break;}
+
+case 3: {
+	
+	System.out.println("Benny. Roll.Number: "+ array[2]);
+break;}
+case 4: {
+	
+	System.out.println("Baljit kaur");
+break;}
+case 5: {
+	
+	System.out.println("Chahel Singh");
+break;}
+case 6: {
+	
+	System.out.println("Chavvi Pathak");
+break;}
+case 7: {
+	
+	System.out.println("Deepanshu Pant");
+break;}
+case 8: {
+	
+	System.out.println("Delnaaz Arya");
+break;}
+case 9: {
+	
+	System.out.println("Elena James");
+break;}
+case 10: {
+	
+	System.out.println("Falguni Panchal");
+break;}
+case 11: {
+	
+	System.out.println("Gaurav Lamba");
+break;}
+case 12: {
+	
+	System.out.println("Gaurav Singh");
+break;}
+case 13: {
+	
+	System.out.println("Himanshu Bhardwaj");
+break;}
+case 14: {
+	
+	System.out.println("Harshita Pant");
+break;}
+case 15: {
+	
+	System.out.println("Ileana");
+break;}
+case 16: {
+	
+	System.out.println("Jenny ");
+break;}
+case 17: {
+	
+	System.out.println("Jose Cherian");
+break;}
+
+case 18: {
+	
+	System.out.println("Komal Mattoo");
+break;}
+case 19: {
+	
+	System.out.println("Kayanat Sharma");
+break;}
+case 20: {
+	
+	System.out.println("Lara Jean Covey");
+break;}
+case 21: {
+	
+	System.out.println("Lara Dutta");
+break;}
+case 22: {
+	
+	System.out.println("Mehak Mattoo");
+break;}
+case 23: {
+	
+	System.out.println("Manpreet Singh");
+break;}
+case 24: {
+	
+	System.out.println("Naira Seth");
+break;}
+case 25: {
+	
+	System.out.println("Nora Fatehi");
+break;}
+case 26: {
+	
+	System.out.println("Payal Kumari");
+break;}
+case 27: {
+	
+	System.out.println("Patralekha Rao");
+break;}
+case 28: {
+	
+	System.out.println("Fatima Sheik");
+break;}
+case 29: {
+	
+	System.out.println("Riya Rai");
+break;}
+case 30: {
+	
+	System.out.println("Riya Jain");
+break;}
+case 31: {
+	
+	System.out.println("Ritika Kumari");
+break;}
+case 32: {
+	
+	System.out.println("Simran Chauhan");
+break;}
+case 33: {
+	
+	System.out.println("Sara Khan");
+break;}
+case 34: {
+	
+	System.out.println("Tara Sutaria");
+break;}
+case 35: {
+	
+	System.out.println("Tanish Tickoo");
+break;}
+case 36: {
+	
+	System.out.println("Urvashi Rautela");
+break;}
+case 37: {
+	
+	System.out.println("Urmila Rao");
+break;}
+case 38: {
+	
+	System.out.println("Vipul Kumar");
+break;}
+case 39: {
+	
+	System.out.println("Vishal Kumar");
+break;}
+case 40: {
+	
+	System.out.println("Watson");
+break;}
+case 41: {
+	
+	System.out.println("Xavier");
+break;}
+case 42: {
+	
+	System.out.println("Yondu");
+break;}
+case 43: {
+	
+	System.out.println("Zendaya");
+break;}
+
+default: System.out.println("Invalid input");
+	
+}}}
