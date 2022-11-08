@@ -8,5 +8,5 @@
 		 while(num1<=n) {
 			 System.out.print(num1+ ",");
 			 sum= num1+num2;
-			 num1=num2;
+			 num1=num2; // here the value of num2 gets assigned to num1.
 			 num2= sum;}
