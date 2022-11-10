@@ -1,0 +1,9 @@
+		 Scanner s= new Scanner(System.in);
+			 System.out.println("Enter any number:");
+		     int num1= s.nextInt();
+		     System.out.println("Divided by: ");
+		     int num2= s.nextInt();
+		     int Result =num1/num2;
+		     int result =num1%num2;
+		    System.out.println("Quotient is "+Result+ ". Remainder is "+result);
+}}
