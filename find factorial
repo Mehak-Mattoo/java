@@ -1,0 +1,13 @@
+ Scanner s= new Scanner(System.in);
+			 System.out.println("Enter any number:");
+		     int num= s.nextInt();
+		     long factorial = 1; 
+		     
+		     for (int j=1;j<=num;j++) {
+			  factorial*=j;}
+		     
+		     if(num>0) {
+		    	 System.out.println("The factorial of " +num+ " is: " +factorial);
+		     }else {
+			  System.out.println("Not valid");
+		
