@@ -1,0 +1,37 @@
+
+class FirstThread implements Runnable{
+	public void run() {
+		String nameArray[]= {"Arjun Kumar","Abhishek Kumar","Chhaya Singh","Chavvi Kumari","Deepanshu Pant"};
+	
+for (int i=0;i<nameArray.length;i++) {
+			System.out.println(nameArray[i]);}}}
+
+public class AllThreads {
+	public static void main(String[] args) throws InterruptedException {
+		FirstThread s= new FirstThread();
+		Thread t= new Thread();
+		Thread t1= new Thread();
+		Thread t2= new Thread();
+	
+		FirstThread t3= new FirstThread();
+			
+	synchronized (t) {
+		t.setDaemon(true);
+		t.start();
+		t.notify();
+		t.wait();
+		t1.setName("Thread 1 is running");
+		t1.setPriority(8);
+		System.out.println(t.getClass());
+        System.out.println(t3.hashCode());
+		System.out.println(t1.getName());
+		Thread.sleep(800);
+		
+		t1.run();
+		t2.setName("Thread 2 is running");;
+		System.out.println(t2.getName());
+		t3.run();
+		t2.run();
+		t2.sleep(1000);
+		
+	}}}
