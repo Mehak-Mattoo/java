@@ -1,0 +1,116 @@
+import java.util.Scanner;
+
+class Mygame extends Thread{
+	 public void run() {
+		System.out.println("Welcome to my game: The land of Azeroth");}}
+
+class Mycharacter extends Mygame{
+	public Mycharacter() {
+		System.out.println("Enter your name: ");
+		Scanner s=new Scanner(System.in);
+		String characterName= s.nextLine();
+		System.out.println("Hey! Welcome "+ characterName);
+	}}
+class Name extends Mycharacter{
+	 public void run() {
+		 Scanner s=new Scanner(System.in);
+		 System.out.println("Choose: Male or female (Press M or F to continue): ");
+		String gender= s.nextLine();
+		if (gender.equals("M")) {
+System.out.println( "You are a 16- year old boy in old medevial times, Kaizar. A son of a cobbler, who works daily who supports his family ");}
+else{
+System.out.println("You are a 16-year old girl in old medevial times, Kaisha. An orphan who sells flowers to support herself");}}}
+
+abstract class Objective{
+	protected abstract void obj();}
+
+class Do extends Objective{
+	protected void obj(){
+System.out.println("A demon king has taken over Azeroth and taken many people hostage "
++ "including your parents to make up his army. It is now your mission to rescue them");}}
+
+class Plan extends Name{
+public	void display() {
+		
+System.out.println("You gather up all your saved money, try to come up with a plan to save everyone");
+System.out.println("At nightfall");
+System.out.println("You hear a knock at your door. You open the door and see that it's your childhood "
++ "friend Abid, who comes bearing a bad news, that even his dad has been taken away by the Demon King army");
+		
+System.out.println("Abid's dad has always been very kind to you. You are now filled with more rage,"
+				+ " but are unsure whether to tell Abid  about  your mission or not");
+	System.out.println("What will you do? Press 'Yes' to include or 'No' to exclude Abid in your plan");
+	
+	Scanner s=new Scanner(System.in);
+	String decision= s.nextLine();
+	
+	if(decision.equals("Yes")) {
+System.out.println("You decide to tell Abid everything and he is proud of you of how much you've prepared in such "
+		+ "short time");}
+	
+	if(decision.equals("Yes")) {
+		System.out.println("Abid decide to help you, being a son of a poor mason whose father has helped in "
+				+ "building the castle."
++ " His home has tons of maps of secret passages that lead into various rooms of the castle.");
+		System.out.println("He brings them over, and you see a secret passageway that leads to the old bathrooms "
+				+ "that are no longer in use"
+	+"You decide to sneak in the castle tomorrow night.Up until then, you decide to rest and pack all the essentials");
+		
+	}else {
+		System.out.println("You decide to keep Abid from this mission and go alone");}}
+	
+public void Atpassagway() {
+System.out.println("You wait for Abid the next day and he comes in early with a bag on his back and both of you "
+		+ "carefully tiptoe"
+		+ " around the castle entry way ");
+
+System.out.println("You are unsure where is the entryway for the secret passageway? You look at the map it says that you"
+		+ " are at the right place, but you are only standing standing adjacent to the castle wall. All of a sudden, "
+		+ "you hear"
+		+ " footsteps of two guards approaching. What do you do?");
+
+System.out.println("Hide or try to find entryway");
+
+Scanner f=new Scanner(System.in);
+String direction= f.nextLine();
+
+if(direction.equalsIgnoreCase("Hide")) {
+	System.out.println("You take refuge behind some trees just as long the guards pass away. Then you reach the spot again. "
+			+ "Abid: I think a portion of this wall has been built recently to hide "
+			+ "the entryway. We should try digging. You panic up but decide to dug through anyway. "
+			+ "After a minute, the wall comes off to reveal the entrance."
+			+ "You manage to hide in the entryway and and block the entrace with a huge plant to not grow suspicion");}
+else{
+System.out.println("Abid: I think a portion of this wall has been built recently to hide "
+				+ "the entryway. We should try digging. You panic up but decide to dug through anyway. "
+				+ "After a minute, the wall comes off to reveal the entrance."
+				+ "You manage to hide in the entryway and and block the entrace with a huge plant to not grow suspicion");}}
+
+public void Bathroom() {
+	System.out.println("Inside the abandoned bathrooms,there is pitch black darkness. Both of you carefully make your"
++ " way and then you see Abid rummaging around in his backpack. He takes out a candle and lights up the path. When you finally"
++ "see the bathroom with some light, you get revolted by the sight of it.");
+	System.out.println("You: What is THAT ?!!"
++ "Abid:Looks like the people of demon king used to torture people down here. Their bodies are starting to decompose "
++ "You: It's so sad that their families never got a chance to meet them for the last time"
++ "You see Abid taking out another candle from his backpack and placing it in front of the dead corpses to pay his respects");
+	
+	System.out.println("Abid manages to find a corner  ");
+
+			
+			
+		
+}}
+public class Mine {
+	public static void main(String[] args) throws InterruptedException {
+		Mygame my= new Mygame();
+		Plan no= new Plan();
+		Do d= new Do();
+		Thread.sleep(1000);
+		my.run();
+		no.run();
+	    d.obj();
+	    no.display();
+	    no.Atpassagway();
+	    		
+	}}
