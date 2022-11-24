@@ -12,7 +12,7 @@ for(int i=1;i<=num;i++) {
 	if(i%j==0) {
 		temp++;}}
 	
-	if(temp==2) {
+	if(temp==2) { // because prime numbers have ony 2 factors
 		System.out.println(i);}
 	
 }}}
