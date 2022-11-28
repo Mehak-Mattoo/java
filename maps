@@ -1,0 +1,18 @@
+ Map<Integer,String> Map= new HashMap<>();
+ Map.put(1, "Mehak");
+ Map.put(2, "Mehak");
+ Map.put(3, "Komal");
+ Map.putAll(Map);
+ 
+ Set set= Map.entrySet();
+ 
+// Iterator itr= set.iterator ();
+// while (itr.hasNext()) {
+////	System.out.println( itr.next());
+//	
+//	Map.Entry<Integer,String> entry= (Map.Entry)itr.next();
+//	System.out.println(entry.getKey()+" "+entry.getValue());
+	
+ for(Map.Entry m :Map.entrySet()) {
+	 System.out.println(m);
+	 
