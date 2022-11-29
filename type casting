@@ -1,0 +1,31 @@
+		byte b= 2;
+		short s= 24;
+		int i=322;         // defining some data types with some values
+		long l=46532;
+		float f= 3854.43f;
+		double d= 342537534.2;
+		
+		System.out.println(" The original value of byte is: "+b+".\n The orginal value of short is: "+s+".\n The original value of int is: "+i+
+				".\n The original value of long is: "+ l+".\n The original value of float is: "+f+".\n The original value of double is: "+d+" .");
+		
+//		Widening
+		short s1= (short)b;
+		int i1= (int)s;
+		long l1= (long)i;          //Type casting /converting one data type to its larger one
+		float f1= (float)l;
+		double d1= (float)f;
+		System.out.println("After data widening: \n The value of short is: "+s1+". \n The value of int is: "+i1+
+				". \n The value of long is: "+ l1+". \n The value of float is: "+f1+". \n The value of double is: "+d1+" .");
+				
+		//Narrowing
+		byte b1= (byte)s;
+		short s2 = (short)s;     //Type casting /converting one data type to its smaller one
+		int i2= (int)f;
+		long l2= (long)f;
+		float f2= (float)d;
+		
+		System.out.println("After data narrowing:\n The value of byte is: "+b1+" .\n The value of short is: "+s1+" .\n The value of int is: "+i2+
+				" .\n The value of long is: "+ l2+" .\n The value of float is: "+f2+" .");
+		
+	}
+}
