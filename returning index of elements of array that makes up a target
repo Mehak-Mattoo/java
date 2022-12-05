@@ -1,0 +1,11 @@
+	int array[]= {5,8,2,5,4,1,3};
+	int target= 7;
+	for(int i=0;i<array.length;i++) {
+		for(int j=i+1;j<array.length;j++) {
+			if(array[i]+array[j]==target) {
+				System.out.println("["+i+","+j+"]");
+				
+			}
+		}
+	}	
+}}
