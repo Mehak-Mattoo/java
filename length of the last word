@@ -1,0 +1,15 @@
+ Scanner s=new Scanner(System.in);
+	 System.out.println("Enter n: ");
+     String name = s.nextLine();
+
+	String s1= name.trim();
+	
+	if(s1.isEmpty()) {
+		System.out.println(0);
+	}
+	for(int i = s1.length() - 1; i > 0; i--) {
+        if(s1.substring(i, i + 1).equals(" ")) { 
+            System.out.println( s1.length()-i -1 );  }  }
+            
+            System.out.println(s1.length());
+    
