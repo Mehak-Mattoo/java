@@ -1,0 +1,19 @@
+int array []= {98,6,9,3,97,6,4};
+ int min = array[0];
+ int max = array[1];
+ int i;
+ int netProfit=0;
+ 
+ for( i=0;i<array.length-1;i++) {
+
+if( array[i]<=min) {
+min = array[i];}
+ }
+for(int j=1;j<array.length-1;j++) {
+
+     if( array[j]>=max) {
+    max =array[j];
+    netProfit= max-min;}}
+System.out.println("Best time to buy the stock = "+ min+"\nBest time to sell the stock = "+ max+"\nNet Profit = "+netProfit);
+}
+}
