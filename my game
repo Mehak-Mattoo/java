@@ -1,116 +1,368 @@
-import java.util.Scanner;
+package com.Myproject.java;
+import java.util.*;
+import java.awt.Button;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;  
 
-class Mygame extends Thread{
-	 public void run() {
-		System.out.println("Welcome to my game: The land of Azeroth");}}
+ 	class My {
+		 public void run() {
+			System.out.println("Welcome to my game: The land of Azeroth");
 
-class Mycharacter extends Mygame{
-	public Mycharacter() {
-		System.out.println("Enter your name: ");
-		Scanner s=new Scanner(System.in);
-		String characterName= s.nextLine();
-		System.out.println("Hey! Welcome "+ characterName);
-	}}
-class Name extends Mycharacter{
-	 public void run() {
-		 Scanner s=new Scanner(System.in);
-		 System.out.println("Choose: Male or female (Press M or F to continue): ");
-		String gender= s.nextLine();
-		if (gender.equals("M")) {
-System.out.println( "You are a 16- year old boy in old medevial times, Kaizar. A son of a cobbler, who works daily who supports his family ");}
-else{
-System.out.println("You are a 16-year old girl in old medevial times, Kaisha. An orphan who sells flowers to support herself");}}}
+			System.out.println("\nEnter your name: ");
+			Scanner s=new Scanner(System.in);
+			
+			String characterName= s.nextLine();
+			System.out.println("\nHey! Welcome "+ characterName);}}
+	
+	class Name extends My{
+		 public void runn() {
+			 Scanner s=new Scanner(System.in);
+			 System.out.println("Choose: Male or female (Press M or F to continue): ");
+			String gender= s.nextLine();
+			if (gender.equalsIgnoreCase("M")) {
+	System.out.println("\nYou are a 22- year old boy in old medevial times, Kaizar. A son of a mason, who works daily who supports his family ");}
+	else{
+	System.out.println("\nYou are a 21-year old girl in old medevial times, Kaisha. An orphan who sells flowers to support herself");}}}
 
-abstract class Objective{
-	protected abstract void obj();}
+	class Do extends Name{
+		public void fry() throws InterruptedException{
+			Thread.sleep(3000);
+			System.out.println("-------------------------------------------------------------------------");
+	System.out.println("A demon king has taken over your and taken many people hostage "
+	+ "to make up his army. \nIt is now your mission to rescue them. "); }}
 
-class Do extends Objective{
-	protected void obj(){
-System.out.println("A demon king has taken over Azeroth and taken many people hostage "
-+ "including your parents to make up his army. It is now your mission to rescue them");}}
+	class Plan extends Do{
+	public void display() throws InterruptedException {
+		System.out.println("------------------------------------------------------------------------------------------------");		
+	System.out.println("\nYou gather up all your saved money, try to come up with a plan to save everyone.");
+	Thread.sleep(3400);
+	System.out.println("\nAt nightfall");
 
-class Plan extends Name{
-public	void display() {
-		
-System.out.println("You gather up all your saved money, try to come up with a plan to save everyone");
-System.out.println("At nightfall");
-System.out.println("You hear a knock at your door. You open the door and see that it's your childhood "
-+ "friend Abid, who comes bearing a bad news, that even his dad has been taken away by the Demon King army");
-		
-System.out.println("Abid's dad has always been very kind to you. You are now filled with more rage,"
-				+ " but are unsure whether to tell Abid  about  your mission or not");
-	System.out.println("What will you do? Press 'Yes' to include or 'No' to exclude Abid in your plan");
+	Thread.sleep(3500);
+	System.out.println("\nYou hear a knock at your door. \nYou open the door and see that it's your childhood "
+	+ "friend ABID, who comes bearing a bad news, that even his dad has been taken away by the Demon King army.");
+
+	Thread.sleep(3800);		
+	System.out.println("\nAbid's dad has always been very kind to you. \n You are now filled with more rage,"
+					+ " but are unsure whether to tell Abid  about  your mission or not.");
+	System.out.println("-------------------------------------------------------------------------------------------------");
+	Thread.sleep(4200);
+		System.out.println("\nWhat will you do? Press 'Yes' to include or 'No' to exclude Abid in your plan.");
 	
 	Scanner s=new Scanner(System.in);
-	String decision= s.nextLine();
-	
-	if(decision.equals("Yes")) {
-System.out.println("You decide to tell Abid everything and he is proud of you of how much you've prepared in such "
-		+ "short time");}
-	
-	if(decision.equals("Yes")) {
-		System.out.println("Abid decide to help you, being a son of a poor mason whose father has helped in "
-				+ "building the castle."
-+ " His home has tons of maps of secret passages that lead into various rooms of the castle.");
-		System.out.println("He brings them over, and you see a secret passageway that leads to the old bathrooms "
-				+ "that are no longer in use"
-	+"You decide to sneak in the castle tomorrow night.Up until then, you decide to rest and pack all the essentials");
+		String decision= s.nextLine();
 		
-	}else {
-		System.out.println("You decide to keep Abid from this mission and go alone");}}
-	
-public void Atpassagway() {
-System.out.println("You wait for Abid the next day and he comes in early with a bag on his back and both of you "
-		+ "carefully tiptoe"
-		+ " around the castle entry way ");
-
-System.out.println("You are unsure where is the entryway for the secret passageway? You look at the map it says that you"
-		+ " are at the right place, but you are only standing standing adjacent to the castle wall. All of a sudden, "
-		+ "you hear"
-		+ " footsteps of two guards approaching. What do you do?");
-
-System.out.println("Hide or try to find entryway");
-
-Scanner f=new Scanner(System.in);
-String direction= f.nextLine();
-
-if(direction.equalsIgnoreCase("Hide")) {
-	System.out.println("You take refuge behind some trees just as long the guards pass away. Then you reach the spot again. "
-			+ "Abid: I think a portion of this wall has been built recently to hide "
-			+ "the entryway. We should try digging. You panic up but decide to dug through anyway. "
-			+ "After a minute, the wall comes off to reveal the entrance."
-			+ "You manage to hide in the entryway and and block the entrace with a huge plant to not grow suspicion");}
-else{
-System.out.println("Abid: I think a portion of this wall has been built recently to hide "
-				+ "the entryway. We should try digging. You panic up but decide to dug through anyway. "
-				+ "After a minute, the wall comes off to reveal the entrance."
-				+ "You manage to hide in the entryway and and block the entrace with a huge plant to not grow suspicion");}}
-
-public void Bathroom() {
-	System.out.println("Inside the abandoned bathrooms,there is pitch black darkness. Both of you carefully make your"
-+ " way and then you see Abid rummaging around in his backpack. He takes out a candle and lights up the path. When you finally"
-+ "see the bathroom with some light, you get revolted by the sight of it.");
-	System.out.println("You: What is THAT ?!!"
-+ "Abid:Looks like the people of demon king used to torture people down here. Their bodies are starting to decompose "
-+ "You: It's so sad that their families never got a chance to meet them for the last time"
-+ "You see Abid taking out another candle from his backpack and placing it in front of the dead corpses to pay his respects");
-	
-	System.out.println("Abid manages to find a corner  ");
-
-			
-			
+		if(decision.equalsIgnoreCase("Yes")) {
+System.out.println("You decide to tell Abid everything.");
+System.out.println("\nAbid's father has helped in building the castle.\n His home is filled with secret maps that lead into the castle.");
+Thread.sleep(6400);
+System.out.println("\nHe brings them over, and you see a way that leads to the old bathrooms that are no longer used.");
+System.out.println("You decide to sneak in the castle tomorrow night.");
+}else {
+			System.out.println("\nYou decide to keep Abid from this mission and go alone.\n But he follows you as you make your way to the castle.");	Thread.sleep(6400);
+			System.out.println("\nYou: Abid what are you doing here? ");	Thread.sleep(7400);
+			System.out.println("\nABID: Coming with you of course. Need I remind you that my dad has also been taken away!");	Thread.sleep(7700);
+			System.out.println("\nWith him gone, there is only you in my life :( ");	Thread.sleep(7780);
+			System.out.println("\nYOU: I understand. Let's go save him.");	Thread.sleep(7800);
+			}}
 		
+	public void Atpassagway() throws InterruptedException {
+		Thread.sleep(3000);
+System.out.println("-------------------------------------------------------------------------");
+		System.out.println("\nAbid comes with a bag on his back and both of you "
++ "carefully tiptoe around the palace entry way.");	Thread.sleep(5000);
+System.out.println("You start looking for the secret passageway.\n The map says that you"
++ " are at the right place, but you are only standing adjacent to the castle wall. ");	Thread.sleep(8000);
+System.out.println("\n All of a sudden, you hear footsteps of some guards approaching. \n What do you do?");Thread.sleep(9400);
+System.out.println("\nHide or try to find entryway");
+
+	Scanner f=new Scanner(System.in);
+	String direction= f.nextLine();
+
+	if(direction.equalsIgnoreCase("Hide")) {
+		System.out.println("\nYou take refuge behind some trees just as long the guards pass away. Then you reach the same spot again. "
++ "\nABID: I think a portion of this wall has been built recently.\nWe should try digging.");Thread.sleep(6500);
+
+System.out.println("\n After a minute, the wall comes off to reveal the entrance."
++ "\nYou manage to hide in the entryway and and block the entrace with a huge plant to not grow suspicion");Thread.sleep(7500);}
+	
+	else{
+	System.out.println("ABID: I think a portion of this wall has been built recently to hide "
+					+ "the entryway. We should try digging.");
+Thread.sleep(7900);
+	System.out.println("After a minute, the wall starts to comes off to reveal the entrance."
+					+ "\n You manage to hide in the entryway and and block the entrace with a huge plant to not grow suspicion.");
+	Thread.sleep(8500);}}
+
+	public void Bathroom() throws InterruptedException {
+System.out.println("---------------------------------------------------------------------------------------------------------------");
+System.out.println("Inside the abandoned bathrooms, there is pitch black darkness. \nAbid takes out a candle and when you finally"
++ " see the bathroom clearly, you get revolted by the sight of it.");Thread.sleep(8880);		
+System.out.println("\nYou: What are THOSE ?!!");Thread.sleep(9100);
+		
+System.out.println("\nABID: Looks like the people of demon king used to torture people down here. Their bodies are starting to decompose! ");
+Thread.sleep(9400);
+System.out.println("\nYou: It's so sad that their families never got a chance to meet them for the last time. ");Thread.sleep(9900);
+System.out.println("\nYou see Abid taking out another candle from his backpack and placing it in front of the dead corpses to pay his respects.");
+Thread.sleep(10010);}} 
+	
+	class UltimatePlan extends Plan{
+		public void Plan() throws InterruptedException {
+	System.out.println("--------------------------------------------------------------------------------------------------------------------------");
+	 LocalTime time = LocalTime.now();
+	System.out.println("\nTIME: "+time);
+	System.out.println("\nABID: So, what is our plan exactly?");	Thread.sleep(2100);
+	System.out.println("\nYou: We have exactly 1 hour when guards go for their dinner break."
+	+ " \n Then, we will sneak upto those backstairs and make our way to the jails.");Thread.sleep(2300);
+
+System.out.println("\nABID: But, even if we do become succesful in rescuing our parents, what is the guarantee"
+			+ " that everyone will not get kidnapped again?");
+	Thread.sleep(2400);
+	System.out.println("\nYou: That's why we have to overthrow the demon king and bring our King Vasilis back.");
+System.out.println("-----------------------------------------------------------------------------------------------------");Thread.sleep(3800);}}
+
+	class Strikehour extends UltimatePlan{		
+	 public void hour()  throws InterruptedException {
+		System.out.println("\nYOU: We have to reach those stairs, so we'll take a route over by the small pond that to reach there.");
+		Thread.sleep(1500);
+		System.out.println("\nABID: But I heard that the castle has only one pond which has flesh-eating fishes! ");
+		Thread.sleep(2500);
+		System.out.println("\nYou: You heard it right. But, it's the only way we've got. ");Thread.sleep(3400);
+	
+		System.out.println("\nABID: Are you absolutely sure ?");	Thread.sleep(3700);
+		System.out.println("\nYou: Yes Abid, we have to cross the pond by swinging across those vines. ");  Thread.sleep(3900);
+		System.out.println("\nABID: Oh great Vasilis. SERIOUSLY!!");Thread.sleep(4100);
+		System.out.println("\nYou: Please Abid, we don't have much time. ");Thread.sleep(4500);
+		System.out.println("\nABID: Okay Okay, but wait a second, I have some ropes with me.");
+		System.out.println("--------------------------------------------------------------------------------------------------");
+		Thread.sleep(4650);}}
+	
+	class Lake extends Strikehour{
+		public void print() throws InterruptedException {
+
+			Random rand= new Random();
+			int maxfishesBite=4;
+			int fishesBite= rand.nextInt(maxfishesBite);
+			int fishesBite2= rand.nextInt(maxfishesBite);
+			
+System.out.println("\nYou: Okay. I'll go first then you can follow me.");	Thread.sleep(5200);
+System.out.println("\nABID: Alright. But be careful. "); 	Thread.sleep(5400);
+System.out.println("\nYou pick up the thickest vine."); 	Thread.sleep(6400);
+
+if(fishesBite==1) {
+	System.out.println("\nYou get bit by a fish.\n But manage to cross the pond somehow. ");}
+	else if(fishesBite==2) {
+		System.out.println("\nYou get bit by a fish two times! ");}	
+	else {System.out.println("\nYou succesfully crossed the pond without getting injured! ");}
+
+System.out.println("\nYou: Come on ABID!! ");Thread.sleep(6500);
+System.out.println("\nABID: Yeah. You made it look real easy.\n I'm just going to close my eyes and go for it.");Thread.sleep(6600);
+
+if(fishesBite2==1) {
+	System.out.println("\nAbid got bit by a fish.\n But manages to cross the pond somehow. ");}
+
+	else if(fishesBite2==2) {
+		System.out.println("\nAbid gets bit by a fish two times! ");}
+
+	else if(fishesBite2==3) {
+		System.out.println("\nSuddenly Abid stops swinging and a whole family of fishess starts gathering at a spot to wait for their meal. ");
+	Thread.sleep(6610);
+	System.out.println("\nYou: ABID! Try to swing again. Those vines are not going to hold you off much longer!! ");
+	Thread.sleep(6620);
+	System.out.println("\nAbid finaly manages to reach the corner of the pond. ");
+	}	
+	else {
+		System.out.println("\nAbid succesfully crosses the lake without getting injured! ");}
+System.out.println("-------------------------------------------------------------------------");
+		if(fishesBite>0 || fishesBite2>0) {
+			System.out.println("\nAfter resting for couple of minutes."
+					+ "\nYou move on to the next step of your mission");}}}
+		
+	class Stairs extends Lake{
+		public void Stair() throws InterruptedException {
+			Thread.sleep(4990);
+			 LocalTime time = LocalTime.now();
+			System.out.println("\nTIME: "+time);
+			System.out.println("\nYou manage to find the backstairs with 20 minutes to spare.");
+			Thread.sleep(5000);
+			System.out.println("\nYou: Let's hurry up.");
+			Thread.sleep(5500);
+			System.out.println("\nYou find the jails and there are handful of people inside");
+			Thread.sleep(5800);
+			System.out.println("\nYou: Do you see your father? ");Thread.sleep(3000);
+			System.out.println("\nABID: No, Do you see your parents? ");Thread.sleep(3200);
+			Thread.sleep(6500);
+			System.out.println("\nOld woman: Ohh my dear children! How did you come up here? ");
+			Thread.sleep(6200);
+			System.out.println("\nABID: We came to rescue everyone. Where are others? ");
+			
+			System.out.println("\nOld woman: Some of us have been taken away for cleaning and preparing food .");
+			Thread.sleep(7900);
+			System.out.println("\nABID: How do we rescue them? We don't have the keys! ");
+			Thread.sleep(8200);
+			System.out.println("\nOld woman: The General has the keys.");Thread.sleep(9600);
+			System.out.println("\nABID: Great, now we have to find the General before he finds us and throw us in these jails.");
+			Thread.sleep(9800);
+			System.out.println("\nYou: What does he look like Grandma?");	Thread.sleep(11000);
+			System.out.println("\nOld woman: Well, he is the only one who wears a gold armor.");Thread.sleep(11210);
+			System.out.println("\nYou: Okay thank you Grandma! We promise that we'll come back and rescue everyone.");	
+			Thread.sleep(11225);
+			System.out.println("\nYou move up ahead to see from the top if the guards are starting to come back to their posts.");
+			Thread.sleep(11230);
+			System.out.println("\nBut you see that Abid is nowhere near you.");Thread.sleep(11240);
+			System.out.println("\nAfter some seconds he shows up. ");Thread.sleep(11246);
+			System.out.println("\nYou: Where were you?");Thread.sleep(11500);
+			System.out.println("\nABID: I was offering some people back there some clean water and a little food.");
+			System.out.println("\nYou: We have a mission Abid. We CANNOT waste our time! ");Thread.sleep(11555);
+			System.out.println("\nABID: You are right. Sorry.");Thread.sleep(11560);
+		}}
+class Kitchen extends Stairs{
+	
+	public void prince() throws InterruptedException {
+		System.out.println("------------------------------------------------------------------------------------------------------");Thread.sleep(1000);
+		System.out.println("\nYou: Can you look at the map and tell me which way it is to the kitchens? "); Thread.sleep(1200);
+		System.out.println("\nABID: Okay. We have to move two flight stairs up and then make a right.");Thread.sleep(1500);
+		System.out.println("\nYou : We must be extra careful now as there will be guards stationed everywhere.");Thread.sleep(1700);
+		System.out.println("\n ABID: Right");Thread.sleep(1900);
+		System.out.println("As soon as you reach the first flight of stairs, you see that there is someone standing at the top.");
+		Thread.sleep(2200);
+
+		Scanner scanner= new Scanner(System.in);
+		
+		String enemies[]= {"Cleaner","Jailer","Guard","General"};
+		Random random = new Random();
+
+		int maxenemyhealth = 75;
+		int enemyDamage =25;
+		int playerHealth = 100;
+		int playerDamage= 50;
+
+			int enemyhealth = random.nextInt(maxenemyhealth);
+			String enemy = enemies[random.nextInt(enemies.length)];
+			System.out.println("\n"+enemy+" has appeared! \n");
+
+		while (enemy==enemies[3]) {
+			 if (enemy==enemies[3]) {
+					System.out.println("His men throw you in jail.\nGAME OVER");break; }}
+		
+			if(enemyhealth>0 && enemy != enemies[3]) {
+				System.out.println("Your health: "+playerHealth); Thread.sleep(3000);	
+				System.out.println(enemy+ " health: "+enemyhealth); Thread.sleep(3500);	
+				System.out.println("\nWhat would you like to do? "); Thread.sleep(3800);	
+				System.out.println("1- Attack");
+				System.out.println("\n2- Run away. (Beware that your presence in the castle may get revealed!) ");
+				
+				String choice= scanner.nextLine();
+				
+				if(choice.equals("1")) {
+					int damageDealt= random.nextInt(playerDamage);
+					int damageTaken= random.nextInt(enemyDamage);
+					
+					enemyhealth -= damageDealt;
+					playerHealth -= damageTaken;
+					
+					System.out.println("\n You strike the "+enemy+ " with a wooden stick for " +damageDealt+" damage."); Thread.sleep(3900);	
+					System.out.println("\n You received "+damageTaken+" in return."); Thread.sleep(4000);	
+			}else  {
+					System.out.println("You try to run away from "+enemy);	} }
+System.out.println("-------------------------------------------------------------------------");
+			
+	System.out.println("\nYou move up the second flight of stairs.");	Thread.sleep(5000);	
+	System.out.println("\nAnd sure enough, another "+enemy+" appears."); Thread.sleep(5100);	
+		
+		while (enemy==enemies[3]) {		
+			 if (enemy==enemies[3]) {
+					System.out.println(enemy+" throws you in jail.\nGAME OVER");break; }	}
+		
+			if(enemyhealth>0 && enemy != enemies[3]) {
+				System.out.println("Your health: "+playerHealth);
+				System.out.println(enemy+ " health: "+enemyhealth); Thread.sleep(5500);	
+				System.out.println("\nWhat would you like to do? ");  Thread.sleep(5600);	
+				System.out.println("1- Attack");
+				System.out.println("\n2- Run away. (Beware that your presence in the castle may get revealed!) ");
+				
+				String choice= scanner.nextLine();	
+				if(choice.equals("1")) {
+					int damageDealt= random.nextInt(playerDamage);
+					int damageTaken= random.nextInt(enemyDamage);
+					
+					enemyhealth -= damageDealt;
+					playerHealth -= damageTaken;
+					
+					System.out.println("\n You bash the "+enemy+ " with a wooden pot for " +damageDealt+" damage.");  Thread.sleep(5700);	
+					System.out.println("\n You received "+damageTaken+" in return.");   Thread.sleep(5800);	
+					}else {
+					System.out.println("\nYou try to run away from "+enemy); }}		
+	
+System.out.println("\nABID: Oh great Vasilis! I'm tired.");	  Thread.sleep(6200);	
+ 
+System.out.println("YOU: Ohh come on. We are almost there. Let's go. ");Thread.sleep(6400);	
+
+System.out.println("ABID: Yes, I do need some food.");Thread.sleep(6500);	
+System.out.println("\nYou make your way inside the kitchen and you see hundreds of people cleaning floors and washing dishes."); 
+Thread.sleep(6600);	
+System.out.println("\nBoth of you start looking for Abid's dad. ");
+Thread.sleep(6800);	
+System.out.println("\nBut, he is nowhere to be found! ");
+Thread.sleep(8200);	 
+System.out.println("\nYOU: Abid, those people back there told me that some villagers were recruited for doing other chores.");
+Thread.sleep(8500);				
+System.out.println("\nAbid: I'm scared."); Thread.sleep(8900);	
+System.out.println("YOU: Abid ,don't be scared. I'm sure he is fine and just working in some other part of the castle.");
+Thread.sleep(9200);	
+System.out.println("ABID: You don't know that. ");
+
+System.out.println("\nYOU: I do because look around you. There are mosty females here and only a handful of men.");Thread.sleep(9500);	
+System.out.println("It's obvious that they chose females to do the cooking and males for other jobs.");Thread.sleep(9700);	
+System.out.println("\nNow, get up and we have to leave from here."); Thread.sleep(9900);	
+System.out.println("\nABID: Sure. \nThanks friend.");Thread.sleep(10000);	
+System.out.println("\nYOU: Anytime :) ");
+System.out.println("-----------------------------------------------------------------------------------------------------");Thread.sleep(11000);
 }}
-public class Mine {
-	public static void main(String[] args) throws InterruptedException {
-		Mygame my= new Mygame();
-		Plan no= new Plan();
-		Do d= new Do();
-		Thread.sleep(1000);
-		my.run();
-		no.run();
-	    d.obj();
-	    no.display();
-	    no.Atpassagway();
-	    		
-	}}
+
+class BroomCloset extends Kitchen{
+public void Step() throws InterruptedException	{
+System.out.println("\nIN A BROOM CLOSET ");Thread.sleep(2000);	
+	System.out.println("\nABID: I think we should look for our King Caleb. He will absolutely help us.");Thread.sleep(2800);
+	System.out.println("\nYOU: That would be a great idea if we we had any idea where he is! ");Thread.sleep(4000);
+	System.out.println("\nABID: Hmmm. I didn't see him in the jails.");Thread.sleep(5000);
+	
+	System.out.println("\nYOU: Maybe, they killed him.");Thread.sleep(5500);
+	System.out.println("\nABID: Don't say that. ");Thread.sleep(6000);
+	System.out.println("\nYOU: But, he could also be locked up in some other jail."); Thread.sleep(6500);
+	
+	System.out.println("\nYOU: Anyway, I stole some food from the kitchen.");Thread.sleep(8500);
+	System.out.println("\nLet's eat and continue our mission.");Thread.sleep(9500);
+	System.out.println("\nABID: You sure know how to motive me.");
+	System.out.println("---------------------------------------------------------------------------------------------------------------------");	
+	Thread.sleep(10500);   }}
+
+class Upstairs extends BroomCloset{
+	public void Up() throws InterruptedException{
+		System.out.println("ABID: I think we should move up to the king quarters. ");
+		System.out.println("YOU: And then what suffocate devil king to death?");
+	
+	}
+}
+	
+ public class Mygame {
+		public static void main(String[] args) throws InterruptedException {
+		BroomCloset l= new BroomCloset();
+
+		    l.run();
+			l.runn();
+            l.fry();
+            
+		    l.display();
+		    l.Atpassagway();
+		    l.Bathroom();
+		    l.Plan();
+		 	
+		    l.hour();
+		    l.print();
+		    l.Stair(); 
+		    l.prince();
+		    
+		   	l.Step();	
+		}}
