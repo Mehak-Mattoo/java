@@ -21,3 +21,28 @@ for (int k = 0; k < arr.length; k++) {
 
 System.out.print(arr[k]+ " , ");}}
 }
+
+
+// recursion
+
+	int arr []= {2,5,9,6,1};
+	RecursiveBubbleSort(arr, 5);
+	System.out.println(Arrays.toString(arr));
+	}
+
+	private static int []RecursiveBubbleSort(int[] arr, int n) {
+	 int temp =0;
+		
+		if (n <= 1) {
+	         return arr ;}
+
+	     for (int i=0; i<n-1; i++) {
+	         if (arr[i] > arr[i+1]) {
+	    
+	             temp = arr[i];
+	             arr[i] = arr[i+1];
+	             arr[i+1] = temp;   }
+
+	     } return RecursiveBubbleSort(arr, n-1);
+	 
+	}}
