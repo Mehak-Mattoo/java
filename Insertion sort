@@ -25,3 +25,26 @@ for (int k = 0; k < arr.length; k++) {
 System.out.print(arr[k]+ ", "); }
 
 }}
+// Recusrion
+
+	int arr[]= {9,4,3,1,0,8,56,9,2,5};
+InsertionRecursive(arr, 10);
+System.out.println(Arrays.toString(arr));	
+}
+
+private static int []InsertionRecursive(int[] arr, int n) {
+	if(n<=1) {
+		return arr;}
+	InsertionRecursive(arr, n-1);
+	  int last = arr[n-1];
+      int j = n-2;
+        
+      while (j >= 0 && arr[j] > last){
+          arr[j+1] = arr[j];
+          j--; }
+      arr[j+1] = last;
+	
+	return InsertionRecursive(arr, n-1);
+	
+}
+}
