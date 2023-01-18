@@ -30,3 +30,30 @@ for (int k=0; k<n; k++)
 System.out.print(arr[k]+" , ");
 
 }}
+
+
+// Recursion
+
+	int array []= {2,5,9,6,1};
+	RecSelectionSort(array,4);	
+
+	System.out.println(Arrays.toString(array));	
+	}
+
+	private static int[] RecSelectionSort(int[] array, int lastElement) {
+	int i, temp = 0;
+
+	if(lastElement== 0) {
+		return array;}
+
+		for (i = 0;  i < lastElement; i++) {
+				if(array[i]> array[i+1])	{
+				 temp= array[i];
+				 array[i] = array[i+1];
+				 array[i+1] = temp;}}
+				
+					
+		return RecSelectionSort(array, lastElement-1);
+	
+}
+}
