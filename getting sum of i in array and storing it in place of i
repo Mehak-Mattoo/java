@@ -1,0 +1,11 @@
+int runningNums []= {1,2,3,4};
+int sum= 0;
+
+for (int i = 0; i < runningNums.length; i++) {
+	sum+= runningNums[i];
+	runningNums[i]= sum;	
+	}
+
+System.out.println(Arrays.toString(runningNums));
+
+}}
