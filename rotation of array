@@ -1,0 +1,10 @@
+	int arr[]= {0,3,20,4,7,5};
+	
+	int target= 2;
+	int i;
+	for ( i = target; i < arr.length; i++) {
+		System.out.print(arr[i]+" , ");}
+	if(i== arr.length) {
+		for (int j = 0; j <target; j++) {
+			System.out.print(arr[j]+" , ");}
+	}
