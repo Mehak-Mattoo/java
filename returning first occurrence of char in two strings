@@ -1,0 +1,12 @@
+	String string1= "Sadnus";
+	String string2= "Sad";
+	
+	System.out.println(Binary(string1, string2));
+		
+}
+
+private static int Binary(String a, String b ) {
+	
+return a.indexOf(b);
+}
+}
