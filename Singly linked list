@@ -1,0 +1,173 @@
+package com.Myproject.java;
+
+
+public class List {
+	class Node{    
+        int data;    
+        Node next;    
+            
+        public Node(int data) {    
+            this.data = data;    
+            this.next = null;    }     }    
+     
+    public static Node head = null;    
+    public Node tail = null;    
+           
+    public void addNode(int data) {    
+        
+        Node newNode = new Node(data);    
+                 
+        if(head == null) {             
+            head = newNode;    
+            tail = newNode; }   
+           
+        else {                
+            tail.next = newNode;       
+            tail = newNode;    }}
+       
+        
+    public void display() {    
+       
+        Node current = head;    
+            
+        if(head == null) {    
+            System.out.println("List is empty");    
+            return;    }
+           
+        while(current != null) {    
+           
+            System.out.print(current.data + " ");    
+            current = current.next;   }} 
+    
+  public Node deleteLastNode(Node head) {
+	  
+	  if(head == null) {
+		  return head ;  }
+	  
+	  Node lastNode = head;
+	  Node previousTolastNode = null;
+	  
+	  while(lastNode.next!= null) {
+		  previousTolastNode = lastNode;
+		  lastNode= lastNode.next; }
+	  
+previousTolastNode.next= null;
+return lastNode;  } 
+  
+  
+  public boolean SearchNode(Node head, int desiredElement) {
+	  
+	  if(head==null) {
+		  return false;}
+	  
+	 Node currentNode = head;
+	 
+	 while(currentNode!= null) {
+		 if(currentNode.data == desiredElement) {
+			 return true; }
+			 
+		 currentNode = currentNode.next;}
+	 
+	 return false; }
+  
+  public int FindLength(Node head) {
+	  
+	  if(head == null) {
+		  return 0; }
+	  
+	  int count= 0;
+	 Node currentNode = head;
+	 
+	  while(currentNode!= null) {
+		  count++;  
+	  currentNode= currentNode.next;}
+		  
+	  return count;  }
+  
+  public Node deleteParticularNode(Node head, int position) {
+	  
+  Node previosNode ;
+	  
+  int size = FindLength(head);
+  if(position> size || position<1) {
+	  System.out.println("Invalid position");
+	  return head; }
+  
+  	if(position ==1) {
+  		Node temp = head;
+  		head = head.next;
+  		temp.next = null;
+  		
+  		return temp; }
+  	
+  	else {
+  		previosNode = head;
+  		int count = 1;
+  		
+  		while( count< position-1) {
+  			previosNode= previosNode.next;
+  			count++; }
+  			
+  	Node curNode = previosNode.next;
+  	previosNode.next= curNode.next;
+  	curNode.next = null;
+  	
+  	return curNode; 		}}
+  
+  public Node FindMiddleNode() {
+	  
+	  if(head == null) {
+		  return null; }
+	  
+	  Node firstPointer = head;
+	  Node secondPointer = head;
+	  
+	  while(secondPointer != null&& secondPointer.next != null) {
+		firstPointer = firstPointer.next;
+		secondPointer = secondPointer.next.next; }
+	  
+	  return firstPointer; }
+  
+	  	  
+	  public int GetData(int index){
+              
+          if (index== 0) {
+        	  return head.data; }
+                           
+          Node temp = head;
+          for (int i = 0; i < index && temp != null; i++) {
+              temp = temp.next;  } 
+          
+          return temp.data;  }                      
+	  
+	  
+  public static void main(String[] args) {    
+            
+        List sList = new  List();    
+               
+        sList.addNode(1);    
+        sList.addNode(2);    
+        sList.addNode(3);    
+        sList.addNode(4);    
+            
+        sList.display();
+        
+ if(sList.SearchNode(head, 1)) {
+	 System.out.println("\nInput element found in the list ");  }
+ else {
+	 System.out.println("\nInput element not found in the list ");}
+ 
+ 
+ System.out.println("\nLength: "+ sList.FindLength(head));
+ 
+ Node middleNode = sList.FindMiddleNode();
+ 
+ System.out.println("\nMiddle node is "+ middleNode.data); 
+ int dataNode = sList.GetData(2);
+ 
+System.out.println("\nData at node = "+dataNode);      
+        
+       sList.deleteLastNode(head);
+       sList.display();
+       
+} }
