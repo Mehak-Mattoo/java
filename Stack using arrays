@@ -1,0 +1,47 @@
+package com.Myproject.java;
+
+	 class Stack{
+	    static final int MAX= 5;
+	    int top;
+	    int stack[]= new int[MAX];
+	    
+	
+	 boolean push(int x){
+	    if (top>= (MAX-1)){
+	        System.out.println(" Stack overflow");
+	        return false;
+	    }else{
+	        stack[++top]=  x;
+	         System.out.println(x+ " inserted ");
+	    
+		return true; }}
+	
+	int pop(){
+	    if(top<0){
+	         System.out.println("Stack underflow");
+	         return  0;
+	    }else{
+	       int  x= stack[top--];
+	        return x;}}
+	   
+
+	public void display(){
+	     System.out.println("\nElements :");
+	     for(int i = top; i> -1;i--){
+	          System.out.println(stack[i]);
+	     }	    
+	}}
+	public class StackusingArrays {
+	public static void main(String[] args){
+	    Stack s= new Stack();
+	    s.push(1);
+	    s.push(2);
+	    s.push(4);
+	    s.push(8);
+	    
+	  System.out.println("\n"+ s.pop()+ " removed");
+	  s.display();
+	}
+	}
+
+
