@@ -1,0 +1,84 @@
+package com.Myproject.java;
+
+
+public class DoublylinkedList {
+	 Node head;
+		Node tail;
+		int length;
+		
+	private	class Node {
+			
+		int data;
+		Node next;
+		Node previous;
+		
+	public Node (int data) {
+		this.data = data; }}
+
+
+	 public DoublylinkedList() {
+		this.head = null; 
+		this.tail = null;
+		this.length = 0; }
+	 
+	 public int length() {
+	 
+		 return length;}
+	 
+	 public boolean IslistEmpty() {
+		 return length== 0;  }
+	 
+	 
+	 public void addNode(int data) {    
+	     
+	     Node newNode = new Node(data);
+	     
+	     if(IslistEmpty()) {
+	    	 head= newNode; }
+	     else {
+	    	 tail.next = newNode;
+	     newNode.previous = tail;} 
+	     
+	     tail = newNode;
+	     length++;
+	 }
+	 
+	public void ForwardPrintList() {
+		
+		if (head == null) {
+			return;}
+		
+		Node node = head;
+		while(node != null) {
+			System.out.print(node.data+ " , ");
+			node = node.next;}
+		System.out.println("null");}
+	
+
+	public void BackwardPrintist() {
+		
+		if (head == null) {
+			return;}
+		
+		Node node = tail;
+		while(node != null) {
+			System.out.print(node.data+ " , ");
+			node = node.previous;}
+		System.out.println("null");}
+		
+
+	public static void main(String[] args) {
+		DoublylinkedList list = new DoublylinkedList();
+
+		list.addNode(2);
+		list.addNode(5);
+		list.addNode(8);
+		list.addNode(9);
+		
+		list.ForwardPrintList();
+		list.BackwardPrintist();
+		
+	}
+
+	}
+
