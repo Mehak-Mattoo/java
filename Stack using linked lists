@@ -1,0 +1,57 @@
+package com.Myproject.java;
+
+
+public class StacksUsinglinkedist {
+	
+static	class Node{    
+        int data;    
+        Node next;  
+ 
+            
+        public Node(int data) {    
+            this.data = data;    
+            this.next = null;    }     }    
+     
+    Node top = null;       
+           
+    public void push(int data) {    
+        
+        Node newNode = new Node(data);    
+                 
+        if(top == null) {             
+             
+            top = newNode; } 
+        else {
+        	newNode.next= top;
+        	top = newNode;}}
+        	
+           
+public  void pop() {
+	 
+if(top == null)	{
+	System.out.println("Stack underflow ");}
+else {
+	top = top.next;  }}
+     
+        
+    public void display() {    
+       
+        Node current = top;    
+            
+        while(current != null) {    
+            System.out.println(current.data+"\n");   
+               
+            current = current.next;  } }
+    
+public static void main(String[] args) {
+	StacksUsinglinkedist s= new StacksUsinglinkedist();
+	
+	s.push(2);
+	s.push(4);
+	s.push(7);
+	s.push(6);
+	s.display();
+	
+	System.out.println("After deleting: ");
+	s.pop();
+    s.display();    }} 
