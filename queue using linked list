@@ -1,0 +1,69 @@
+package com.Myproject.java;
+
+
+class Node {
+	int data;
+	Node next;
+	
+	
+	public Node(int data) {
+		
+	this.next= null;
+	this.data = data; 	}}
+
+
+ class Queues {
+	Node frontNode;
+	Node rearNode;
+	int length;
+	
+	public Queues() {
+		this.frontNode = null;
+		this.rearNode= null;   }
+	
+	
+	public void enQueue(int data) {
+		Node newNode = new Node(data);
+		
+		if(this.frontNode == null) {
+		this.rearNode = this.frontNode= newNode;  }
+		
+		else {
+		this.rearNode.next = newNode;
+		this.rearNode = rearNode.next;  }
+		this.length ++;}
+		
+
+	public int deQueue() {
+		if (this.frontNode == null) {
+			System.out.println("Empty queue ");
+			int item = this.frontNode.data;
+			this.frontNode = frontNode.next;
+			this.length--;
+			return item;
+		}
+		return 0;
+	}    
+		
+
+ public void display() {
+	 Node currNode= frontNode;
+	 while(currNode != null) {
+		 System.out.println(currNode.data);
+		 currNode = currNode.next;  }}}
+   
+ 
+	public class QueuesUsingLinkedLists {
+		
+	public static void main(String[] args) {
+		Queues q= new Queues();
+	    q.enQueue(2);
+		q.enQueue(4);
+		q.enQueue(7);
+	 	q.display();
+	System.out.println(	q.deQueue()+ " removed");
+	System.out.println();
+	q.display();
+	System.out.println("\nLength : "+ q.length);
+	}
+}
