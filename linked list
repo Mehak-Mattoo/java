@@ -1,0 +1,147 @@
+
+
+package com.java.MyNewGame;
+
+
+
+public class LinkedList {
+
+
+		
+
+
+	Node head;
+
+
+
+	public void Insertend(int data) {
+
+
+		
+
+
+		Node newNode = new Node(data);
+
+
+		
+
+
+		if(head== null) {
+
+
+			head = new Node(data);
+
+
+		return;}
+
+
+		
+
+
+		newNode.next= null;
+
+
+		
+
+
+		Node last= head;
+
+
+		while(head.next != null) {
+
+
+			last = last.next;
+
+
+			
+
+
+			last.next = newNode;
+
+
+			
+
+
+		}
+
+
+	}
+
+
+static class Node {
+
+
+	int data;
+
+
+	Node next;
+
+
+
+ Node(int d) {
+
+
+	data = d;
+
+
+	next = null;}}
+
+
+ 
+
+
+public void PrintList() {
+
+
+	Node n = head;
+
+
+	
+
+
+	while(n != null) {
+
+
+		System.out.print(n.data+" ");
+
+
+		n= n.next;  }}
+
+
+
+
+
+ public static void main(String[] args) {
+
+
+	 
+
+
+	LinkedList objLinkedList= new LinkedList();
+
+
+	objLinkedList.head = new Node(0);	
+
+
+	Node second = new Node(1);
+
+
+	Node third = new Node(2);
+
+
+	
+
+
+	objLinkedList.head.next= second;
+
+
+	second.next = third;
+
+
+	objLinkedList.PrintList();
+
+	objLinkedList.Insertend(8);
+
+}
+
+}
