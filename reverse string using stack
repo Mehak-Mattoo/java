@@ -1,0 +1,21 @@
+package com.Myproject.java;
+import java.util.Stack;
+
+
+public class ReverseSTringUsingStack {
+public static void main(String[] args) {
+	
+	StringBuilder sBuilder = new StringBuilder("Mehak");
+	 Stack <Character> stack= new Stack<>(); // creating character stack
+	 
+	 	 	 
+	 for (int   i= 0; i  < sBuilder.length();i  ++) {
+		 stack.push(sBuilder.charAt(i));  }    // pushing all character inside stack
+	
+
+	 while(!stack.isEmpty()) {  // pop all elements until stack is empty
+		 Character c= (char) stack.pop();
+		 System.out.print(c); }	 
+	
+}
+}
