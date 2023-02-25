@@ -1,0 +1,49 @@
+package com.java.MyProject;
+
+import java.util.HashMap;
+
+public class SumEqualsToTarget {
+	public static void main(String[] args) {
+		
+	
+	int arr[]= {3,1,1,2,2,1};		
+	int target = 5 ;// also change value here
+		
+		array(arr, target);   }
+
+	private static void array(int[] arr, int target) {
+		
+		int currentSum= 5; //change value here
+		int start= 0;
+	    int end = -1;
+		
+	HashMap <Integer, Integer> map = new HashMap<>();
+
+	for (int i = 0; i < arr.length; i++) {
+		currentSum += arr[i];  
+
+
+	if(currentSum- start==0) {
+		start = 0;
+		end = i;
+		break;  }
+
+	if(map.containsKey(currentSum-target)) {  // if this value is present, 	                                       
+		start= map.get(currentSum- target) +1;   //its next value will be the start 
+		end= i;
+		 }
+
+	map.put(currentSum, i); }
+	  
+	if(end== -1) {    // if i reaches here, then sum not found
+		System.out.println("Not found"); }
+
+	else {
+		System.out.print("[ ");
+		for (int i = start; i <= end; i++) {		
+		
+		System.out.print( arr[i]+ " , ");  }
+		System.out.print("]");} 
+		
+	}
+}
