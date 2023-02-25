@@ -1,0 +1,72 @@
+package com.java.MyProject;
+
+
+/*APPROACH:
+quick sorting the array elements
+
+then printing the last and second last element because max product would be b/w them.
+*/
+public class MaximumProduct {
+public static void main(String[] args) {
+	
+
+	  int numbers[]= {2,-6,3,-2,9};
+	  int length = numbers.length-1;
+
+	    quicksort(numbers,0,numbers.length-1);
+
+
+System.out.println("Maximum product found between "+numbers[length]+ " and "+ numbers[length-1]);  }
+	    
+	  private static void quicksort(int[] array, int lowIndex, int highIndex) {
+
+	    if (lowIndex >= highIndex) {
+	      return;
+	    }
+
+	    int pivotIndex = highIndex;
+	    int pivot = array[pivotIndex];
+	    swap(array, pivotIndex, highIndex);
+
+	    int leftPointer = partition(array, lowIndex, highIndex, pivot);
+
+	    quicksort(array, lowIndex, leftPointer - 1);
+	    quicksort(array, leftPointer + 1, highIndex);
+
+	  }
+
+	  private static int partition(int[] array, int lowIndex, int highIndex, int pivot) {
+	    int leftPointer = lowIndex;
+	    int rightPointer = highIndex - 1;
+
+	    while (leftPointer < rightPointer) {
+
+	      while (array[leftPointer] <= pivot && leftPointer < rightPointer) {
+	        leftPointer++;
+	      }
+
+	     
+	      while (array[rightPointer] >= pivot && leftPointer < rightPointer) {
+	        rightPointer--;
+	      }
+
+	      swap(array, leftPointer, rightPointer);
+	    }
+	    
+	    if(array[leftPointer] > array[highIndex]) {
+	      swap(array, leftPointer, highIndex);
+	    }
+	    else {
+	      leftPointer = highIndex;
+	    }
+	    
+	    return leftPointer;
+	  }
+
+	  private static void swap(int[] array, int index1, int index2) {
+	    int temp = array[index1];
+	    array[index1] = array[index2];
+	    array[index2] = temp;
+	  }
+
+}
