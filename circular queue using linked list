@@ -1,0 +1,87 @@
+package com.Myproject.java;
+
+
+ class NodeClass {
+	int data;
+	Node next;
+	
+	
+	public NodeClass(int data) {
+		
+	this.next= null;
+	this.data = data; 	}}
+
+
+ class Que {
+	Node frontNode;
+	Node rearNode;
+ 
+	
+	public Que() {
+		this.frontNode = null;
+		this.rearNode= null;   }
+	
+	public void enqueue(int data) {
+		
+	Node newNode = new Node(data);
+		
+		if(this.frontNode == null) {
+	    this.frontNode= newNode;  }
+		
+		else {
+			this.rearNode = newNode;
+			this.rearNode.next = frontNode;  }}
+		
+	public int dequeue() {
+		
+		if(this.frontNode == null) {
+			 System.out.println("Queue is empty");
+	            return Integer.MIN_VALUE;  }
+		
+		int item; 
+		
+		if(this.frontNode == this.rearNode) {
+			item = this.frontNode.data;	
+			this.frontNode = null;
+			this.rearNode= null;  }
+		
+		else {
+			Node temp = this.frontNode; 
+			item = temp.data;
+			this.frontNode= this.frontNode.next;
+			this.rearNode.next = this.frontNode;  }
+		
+		return item;  }
+		
+	
+public  void display() {
+	 Node currNode= this.frontNode;
+	 
+	 while(currNode != this.frontNode) {
+		 System.out.println(currNode.data);
+		 currNode = currNode.next;  } 
+	 System.out.println(currNode.data);   }}
+
+
+public class CircularQueueUsingLinkedList {
+	
+public static void main(String[] args) {
+		
+	Que obj= new Que();
+	
+	obj.enqueue(5);
+	obj.enqueue(9);
+	obj.enqueue(7);
+	obj.enqueue(8);
+	
+	obj.display();
+	
+System.out.println(	obj.dequeue() + " removed");
+
+	
+	
+	
+	
+
+}
+}
