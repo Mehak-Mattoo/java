@@ -73,7 +73,7 @@ public void PostOrder(Node focusNode) {
 
 public void LevelOrder () {
 	
-	Queue<Node> queue= new LinkedList<Node>();
+	Queue<Node> queue= new LinkedList<Node>();  // using queue becasue of fifo approach
 	queue.offer(root);   // adding root to queue
 	
 	while (!queue.isEmpty()) {
