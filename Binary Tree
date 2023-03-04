@@ -1,0 +1,114 @@
+package com.java.MyProject;
+
+import java.awt.event.FocusAdapter;
+import java.util.LinkedList;
+import java.util.Queue;
+
+import javax.crypto.BadPaddingException;
+import javax.xml.transform.Templates;
+
+class Node{
+	
+	Node left, right;
+     int  data;
+
+public Node(int data) {
+	 this.data= data;  }
+}
+class BinaryTree{
+	static Node root;
+
+static void add(int data) {
+
+	Node newNode= new Node(data);
+	
+	if(root== null) {
+		root= newNode;  }
+	
+	else {
+		Node focusNode= root;
+		Node parent;
+		
+		while(true) {
+			parent= focusNode;
+			
+			if(data< focusNode.data) { //  smaller data will be at left side
+				focusNode= focusNode.left;  // changing focus to left side
+				if(focusNode== null) {
+					parent.left= newNode;
+					return;   }}
+				
+				else {
+					focusNode= focusNode.right;  // changing focus to right side
+					if(focusNode== null) {
+						parent.right= newNode;
+						return;  }}
+		
+	
+}}}
+public void InOrder(Node focusNode) {
+	if(focusNode == null) {
+		return;}
+	
+	InOrder(focusNode.left);
+	System.out.print(focusNode.data+" , ");
+	InOrder(focusNode.right);
+}
+
+public void PreOrder(Node focusNode) {
+	if(focusNode == null) {
+		return;}
+	
+
+	System.out.print(focusNode.data+" , ");
+	PreOrder(focusNode.left);
+	PreOrder(focusNode.right); }
+
+public void PostOrder(Node focusNode) {
+	if(focusNode == null) {
+		return;}
+	PostOrder(focusNode.left);
+	PostOrder(focusNode.right);
+	System.out.print(focusNode.data+" , ");}
+
+public void LevelOrder () {
+	
+	Queue<Node> queue= new LinkedList<Node>();
+	queue.offer(root);   // adding root to queue
+	
+	while (!queue.isEmpty()) {
+		Node tempNode= queue.poll();  // removing the head of queue
+		System.out.print(tempNode.data+ " , ");
+		 if (tempNode.left != null) {
+             queue.add(tempNode.left); }   // adding left node
+
+         if (tempNode.right != null) {
+             queue.add(tempNode.right);   } }  // adding right node
+	}}
+
+
+public class Tree {
+public static void main(String[] args) {
+BinaryTree tree= new BinaryTree()	;
+
+tree.root=new Node(4);
+tree.root.left = new Node(7);
+tree.root.right= new Node(9);
+tree.root.left.left = new Node(13);
+tree.root.left.right= new Node(20);
+tree.root.right.left= new Node(23);
+tree.root.right.right= new Node(70);
+
+System.out.println("In-order Transversal: ");
+tree.InOrder(tree.root);
+
+System.out.println("\n\nPre-order Transversal: ");
+tree.PreOrder(tree.root);
+
+System.out.println("\n\nPost-order Transversal: ");
+tree.PostOrder(tree.root);
+
+System.out.println("\n\nLevel-order Transversal: ");
+tree.LevelOrder();
+
+}}
