@@ -1,0 +1,30 @@
+package com.Myproject.java;
+
+
+class Depth{
+	 int MaxDepth(StringBuilder PreOrder, int length ,int index ) {
+		
+	if(index>= length || PreOrder.charAt(index)== 'l') { // when any leaf is encountered, return 0
+		return 0;}
+	
+	index++;  // incrementing index value
+	
+	int left = MaxDepth(PreOrder, length, index);  // recursion on left subtree
+	index++;       // incrementing index value
+	int right = MaxDepth(PreOrder, length, index);   // recursion on right subtree
+	
+	int maxDepth = Math.max(left,right)+1;   // calculating the max b/w two +1 because indexing starts at 0
+	
+	return maxDepth;}}
+
+public class DepthFromPreOrder {
+public static void main(String[] args) {
+	
+	Depth depth= new Depth();
+	
+StringBuilder PreOrder = new StringBuilder("nlnnlll"); // n= internal nodes, l = leaf nodes	
+	System.out.println("Depth: "+ depth.MaxDepth(PreOrder, PreOrder.length(), 0));
+	
+	
+	
+}}
