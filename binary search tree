@@ -1,0 +1,156 @@
+package com.Myproject.java;
+
+import java.util.LinkedList;
+import java.util.Queue;
+
+class BSTNode{
+
+	BSTNode right;
+	BSTNode left;
+	int data;
+	
+	public BSTNode(int data) {		
+	this.data= data;	}}
+
+
+class BST{
+	
+static	BSTNode rootNode;
+
+	public void insert(int data) {
+		rootNode = insert(rootNode, data);	}
+	
+
+public	static BSTNode insert(BSTNode root ,int data) {
+		
+		if(root == null) {
+			 root = new BSTNode(data);}
+		
+		else if(data < root.data) {
+		root.left = insert(root.left, data);	} // inserting at right subtree 
+		
+		else if (data> root.data){
+			root.right = insert(root.right, data); }  // inserting at left subtree
+				
+		return root;		}
+
+public void Delete(int data) {
+	rootNode = Deletion(rootNode, data);}
+
+
+public BSTNode Deletion(BSTNode root, int data) {
+
+	if(root == null) {    // if tree is empty
+		return root; }
+	
+	if(data < rootNode.data) {   // recurring down
+		rootNode.left = Deletion(root.left, data);	} 
+		
+		else if (data > rootNode.data){
+			rootNode.right = Deletion(root.right, data);}
+	
+		else {
+			if(root.left== null) {  //node with one or no child
+				return root.right;}
+			
+			else if (root.right== null) {
+				return root.left;}
+			
+			root.data = smallerValue(root.right);  // node with 2 children , finding smallest number in right subtree
+			root.right = Deletion(root.right, root.data);} // deleting that number
+	
+	return root;}
+
+
+private int smallerValue(BSTNode root) {   //finding smallest element to replace with root
+	
+	int smallerValue = root.data;
+	
+	while(root.left!= null) {
+		smallerValue= root.left.data;
+		root = root.left; }
+	
+	return smallerValue ; }
+
+
+public BSTNode searchNode(int data) {
+	return rootNode = searchNode(rootNode, data); }
+
+
+public  BSTNode searchNode(BSTNode root, int element) {
+	if(root.data == element || root == null) {
+		return root;}
+	
+	if(element< root.data) {     // if search element is smaller than root, then it must be in the left subtree
+	return searchNode(root.left, element);}
+	
+	else {
+	return searchNode(root.right, element); }}
+
+
+	
+public void InOrderDisplay(BSTNode root) {
+        if (root == null) {
+        	return;}
+        
+            InOrderDisplay(root.left);
+            System.out.print(root.data+ " , ");
+            InOrderDisplay(root.right);  }    
+
+public void Preorder(BSTNode root) {
+	 
+	 if (root == null) {
+     	return;}
+	 
+	 System.out.print(root.data+" , ");
+	 Preorder(root.left);
+	 Preorder(root.right); }
+
+
+public void PostOrder(BSTNode root) {
+	 if (root == null) {
+	     	return;}
+	 
+	 PostOrder(root.right);
+	 PostOrder(root.left);
+	 System.out.print(root.data+" , ");}
+
+
+}
+
+
+public class BinarySearchTreee {
+	public static void main(String[] args) {
+		
+	BST tree= new BST();
+
+	tree.insert(5);
+	tree.insert(3);
+	tree.insert(7);
+	tree.insert(1);
+	System.out.println("IN- ORDER TRANSVERSAL");
+	tree.InOrderDisplay(tree.rootNode);
+
+	System.out.println("\n\nPRE- ORDER TRANSVERSAL");
+	tree.Preorder(tree.rootNode);
+
+	System.out.println("\n\nPOST- ORDER TRANSVERSAL");
+	tree.PostOrder(tree.rootNode);
+
+	System.out.println("\n\nAfter deleting a node: ");
+	tree.Delete(3);
+	tree.InOrderDisplay(tree.rootNode);
+	
+	
+	
+
+System.out.println("\n\nSearching for a key: ");
+	try {
+	if(tree.searchNode(3)!= null) {   // if input search was not found the answer would be null and vice-versa
+		System.out.println("\nKey found! ");}}
+
+	catch (Exception e) {
+		System.out.println("\nKey not found"); } // program was throwing exception so used try-catch
+
+
+}}
