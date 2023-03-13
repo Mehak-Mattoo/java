@@ -1,0 +1,94 @@
+package com.Myproject.java;
+import java.util.Arrays;
+
+
+class BNode{
+	int data;
+	BNode root;
+	BNode left;
+	BNode right;
+	
+	
+	public BNode(int data) {
+		this.data= data; }}
+
+class BinaryToBST{
+	int index;
+	
+	public void storeInorder(BNode root, int inorderarray[]) {// first storing the in-order transversal into an array
+		
+		if(root== null) {
+			return; }
+				
+		storeInorder(root.left, inorderarray);   // first storing left subtree
+		
+		inorderarray[index]= root.data;   // storing data inside the array
+		index++;   // Incrementing index
+		
+		storeInorder(root.right, inorderarray);   }// then right subtree
+	
+	public static int countTotalNodes(BNode root) {
+		
+		if(root== null) {
+			return 0; }
+		
+		return countTotalNodes(root.left)+ countTotalNodes(root.right) +1; } // +1 because indexing starts at 0.
+	
+public 	void arrayToBST(BNode root, int array[]) {  // copies content of in order array to binary tree
+
+	if(root == null) {
+		return;}
+	
+	arrayToBST(root.left, array);
+	root.data = array[index];   // updating root data 
+	index++;// incrementing index
+	
+	arrayToBST(root.right, array); }
+
+public void BinaryTreeToBST(BNode root) {    // Conversion
+	
+	if (root== null) {
+		return;}
+
+	
+	int n = countTotalNodes(root);   // getting total number of nodes
+	int arr[]= new int [n];    // to create a array here
+
+	storeInorder(root, arr);
+	
+	Arrays.sort(arr);    // sorting array now
+	
+	index = 0;
+	arrayToBST(root, arr); }
+
+
+static void printInorder(BNode root) {  // finally printing in order of BST
+    if (root == null) {
+        return; }
+
+    printInorder(root.left);
+    System.out.print(root.data + " , ");
+    printInorder(root.right); }   }
+
+
+public class BinaryToBinarySearchTree {
+public static void main(String[] args) {
+	
+BNode root= null;
+
+BinaryToBST tree= new BinaryToBST();
+	
+root= new BNode(78);
+root.left= new BNode(47);
+root.right = new BNode(99);
+root.right.left = new BNode(30);
+root.left.left = new BNode(19);
+root.left.right = new BNode(62);
+root.right.right = new BNode(87);
+
+tree.BinaryTreeToBST(root);   // first conversion
+
+System.out.println("After conversion: ");
+tree.printInorder(root);  // printing result
+
+}}
