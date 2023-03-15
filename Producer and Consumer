@@ -1,0 +1,79 @@
+package com.Myproject.java;
+
+import java.util.*;
+
+class Producer implements Runnable{
+
+List<Integer> list= null;
+private int i=1;
+final int Maxsize =3;
+
+public Producer (List<Integer> list) {
+super();
+this.list = list;}
+
+public void run() {
+
+while(true) {
+try{
+producer(i++);}
+
+catch (Exception e) {
+System.out.println(e);}}}
+
+public void producer(int i)  throws InterruptedException{
+
+synchronized (list) {
+while(list.size()==Maxsize) {
+System.out.println("Three goods produced, waiting for consumer");
+list.wait();}}
+
+synchronized (list) {
+list.add(i);
+System.out.println("Producer produced product: "+i);
+Thread.sleep(400);
+list.notify();}}}
+
+
+class Consumer implements Runnable{
+
+List<Integer>list= null;
+
+public Consumer (List<Integer> list) {
+super();
+this.list = list;}
+
+public void run() {
+
+while(true) {
+try {
+consume();}
+
+catch (Exception e) {
+System.out.println(e);}} }
+
+public void consume() throws InterruptedException {
+
+synchronized (list) {
+while(list.isEmpty()) {
+System.out.println("Three goods consumed, waiting for producer");
+list.wait();}}
+
+    synchronized(list) {
+Thread.sleep(800);
+System.out.println("Consumer consumed product: "+ list.remove(0));
+Thread.sleep(400);
+list.notify();}}}
+
+public class ProducerAndConsumer {
+
+public static void main(String[] args) throws Exception {
+System.out.println("Producer and consumer relation in a company");
+ArrayList <Integer>list = new ArrayList<>();
+Thread t1= new Thread(new Producer(list));
+Thread t2= new Thread(new Consumer(list));
+
+synchronized (list) {
+
+t1.start();
+t2.start();}}}
