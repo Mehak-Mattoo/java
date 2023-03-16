@@ -19,7 +19,30 @@ class Implementation { // by adjacency list
 		
 	 
 	System.out.print(adjacency[destination]);  // printing values
-	System.out.print(adjacency[source]);  }}
+	System.out.print(adjacency[source]);  }
+	
+	
+public void BFS(int source) {
+	
+boolean visited[]= new boolean [adjacency.length];
+Queue <Integer> q= new LinkedList<>();
+
+q.add(source); // adding source to the queue
+visited[source]= true;  // and setting it to true in boolean array
+
+while(!q.isEmpty()) {
+	int root = q.poll(); // removing root
+	System.out.print(root);  // printing it
+	
+	for(int i: adjacency[root]) {  // getting the neighboring nodes of root
+	if(visited [i]!= true) {  // if element is found to be false, set it to true
+		visited[i]= true;}
+	
+	q.add(i);  // adding all neighbors into the queue
+	
+	}}
+}}
+
 
 
 public class Graph {
