@@ -1,0 +1,51 @@
+package com.Myproject.java;
+import java.util.*;
+
+
+class Implementation { // by adjacency list	
+	public LinkedList<Integer> adjacency[] ; // creating a public adjacency list
+
+	
+	public Implementation(int vertices) {  // making a constructor to make vertices
+		adjacency = new LinkedList[vertices]; 
+		for (int i = 0; i < vertices; i++) { // creating a array list of size vertices
+			adjacency[i]= new LinkedList<Integer>(); }}  /* in each array list, a linked linked list will be connected 
+	                                                holding values of vertices connected to it (empty right now).*/
+	
+	public void InsertEdge(int source, int destination) {
+		
+		adjacency[source].add(destination); // adding source to destination and vice- versa 
+		adjacency[destination].add(source);
+		
+	 
+	System.out.print(adjacency[destination]);  // printing values
+	System.out.print(adjacency[source]);  }}
+
+
+public class Graph {
+	public static void main(String[] args) {
+		
+		try {
+		Scanner s = new Scanner(System.in);
+		System.out.println("Enter number of vertices and edges: ");
+		
+		int v = s.nextInt();
+		int e = s.nextInt();
+		
+		Implementation i= new Implementation(v);
+		
+		System.out.println("Enter edges: ");
+		
+		for (int j = 0; j < e; j++) {
+					
+		int source = s.nextInt();
+		int destination = s.nextInt();	
+		  
+		i.InsertEdge(source, destination);	}} // prints the connection b/w a source and destination
+		// i.e how many nodes are connected with source
+		
+		catch (Exception e) {
+System.out.println("\nIncorrect input ");}  // if v= 3 and you enter 3 , it will execute i.e enter number lesser than entered v
+		
+	}}
+
