@@ -1,0 +1,48 @@
+package com.java.MyProject;
+
+
+class BTNode{
+	
+	BTNode left, right;
+     int  data;
+
+public BTNode(int data) {
+	 this.data= data;  }
+}
+class BinaryTree{
+	static BTNode root;
+
+
+	public int Height(BTNode root) {
+		if(root== null) {  // if root is null, then height = 0
+			return 0;}
+		
+		else {
+		int left = Height(root.left) ;  // checking left  and right subtree
+		int right = Height(root.right);
+		
+		int max = Math.max(left, right);
+		return max +1; }}}// returning the bigger b/w them +1 because of adding root
+
+
+
+public class HeightOfTree {
+public static void main(String[] args) {
+BinaryTree tree= new BinaryTree()	;
+
+tree.root=new BTNode(4);
+tree.root.left = new BTNode(7);
+tree.root.right= new BTNode(9);
+tree.root.left.left = new BTNode(13);
+tree.root.left.right= new BTNode(20);
+tree.root.right.left= new BTNode(23);
+tree.root.right.right= new BTNode(70);
+tree.root.right.left.right= new BTNode(76);
+tree.root.right.left.right.right = new BTNode(65);
+
+
+
+System.out.println("The height of the input binary tree is : "+tree.Height(tree.root));
+
+
+}}
