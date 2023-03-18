@@ -1,0 +1,59 @@
+package com.java.MyProject;
+import java.util.*;
+
+
+class BNode{
+	
+	BNode left, right;
+     int  data;
+
+public BNode(int data) {
+	 this.data= data;  }}
+
+class LView{
+	public static BNode root;
+	
+	public void LeftView () {
+		
+		Queue<BNode> queue= new LinkedList<BNode>();  // using queue because of fifo approach
+        
+		queue.add(root);
+		
+		while (!queue.isEmpty()) {
+			int size = queue.size();
+		
+			for (int i = 0; i < size; i++) {
+							
+			 BNode	tempNode= queue.poll();  // removing the head of queue
+			
+			if(i== 0) {/* because the left most element is always at the first (for right view simply 
+			              put i==size-1 as the right most element will always be at the end */
+			System.out.print(tempNode.data+ " , ");}
+			
+			 if (tempNode.left != null) {
+	             queue.add(tempNode.left); }   // adding left node
+
+         if (tempNode.right != null) {
+	             queue.add(tempNode.right);  } } }  // adding right node
+	}}
+
+
+public class PrintLeftViewOfTree {
+public static void main(String[] args) {
+	
+	LView tree = new LView();
+	
+	tree.root=new BNode(4);
+	tree.root.left = new BNode(7);
+	tree.root.right= new BNode(9);
+	tree.root.left.left = new BNode(13);
+	tree.root.left.right= new BNode(20);
+	tree.root.right.left= new BNode(23);
+	tree.root.right.right= new BNode(70);
+	
+	System.out.println("Left- view of the tree:");
+	tree.LeftView();
+	
+	
+}
+}
