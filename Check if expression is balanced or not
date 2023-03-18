@@ -1,0 +1,50 @@
+package com.java.MyProject;
+
+import java.util.Stack;
+
+ class CheckIfBalanced {
+	
+	public boolean IsBalanced(String str) {
+		
+		
+		if(str == null || str.length()%2 != 0) {  /* is string is null or if its length is not 
+		                  divisible by 2, it means there must not be equals pairs of braces*/
+		return false;} 
+		
+		Stack<Character> stack= new Stack<>();
+		char[] charArray = str.toCharArray();// storing each character of string in a char array
+		
+		for(char i: charArray) { // Traversing
+			
+			if(i== '('|| i== '{'||i=='[') {   // if any opening brace is found, push it in the stack
+				stack.push(i);}
+			
+		if(i==')'||i=='}'|| i==']') {   // when any closing brace is found, 
+			
+			if(stack.isEmpty()) {  // check is stack is already empty
+				return false;}    // if it is, it means that there is no prior pair found
+			
+			char top = stack.pop(); //if stack is not empty ,the pop the topmost element
+			
+			if(top=='('&& i!=')'|| top=='{' && i!='}'|| top == '['&& i!=']') { // checking if top element
+				return false;	}}}  // and i are pairs
+		
+		return stack.isEmpty();	}}  // if stack becomes empty now, only then the expression will be balanced
+ 
+		
+public class CheckIfExpressionIsBalanced {	
+public static void main(String[] args) {
+	
+	CheckIfBalanced c= new CheckIfBalanced();
+	
+	String str = "{{[[(())])}}";
+	
+	if(c.IsBalanced(str)) {
+		System.out.println("Balanced expression");
+	}else {
+	System.out.println("Not a balanced expression");}
+	
+	
+	
+}}
+
