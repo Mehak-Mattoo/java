@@ -1,0 +1,90 @@
+package com.java.MyProject;
+
+
+class Node{    // creating  a node class holding data members
+	Node next;
+	int data;
+	
+	public Node(int data) {
+		this.data = data; 
+		this.next = next; }}
+
+class List{
+
+public static  Node head = null;    // head and tail is pointing to null at first
+public static Node tail = null;  
+
+public void display() {     // displaying values
+    
+    Node current = head;    
+        
+    if(head == null) {    // if there is no element
+        System.out.println("List is empty");    
+        return;    }
+       
+    while(current != null) {    // while there are elements, keep on printing values
+       
+        System.out.print(current.data + " ");    
+        current = current.next;   }} 
+
+public Node addNode(int data) {    //add nodes  method
+    
+    Node newNode = new Node(data);    
+             
+    if(head == null) {             // if head is null then make two nodes- head and tail
+        head = newNode;    
+        tail = newNode; }   
+       
+    else {                
+        tail.next = newNode;       //if head is not null, then tail will point to the new node
+        tail = newNode;    }   // and new node will become the new tail
+	return newNode;}
+
+
+	
+	public Node sortedInsert(int data) {  // to insert an element in a sorted position
+		
+		Node newNode = new Node(data);
+		
+		Node current = head;  // current points to head
+		Node tempNode= null;
+		
+		if(head == null || newNode.data<head.data) {//if no element is present or new node data is less than head data
+			newNode.next= head; // then new node will point to head
+			head= newNode;  // and new node will become the head
+			return head;  }
+
+			
+		
+			while((current!= null && current.data <newNode.data)) {  //while current is not null and its data is less than new node data 
+				tempNode=current;  // then current becomes temp node
+			current= current.next; }  // going aheadin the list
+			
+		
+		  newNode.next = current;  // when above condition becomes false, then current node will point to new node
+	      tempNode.next = newNode;  // and temp will point to new node( as temp will always be one node behind current node)
+	      
+	return head;}  }
+
+
+public class InsertNodeInSortedLinkedList{
+public static void main(String[] args) {
+	
+	List l= new List();
+	
+
+	l.addNode(3);
+	l.addNode(6);
+	l.addNode(9);
+	l.addNode(12);
+
+	
+	l.sortedInsert(21);  //adding a larger element than tail
+	l.sortedInsert(1); // adding a number lesser than head
+	l.sortedInsert(8);  // adding a number in between
+
+	l.display();  // displaying
+	
+}
+
+}
