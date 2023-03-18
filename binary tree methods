@@ -1,0 +1,160 @@
+package com.Myproject.java;
+import java.util.*;
+
+class BTNode{
+
+	BTNode right;
+	BTNode left;
+	int data;
+	
+public BTNode(int data) {		
+this.data= data;	
+left = null;
+right = null; }}
+
+class Level{
+	
+	static BTNode root;	
+	public static int ans = 1;
+	
+public	int Getlevel(int data) {		 // getting level of a specific node
+
+		Queue<BTNode> queue= new LinkedList<BTNode>();
+		queue.add(root);
+		
+	while(!queue.isEmpty()) {	//	iterating until queue is not empty		
+		
+		int size = queue.size();
+        for (int i = 0; i < size; i++) {   // iterating up to the size only
+        	BTNode tempNode = queue.poll();
+        
+		if(tempNode.data == data) {
+			return ans; }  // if data matches , return
+		
+		if(tempNode.left!= null) {
+			queue.add(tempNode.left); }     // adding both sides of tree
+		
+		 if (tempNode.right != null) {
+             queue.add(tempNode.right);   } }
+		 
+          ans++; }	 // incrementing at every iteration
+	return ans; }
+
+
+
+
+public BTNode LeastCommonAncestor(BTNode root, int Node1, int Node2) {
+	
+	if(root == null) {  // no data is present
+		return null; }
+	
+	if(root.data == Node1 || root.data == Node2) {// if data of node 2 or node 1 == root, then lca must be that root
+		return root; }
+	
+	 BTNode left = LeastCommonAncestor(root.left, Node1, Node2);   //  find element in left subtree
+	 BTNode right = LeastCommonAncestor(root.right, Node1, Node2);  //  find element in right subtree
+	
+	if(left == null) {
+		return  right;} // if element was not found in left subtree, then just return right & vice-versa
+	
+	if(right== null) {
+		return left; }
+
+	return root;}
+	
+
+public int distanceBetweenTwoNodes(BTNode root, int N1, int N2) {   
+	
+	if(root == null) {  // if root is absent, return -1
+		return -1;}
+	
+	BTNode lca = this.LeastCommonAncestor(root, N1, N2);  // getting the lca of input nodes
+	
+	if(lca == null) {  // if lca is null, it means tgat one of input node is not present in the tree
+		return -1;}
+	
+	
+	int distance1 = distanceFromLCA(lca, N1, 0);  // getting distance of node 1 and setting distance to 0 initially
+	int distance2 = distanceFromLCA(lca, N2, 0); // vice-versa
+		
+	return distance1+ distance2; }  // adding both
+
+
+public int distanceFromLCA(BTNode root, int data, int distance ) {
+
+	if(root== null) {  
+		return -1; }
+	
+	if(root.data == data) { // when data is found , return distance
+		return distance; }
+	
+	int d = distanceFromLCA(root.left, data, distance+ 1);  // finding data in left subtree and adding 1 at each increment
+	
+	if(d != -1) {  // if data is not equal to -1, then go in the right subtree
+		return d;}
+	
+	d= distanceFromLCA(root.right, data, distance+1); 
+	return d; }
+
+
+public boolean AreSiblings(BTNode root, int n1, int n2) {  // this is not correct 
+
+	if(root== null) {
+	return false;}
+	
+	if (root.left != null && root.right != null) {
+		
+
+        int left = root.left.data;
+        int right = root.right.data;
+        
+        if(left == n1 && right == n2) {
+        	return true;}
+        
+        else if(left == n2 && right == n1) {
+        	return true; }}
+        
+        if(root.left != null) {
+        	AreSiblings(root.left, n1, n2);}
+        
+        if(root.right!= null) {
+        	AreSiblings(root.right, n1, n2); }
+	
+
+return true;	}
+
+}
+
+
+public class BinaryTree {	
+public static void main(String[] args) {
+	
+	Level l= new Level();
+	l.root = new BTNode(6);
+	l.root.left = new BTNode(9);
+	l.root.right = new BTNode(12);
+	l.root.left.right = new BTNode(23);
+	l.root.right.right = new BTNode(45); 
+	
+System.out.println("Level: "+ l.Getlevel(6));   // writing node value here
+
+BTNode lca = l.LeastCommonAncestor(l.root, 12, 6);
+System.out.println("\nLeast Common Ancestor: "+ lca.data);
+
+System.out.println("\nDistance : "+ l.distanceBetweenTwoNodes(l.root, 12, 9));
+
+int n1 = 9;
+int n2 = 23;
+
+
+if(l.AreSiblings(l.root, n1, n2)) {
+	System.out.println("yes");}
+else {
+	System.out.println("no");
+}
+
+
+			
+	
+}
+}
