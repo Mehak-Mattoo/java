@@ -1,0 +1,56 @@
+package com.java.MyProject;
+import java.util.*;
+
+import javax.management.MBeanServerInvocationHandler;
+
+
+class GImplementation { // by adjacency list	
+	public LinkedList<Integer> adjacency[] ; // creating a public adjacency list
+
+	
+	public GImplementation(int vertices) {  // making a constructor to make vertices
+		adjacency = new LinkedList[vertices]; 
+		for (int i = 0; i < vertices; i++) { // creating a array list of size vertices
+			adjacency[i]= new LinkedList<Integer>(); }}  /* in each array list, a linked linked list will be connected 
+	                                                holding values of vertices connected to it (empty right now).*/
+	
+	public void InsertEdge(int source, int destination) {
+		
+		adjacency[source].add(destination); // adding source to destination and vice- versa 
+		adjacency[destination].add(source); }
+	
+	
+	public void DFS(int source) {
+		
+		boolean visited[]= new boolean [adjacency.length];
+		Stack <Integer> q= new Stack<>();
+
+		q.add(source); // adding source to the queue
+		visited[source]= true;  // and setting it to true in boolean array
+
+		while(q.size()!= 0) {
+			int root = q.pop(); // removing root
+			System.out.print(root+" , ");  // printing it
+			
+			for(int i: adjacency[root]) {  // getting the neighboring nodes of root
+			if(visited [i]!= true) {  // if element is found to be false, set it to true
+				visited[i]= true;
+			
+			q.add(i);  // adding all neighbors into the queue
+			}	}}	}}
+
+
+public class DepthFirstSearch {
+	public static void main(String[] args) {
+		
+		GImplementation i= new GImplementation(4);
+		
+		i.InsertEdge(0, 1);
+		i.InsertEdge(0, 2);
+		i.InsertEdge(1, 2);
+		i.InsertEdge(2, 0);
+		i.InsertEdge(2, 3);
+		i.InsertEdge(3, 3);
+		
+		i.DFS(2); }
+}
