@@ -1,0 +1,42 @@
+package com.java.MyProject;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class DuplicateNumber {
+public static void main(String[] args) {
+	
+List<Integer> list = new ArrayList<>();
+list.add(3);
+list.add(4);  // this only works if there are only one duplicate element
+list.add(8);
+list.add(3);
+list.add(7);
+list.add(4);
+
+	
+System.out.println(	FloydHareTortoise(list));}
+
+private static int FloydHareTortoise(List<Integer> arr ) {
+	
+	int tortoise = arr.get(0);  //  first setting at 0
+	int hare = arr.get(0);
+	
+	while(true) {
+		tortoise= arr.get(tortoise);  // hare moves like fast pointer and tortoise move like slow pointer
+		hare= arr.get(arr.get(hare));  
+		
+	 if (tortoise == hare) {  // when they intersect break,
+		 break;	 }}
+	
+	
+     tortoise= arr.get(0); // setting tortoise at initial position
+	while(tortoise!= hare) {// and running the loop again but this time both pointer moves one step at a time
+		
+	  tortoise= arr.get(tortoise);  
+		hare = arr.get(hare);	}
+	
+	return hare;
+	
+}
+}
