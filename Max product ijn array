@@ -2,7 +2,7 @@ package com.java.MyProject;
 
 
 /*APPROACH:
-quick sorting the array elements
+quick sorting the array elements   TC- ONLogN
 
 then printing the last and second last element because max product would be b/w them.
 */
@@ -70,3 +70,51 @@ System.out.println("Maximum product found between "+numbers[length]+ " and "+ nu
 	  }
 
 }
+
+
+Method 2 : TC-On
+
+
+
+
+package com.Myproject.java;
+
+
+public class MaximumProduct {
+public static void main(String[] args) {
+	
+int nums[]= {-8,5,3,1,0,6};
+
+	System.out.println(MaxProduct(nums)); }
+
+
+private static long MaxProduct(int[] nums) {
+	
+	long current, max;
+		
+	max = nums[0];
+	current = 1;
+	
+	for (int i = 0; i < nums.length; i++) { // continuing to multiply with array elements (left to right)
+		current*= nums[i];   //-8 , -40 , -120 0,1 ,6 
+		
+		max= Math.max(max, current);  // finding the bigger element b/w max and current 
+		
+		if(current==0  ) {  // if any 0 is found in array, change current to 1 (to restart the sub-array)
+			current=1;	}	}
+	
+	current= 1;  // setting current as 1 again for backward traversal
+	
+for (int j= nums.length-1; j >=0; j--) {// now traversing right to left because sometimes a single negative element
+		current*= nums[j];  // keeps on making the current smaller , to avoid that  we traverse in both directions
+	
+		max= Math.max(max, current); // everything else is same
+		
+		if(current==0  ) {
+			current=1;	}
+			
+			
+}	return max; }}  // now returning the max value from both traversals
+
+
+
