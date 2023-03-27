@@ -1,0 +1,28 @@
+package com.Myproject.java;
+
+public class InversionCount {
+public static void main(String[] args) {
+	
+	int arr []= {2,4,1,3,5};
+	
+	
+	bubbleSort(arr); }
+	
+
+private static void bubbleSort(int[] arr) {
+	 
+	 int count =0, i,j , temp = 0;
+	 
+	for ( i = 0; i < arr.length-1; i++){	
+	for ( j = 0; j < arr.length-i-1 ; j++) {
+
+	if(arr[j]> arr[j+1]) {
+
+	temp = arr[j];
+	arr[j]= arr[j+1];
+	arr[j+1]= temp;
+    count++;   }  }}  // incrementing at each swapping
+
+
+	System.out.print("Inversions required: "+count);}}
+	
