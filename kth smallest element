@@ -1,0 +1,26 @@
+package com.Myproject.java;
+import java.util.*;
+
+
+public class KthSmallestElement {
+public static void main(String[] args) {
+	
+
+	int arr[]= {10,20,1,3,30,2};
+	int k= 2;
+	
+System.out.println(	ByMaxHeap(arr,k));  }
+
+private static int ByMaxHeap(int[] arr, int k) {
+	
+	PriorityQueue<Integer> queue= new PriorityQueue<>(Collections.reverseOrder());  // implemented a max heap
+	
+	for (int i = 0; i < arr.length; i++) {  // adding all array elements inside
+		queue.add(arr[i]);
+		 
+		if(queue.size()> k) {// when the size becomes larger than k, start popping the max. number out of inserted ones
+			queue.poll(); }}
+	      return queue.peek();  // the top most element is the answer
+	
+}
+}
