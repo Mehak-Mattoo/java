@@ -1,19 +1,44 @@
-int array []= {98,6,9,3,97,6,4};
- int min = array[0];
- int max = array[1];
- int i;
- int netProfit=0;
- 
- for( i=0;i<array.length-1;i++) {
+package com.Myproject.java;
 
-if( array[i]<=min) {
-min = array[i];}
- }
-for(int j=1;j<array.length-1;j++) {
+public class StockBuyAndSell {
+public static void main(String[] args) {
+	
 
-     if( array[j]>=max) {
-    max =array[j];
-    netProfit= max-min;}}
-System.out.println("Best time to buy the stock = "+ min+"\nBest time to sell the stock = "+ max+"\nNet Profit = "+netProfit);
-}
-}
+	int prices[]= {1,4,3,5,9,2};
+	int n = prices.length;
+
+maxProfit1(prices); 
+maxProfit3(prices);  }
+
+
+	private static void maxProfit1(int[] arr) {// when there can be only one transaction
+	
+
+	int min= arr[0];  // stores  the min. value in array so far 
+	int maxProfit = 0; 
+	int current= 0;
+	
+	for (int i = 0; i < arr.length; i++) {
+		min = Math.min(arr[i], min);  // update the min. value to find the best day to buy stock at lowest price
+		
+		current=  arr[i]- min;  // calculate the current profit 
+		maxProfit= Math.max(maxProfit, current); }  // gets the max profit out of current and max
+	
+	System.out.println("MaxProfit: "+ maxProfit);  }
+	
+	
+	
+
+private static void maxProfit3(int[]arr) {  // when there can be unlimited transactions
+	
+	int profit=0;
+	
+	for (int i = 1; i < arr.length; i++) {
+		if(arr[i]> arr[i-1]) {     // simply comparing two values and getting the difference to get the profit 
+		 profit += arr[i]- arr[i-1];  }	}
+	
+	System.out.println(profit);
+
+
+}}
+
