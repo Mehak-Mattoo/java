@@ -1,0 +1,90 @@
+package com.Myproject.java;
+
+
+public class ReverseLinkedlist {
+
+	Node head;
+
+	public void Insertend(int data) {
+
+		Node newNode = new Node(data);
+
+		if(head== null) {
+		head = newNode;
+		return;}
+
+		newNode.next= null;
+
+		Node last= head;
+
+		while(head.next != null) {
+			last.next = newNode;  }	}
+
+static class Node {
+
+	int data;
+	Node next;
+
+ Node(int d) {
+
+	data = d;
+	next = null;}}
+
+
+public void PrintList(Node head) {
+
+	Node n = head;
+
+	while(n != null) {
+		System.out.print(n.data+" ");
+		n= n.next;  }}
+
+public Node reverse() {
+	
+	Node previous = null;
+	Node current = head;
+	
+	if(head== null) {
+		return head;}
+	
+	
+	while(current!= null) {
+		Node tempNode = current.next;
+		current.next= previous;  // here the next pointer will start pointing to the previous element
+		previous= current;      // hence changing the direction of traversal
+		current= tempNode; }
+				
+	return previous;}
+
+
+
+ public static void main(String[] args) {
+
+	ReverseLinkedlist objLinkedList= new ReverseLinkedlist();
+
+
+	objLinkedList.head = new Node(10);	
+
+
+	Node second = new Node(1);
+	Node third = new Node(2);
+	Node fourth = new Node(6);
+
+	objLinkedList.head.next= second;
+	second.next = third;
+	third.next= fourth;
+
+	System.out.println("Forward linked list: ");
+	objLinkedList.PrintList(objLinkedList.head);
+
+System.out.println("\nReversed linked list: ");
+	Node reverse=  objLinkedList.reverse();
+
+	objLinkedList.PrintList(reverse);
+
+
+
+
+
+}
+}
