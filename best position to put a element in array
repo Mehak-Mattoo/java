@@ -1,0 +1,26 @@
+public static int bestInsertPos(int [] arr, int n, int m){
+		int first=0 ;
+	int last= n-1;
+	int ans=0;
+	
+	
+
+	while(first<=last) {		
+		
+	int mid = (first + last)/ 2;
+		
+	if(arr[mid]<m) {
+	ans= mid+1;  // hence m will be at the at the place after mid
+	first= mid+1;}
+
+	else if (arr[mid]==m  ) {   
+	ans= mid;
+	   }  
+	
+	else {
+	last = mid-1;} } // hence m will be at the at the place before mid
+
+	 
+return ans;
+	}
+}
