@@ -1,0 +1,53 @@
+package com.java.MyProject;
+import java.util.*;
+
+
+
+public class New {
+public static void main(String[] args) {
+	
+
+int arr[]= {0,0,0,0,0,0,0,1,1,1,1,1};// a infinite array of 0,1
+	
+	
+
+int low = 0;  // making a range
+int high=1;
+
+while(arr[high]!= 1) {  // loop until 1 is not found
+
+low = high;  // changing range
+high *=2;}    // increasing range as it is a infinite array to make process faster
+System.out.println( binarySearchII(arr,high, low));		
+
+
+}
+
+public static int binarySearchII(int []arr, int high, int low) {
+	
+	
+	int ans= -1;
+
+	while(low<= high) {		
+		
+	int mid = (low + high)/ 2;
+		
+
+   if (arr[mid]==1 && (mid == 0 || arr[mid - 1] == 0)) {// if 1 is found, we have to check whether this 
+		                     // is its  first occurrence or not
+	ans= mid; 
+   high= mid-1;}
+   
+   
+   else if (arr[mid] == 1)
+       high = mid - 1;
+    else
+       low = mid + 1;} 
+
+	 
+return ans;}
+
+	
+
+	
+}
