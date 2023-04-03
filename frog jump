@@ -1,0 +1,38 @@
+import java.util.* ;
+import java.io.*; 
+public class Solution {
+
+
+
+    public static int frogJump(int n, int heights[]) {
+
+
+// solving using dynamic programming
+
+       int arr[]= new int[n];
+
+       arr[0]= 0;
+
+
+       int jump2 = Integer.MAX_VALUE;  // setting max value for 1 iteration to pick out the min value
+       
+       for(int i= 1; i<n;i++){
+
+int jump1 = arr[i-1] + Math.abs(heights[i]- heights[i-1]);
+  
+// here frog will jump only 1 step, getting current index + step that he jumped to
+
+
+if(i>1){  // because of the below condition
+ jump2 = arr[i-2] + Math.abs(heights[i]- heights[i-2]);}
+
+// here frog will jump 2 step, getting current index + step that he jumped to
+
+
+ arr[i]=Math.min(jump1,jump2); }   // storing min value value out of two jumpes
+return arr[n-1];  // the min value will be stored at this index
+
+
+       }
+
+}
