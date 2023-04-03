@@ -1,0 +1,31 @@
+package com.Myproject.java;
+
+
+
+public class TowerOfHanoi {
+	public static void main(String[] args) {
+		
+		shiftDisks(4, 'A', 'B', 'C'); // 4= num of disks  and A,B,C are three towers where A = source 
+		                             // B= middle tower , C= destination tower
+	}
+	static void shiftDisks(int n, char source,  char helper, char destination) {
+		
+		if(n==1) {  // when there is only one disc only shift it from source to destination
+			
+			System.out.println("Disc 1 moved from "+ source + " to "+ destination);
+			return; }
+			
+shiftDisks(n-1, source, destination , helper); // for other discs, go from source using destination as helper
+			
+	// where, first arrange all discs until there is only one disc left 
+			
+			
+			
+			System.out.println("Disc "+ n + " moved from "+ source + " to "+ destination);
+			
+		    shiftDisks(n-1, helper, source, destination);
+// now , shift from helper acting as source by using source to reach destination
+		    
+		    // This way all discs get arranged
+	}
+}
