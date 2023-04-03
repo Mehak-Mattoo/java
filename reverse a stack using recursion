@@ -1,0 +1,37 @@
+import java.util.Stack;
+
+public class Solution {
+    
+	public static void reverseStack(Stack<Integer> stack) {
+
+// the idea is to pop all the elements first to get a empty stack
+if(stack.isEmpty()){
+	return;}
+
+int data= stack.pop();
+
+
+reverseStack(stack);
+
+
+insertAtLast( stack, data); }
+
+
+
+	static void insertAtLast(Stack<Integer> stack, int data){
+
+// if stack is empty , push the element and return
+if(stack.isEmpty()){
+	stack.push(data);
+	return; }
+
+	int element = stack.pop();  // pop the said element
+	
+
+	insertAtLast(stack, data); 
+
+	stack.push(element);  // then push the popped element which causes actual reversal
+
+	}
+
+}
