@@ -1,0 +1,38 @@
+package com.Myproject.java;
+
+public class LongestCommonSubsequence {
+	public static void main(String[] args) {
+		
+		String s1= "ABCAB";
+		String s2 = "AECB";
+		
+		int length1 = s1.length();
+		int length2 = s2.length();
+		
+		int arr[][] = new int[length1+1][length2+1];
+		
+System.out.println( LCS(length1, length2, s1, s2, arr) );		
+		
+	}
+
+	private static int LCS(int length1, int length2, String s1, String s2, int[][] arr) {
+		
+		for (int i = 1; i <= length1; i++) {
+			for (int j = 1; j <= length2; j++) {
+				
+				if (i == 0 || j == 0)
+                    arr[i][j] = 0;
+				
+		if(s1.charAt(i-1)== s2.charAt(j-1)) {//if elements match(- or j-1 because table starts from 0
+					
+			arr[i][j]= arr[i-1][j-1]+1; }  // then fill the table by adding one
+				
+				else {
+					arr[i][j]= Math.max(arr[i-1][j], arr[i][j-1]); }}}
+		    // picking the max out of upper cell and left adjacent cell       
+		
+		
+		return arr[length1][length2];}  // the answer lies at the bottom right most cell
+	
+
+}
