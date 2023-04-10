@@ -1,0 +1,54 @@
+package com.Myproject.java;
+
+
+public class FloydWarshallAlgorithm {
+	
+final static int i = 9999;  // infinity
+ static	int vertices= 4;
+	
+	
+	static void Algorithm(int [][] distance) {
+		
+		int i, j,k;
+		
+		for ( k = 0; k < vertices; k++) {  // picks all vertices as source one by one
+		for ( i = 0; i < vertices; i++) { // picks all vertices as destination for the selected source
+		for ( j = 0; j < vertices; j++) { // if the picked vertex shows the shortest path from i-j , 
+					                      // then update the value of distance i-j.
+			
+			distance[i][j]= Math.min(distance[i][j], distance[i][k]+ distance[k][j]); }}}	
+		
+	Print(distance);  }
+	
+	
+	
+static void Print(int distance[][]) {  // helps in printing values
+	
+System.out.println("The shortest distances between every pair of vertices");
+	 
+	 for (int k = 0; k < vertices; k++) {
+         for (int j = 0; j < vertices; j++) {
+             if (distance[k][j] == i) {
+                 System.out.print("Max\t");}  // max= infinity
+             else {
+                 System.out.print(distance[k][j] + "\t"); }}
+         System.out.println(); }}
+
+
+
+public static void main(String[] args) {
+	
+	FloydWarshallAlgorithm f= new FloydWarshallAlgorithm();
+	
+	
+	 int matrix [][] = { { 0, 5, i, 10 },
+             { i, 0, 3, i },
+             { i, i, 0, 1 },
+             { i, i, i, 0 } };
+	 
+	 f.Algorithm(matrix);
+}
+
+
+
+}
