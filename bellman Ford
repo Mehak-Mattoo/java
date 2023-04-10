@@ -1,0 +1,139 @@
+package com.Myproject.java;
+import java.util.Arrays;
+
+
+// helps in negative weighted graphs
+
+
+class Graph{
+	
+	 int edges,vertices;
+	 
+	
+	class Edge{
+		int source, weight, destination;
+		
+		public Edge() {
+			source= 0;                              // basic structure
+			weight= 0;
+			destination= 0;  }}
+		
+	Edge e[];
+	
+	public Graph(int vertices, int edges) {
+		this.vertices = vertices;
+		this.edges= edges;
+		
+ e =  new Edge[edges];
+ 
+ for (int i = 0; i < edges; ++i)
+     e[i] = new Edge();  }   
+	
+	
+	
+	
+
+ static void Algorithm(Graph graph, int source) {
+	
+	int V= graph.vertices;
+	int E= graph.edges;
+	
+	
+	int[] distance = new int [V];  // fill the array with infinity values
+	Arrays.fill(distance, Integer.MAX_VALUE);
+	
+	distance[source]= 0;   // source with 0
+	
+	for (int i = 1; i < V; i++) {  // loop runs V-1 times
+		for (int j = 0; j < E; j++) {
+			
+			int src= graph.e[j].source;   // this stores source
+			int destination = graph.e[j].destination; // this stores destination
+			int weight = graph.e[j].weight; // this stores weight
+			
+if(distance[src]!= Integer.MAX_VALUE &&  distance[src]+ weight < distance[destination])	{ // if the distance between source and destination + weight is 
+
+distance[destination]= weight + distance[src]; }} // less than the destination cost then update the destination cost
+	
+
+	for (int j = 0; j < E; j++) { // running the inner loop just 1 more time to check for any negative cycles
+		
+		int src= graph.e[j].source;    // because the shortest path in a negative cycle will keep on decreasing and it will be stuck in a loop
+		int destination = graph.e[j].destination;
+		int weight = graph.e[j].weight;
+		
+if(distance[src]!= Integer.MAX_VALUE &&  distance[src]+ weight < distance[destination])	{
+System.out.println("The graph has a negative cycle "); // if we reach this if statement, this means that there is a negative cycle
+return; }}}  // then simply return
+	
+	
+	
+	Print(distance, V); }
+
+	
+
+	static void Print(int distance[],int vertices) {
+		
+		System.out.println("Vertex Distance from Source: ");
+		
+        for (int i = 0; i < vertices; ++i) {
+            System.out.println(i+"\t\t"+ distance[i]);}}}
+  
+	
+
+
+public class BellmanFordAlgorithm {
+	public static void main(String[] args) {
+		
+
+		 int V = 5; // Number of vertices in graph
+	        int E = 8; // Number of edges in graph
+	  
+	        Graph graph= new Graph(V, E);
+	        
+	        graph.e[0].source = 0;
+	        graph.e[0].destination = 1;
+	        graph.e[0].weight = -1;
+	  
+	      
+	        graph.e[1].source= 0;
+	        graph.e[1].destination = 2;
+	        graph.e[1].weight = 4;
+	  
+	       
+	        graph.e[2].source = 1;
+	        graph.e[2].destination = 2;
+	        graph.e[2].weight = 3;
+	  
+	        
+	        graph.e[3].source = 1;
+	        graph.e[3].destination = 3;
+	        graph.e[3].weight = 2;
+	  
+	       
+	        graph.e[4].source = 1;
+	        graph.e[4].destination = 4;
+	        graph.e[4].weight = 2;
+	  
+	        
+	        graph.e[5].source = 3;
+	        graph.e[5].destination = 2;
+	        graph.e[5].weight = 5;
+	  
+	      
+	        graph.e[6].source = 3;
+	        graph.e[6].destination = 1;
+	        graph.e[6].weight = 1;
+	  
+	      
+	        graph.e[7].source = 4;
+	        graph.e[7].destination = 3;
+	        graph.e[7].weight = -3;
+	          
+	        
+	        graph.Algorithm(graph, 0);
+		
+		
+	
+}
+}
