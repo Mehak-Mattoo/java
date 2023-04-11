@@ -1,0 +1,53 @@
+package com.Myproject.java;
+
+public class Sort012 {
+	public static void main(String[] args) {
+		
+		int arr[]= {0,1,0,2,2,1,0,1,2};
+		
+		DutchNationalFlagAlgo(arr, arr.length);
+	
+		
+		for(int i: arr) {
+		System.out.println(i);}}
+	
+	
+
+	private static void DutchNationalFlagAlgo(int[] arr, int length) {
+		
+		int low,high,mid;             // in this algo:
+		                              // low-mid-1= 0
+		low= 0;                       // mid- high-1= 1
+		mid= 0;                       // high+1 - n= 2
+		high= arr.length-1;
+		
+		while(mid<= high){
+			if(arr[mid]==0) {    // if 0 is found, 
+				
+				swap(arr, mid, low); //swap low with mid so that all 0 are at the left
+				
+				low++;
+				mid++; }
+			
+			else if (arr[mid]==1) {
+				mid++;                     // if 1 is found , just move the mid, as 1 must be found between 0 and 1
+			}else {
+				swap(arr, high, mid);  // if 2 is found then, swap mid with high as 2 must be found at the right
+				
+				high--;}}
+		
+		
+		
+		
+	}
+
+	private static int swap(int arr[], int i, int j) {
+		
+		int temp = arr[i];
+		arr[i]= arr[j];
+		arr[j]= temp;
+		
+		return arr[i];}
+
+}
+
