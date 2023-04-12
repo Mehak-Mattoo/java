@@ -1,0 +1,35 @@
+
+public class Solution {
+    static LinkedListNode addTwoNumbers(LinkedListNode head1, LinkedListNode head2) {
+       
+       LinkedListNode dummy = new LinkedListNode(0); // here dummy will point to the head of the sum linked list
+       LinkedListNode temp= dummy;
+       int carry=0;
+
+       while(head1!= null || head2!= null || carry!=0 ){
+       int sum=0;  // everytime sum becomes 0
+
+       if(head1!= null){
+           int value1= head1.data; // add the data and move ahead
+           sum+= value1;
+           head1= head1.next;  }
+
+           if(head2!= null){
+           int value2= head2.data; // same
+           sum+= value2;
+           head2= head2.next;  }
+
+
+           sum+= carry;   // add the carry as well
+           carry = sum/ 10;  // the first digit of carry is found 
+           
+           LinkedListNode node = new LinkedListNode(sum%10); // a new  node created containg the remainder of carry
+           temp.next= node;  // temp points to thenew formed linked list
+           temp= temp.next;  // temp moves in the sum linked list
+       }
+
+return dummy.next; // dummy next points to the temp
+
+
+    }
+}
