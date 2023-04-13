@@ -1,0 +1,26 @@
+package com.Myproject.java;
+
+public class PowerOf2 {
+	public static void main(String[] args) {
+		
+		int n= 4;
+		
+	System.out.println(	PowerOf2(n));
+		
+		
+	}
+
+	private static boolean PowerOf2(int n) {
+	
+		 if (n == 0) {
+	            return false;}
+	 
+	        while (n != 1) {
+	            if (n % 2 != 0) { // a number will be a power of 2 if it returns 0 when divided by 2
+	                return false;}  // each time
+	            n = n / 2;} 
+	        
+	        return true;
+	    }
+}
+
