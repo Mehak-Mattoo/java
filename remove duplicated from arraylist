@@ -1,0 +1,30 @@
+package com.Myproject.java;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+
+
+public class RemoveDuplicatesFromArrayList {
+public static void main(String[] args) {
+	
+	
+	ArrayList<Integer> list= new ArrayList<>();
+	
+	list.add(3);
+	list.add(7);
+	list.add(1);
+	list.add(3);
+	
+Set<Integer>set = new HashSet<>(list);  // creating a set which will have only distinct values
+
+ArrayList<Integer> newList= new ArrayList<>(set);  // a new list to contain only unique elements
+
+System.out.println(newList);
+}
+
+
+	
+	
+
+}
