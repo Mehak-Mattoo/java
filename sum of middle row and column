@@ -1,0 +1,37 @@
+package com.Myproject.java;
+
+public class SumOfRowColumn {
+	public static void main(String[] args) {
+		
+		
+		 int matrix[][] = {{12, 15, 7},
+                           {3, 7, 42},
+                           {5, 6, 19}};
+		 int n=3; // length of matrix
+		 
+		 SumOfRowColumn(matrix, n); }
+
+	private static void SumOfRowColumn(int[][] matrix, int n) {
+		
+		int row=0;
+		int column=0;
+		
+		for (int i = 0; i < n; i++) {
+							
+				row+= matrix[n/2][i];}  //loops for middle row
+		System.out.println("Sum of middle row: "+row);
+		
+		for (int j = 0; j < n; j++) {
+				
+			column+= matrix[j][n/2];} // loops for middle column
+		System.out.println("Sum of middle column: "+column);
+				
+				
+				
+			
+		
+		
+	}
+
+}
+
