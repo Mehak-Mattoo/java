@@ -1,0 +1,116 @@
+package com.Myproject.java;
+import java.util.* ;
+
+class BinaryTreeNode 
+{
+
+    int data;
+    BinaryTreeNode left;
+    BinaryTreeNode right;
+
+    BinaryTreeNode(int data) {
+        this.data = data;
+        this.left = null;
+        this.right = null;
+    }
+}
+
+
+class Solution {
+	public static BinaryTreeNode root, root2;
+	
+	public void InOrder(BinaryTreeNode focusNode) {
+		if(focusNode == null) {
+			return;}
+		
+		InOrder(focusNode.left);
+		System.out.print(focusNode.data+" , ");
+		InOrder(focusNode.right);}
+	
+	
+	
+	public static void MirrorTree(BinaryTreeNode node) {
+	
+		Queue<BinaryTreeNode> queue= new LinkedList<BinaryTreeNode>();  // using queue because of fifo approach
+		queue.offer(node);   // adding root to queue
+		
+		while (!queue.isEmpty()) {
+			BinaryTreeNode tempNode= queue.poll(); 
+			
+BinaryTreeNode current= tempNode.left;
+tempNode.left= tempNode.right;
+tempNode.right= current;  // swapping the data
+			
+			
+			 if (tempNode.left != null) {
+	             queue.add(tempNode.left); }   // adding left node
+
+	         if (tempNode.right != null) {
+	             queue.add(tempNode.right);   } }  // adding right node
+		
+
+	}	
+	
+	public static boolean AreTreesIdentical(BinaryTreeNode tree1, BinaryTreeNode tree2) {
+		
+		if(tree1== null && tree2== null ) {  // if both tree are empty, then they are same
+			return true;}
+		
+	if(tree1!= null && tree2!= null ) { // if both are not null, check their data on left and right nodes
+		
+return (tree1.data== tree2.data && AreTreesIdentical(tree1.left, tree2.left) && AreTreesIdentical(tree1.right, tree2.right)) ;}
+	
+	return false;}} // if any one of them becomes null, then they are not identical
+			
+		
+		
+
+
+public class MirrorTree {
+	public static void main(String[] args) {
+		
+		Solution tree= new Solution();
+		
+		tree.root=new BinaryTreeNode(4);
+		tree.root.left = new BinaryTreeNode(7);
+		tree.root.right= new BinaryTreeNode(9);
+		tree.root.left.left = new BinaryTreeNode(13);
+		tree.root.left.right= new BinaryTreeNode(20);
+		tree.root.right.left= new BinaryTreeNode(23);
+		tree.root.right.right= new BinaryTreeNode(70);
+		
+
+		tree.root2=new BinaryTreeNode(4);
+		tree.root2.left = new BinaryTreeNode(7);
+		tree.root2.right= new BinaryTreeNode(9);
+		tree.root2.left.left = new BinaryTreeNode(13);
+		tree.root2.left.right= new BinaryTreeNode(20);
+		tree.root2.right.left= new BinaryTreeNode(23);
+		tree.root2.right.right= new BinaryTreeNode(70);
+		
+	if(	tree.AreTreesIdentical(tree.root, tree.root2)) {
+		System.out.println("\nTrees are identical");}
+	else {
+		System.out.println("\nTrees are non - identical");}
+		
+		
+		
+		
+		
+		System.out.println("In order traversal:");
+		
+		tree.InOrder(tree.root);
+		
+		System.out.println("\n\nMirror tree: ");
+		tree.MirrorTree(tree.root);
+		
+		tree.InOrder(tree.root);
+		
+		
+		
+		
+	}
+	
+
+}
+
