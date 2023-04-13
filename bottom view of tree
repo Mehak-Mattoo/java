@@ -1,0 +1,96 @@
+package com.Myproject.java;
+import java.util.*;
+import java.util.Map.Entry;
+
+
+	
+	
+class BNode{
+	
+	BNode left, right;
+    int  data;
+    int d;
+  
+	
+
+public BNode(int data) {
+	 this.data= data;  }}
+
+
+
+
+class Solution{
+
+	 private int d;  // distance
+
+	public Solution(int d) {
+		this.d = d;
+	}
+
+	
+	public static BNode root;
+	
+	public void BottomView(BNode root) {
+		
+		
+		int d=0;
+		
+		
+		if (root == null) {
+            return;}
+	
+	Queue<BNode> q= new LinkedList<BNode>(); 
+	Map<Integer, Integer> map= new HashMap<>(); // to store distance from root along with nodes values
+	
+	root.d= d;
+	q.add(root);  // root distance= 0
+	
+		
+	while(!q.isEmpty()) {
+		
+		BNode tempNode= q.poll();
+		d= tempNode.d;
+		map.put(d, tempNode.data);
+			
+		
+		 if (tempNode.left != null) {		// while going left, the distance decreases by 1	 
+			 tempNode.left.d= d-1;			 
+           q.add( tempNode.left); }   
+
+		 
+         if (tempNode.right != null) {       	 
+        	 tempNode.right.d= d+1;        // while going right, the distance increases by 1	 	 
+        	 q.add( tempNode.right);  } }
+	
+	
+	
+	for(Map.Entry<Integer, Integer> ans: map.entrySet()) {  // iterate over the map and print the values
+	System.out.print(ans.getValue()+ " ");}	}}
+
+
+
+
+public class BottomView {
+	
+	public static void main(String[] args) {
+		
+		
+		Solution tree= new Solution(0);
+
+		
+		
+		tree.root = new BNode(20);
+        tree.root.left = new BNode(8);
+        tree.root.right = new BNode(2);
+        tree.root.left.left = new BNode(5);
+        tree.root.left.right = new BNode(31);
+        tree.root.right.left = new BNode(4);
+        tree.root.right.right = new BNode(25);
+        tree.root.left.right.right = new BNode(14);
+		
+		tree.BottomView(tree.root);
+		
+	}
+	
+
+}
