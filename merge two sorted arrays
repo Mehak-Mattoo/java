@@ -1,9 +1,10 @@
-import java.io.*;
-import java.util.* ;
+package com.java.MyProject;
 
-public class Solution {
-    public static int[] ninjaAndSortedArrays(int arr1[], int arr2[], int m, int n) {
-     
+
+public class MergeTwoSortedArrays{
+	
+    public static int[] mergeSortedArrays(int arr1[], int arr2[], int m, int n) {
+        
 	int pointer1= m-1;  //pointing at at end of arr1 instead of 0
 	int pointer2= n-1; // at end of arr2
 	
@@ -23,7 +24,7 @@ while(pointer2>=0 && pointer1>=0) {// loop until array does not go out of bounds
 	
 while(pointer1>=0) {   // when both arrays have diff. length, then one array will go out of bounds earlier
 	arr1[i]= arr1[pointer1];// then as arrays are already sorted
-    i--;  //put elements in first array
+    i--;             //put elements in first array
     pointer1--;}
 
 
@@ -35,4 +36,28 @@ while(pointer2>=0) {
 
 return arr1;
     }
+ 
+		    public static void main(String[] args) {
+		    	
+		        int arr1[] = {1, 4, 5, 8,0,0,0};
+		        int n1 = 4; // size of elements other than 0(has to be changed for diff. arrays)
+		 
+		        int arr2[] = {3, 9, 10};
+		        int n2 = arr2.length;
+		        
+		        System.out.println("First Array: ");
+		    	for (int i : arr1) {
+					System.out.print(i+ " ");}     
+		        
+		        
+		 System.out.println("\n\nSecond Array: ");
+		    	for (int i : arr2) {
+					System.out.print(i+ " ");}	
+		    	
+		      int [] arr=  mergeSortedArrays(arr1, arr2, n1, n2);
+		      
+		      System.out.println("\n\nAfter merging: ");
+		      for(int i: arr) {
+		    	  System.out.print(i+" ");
+		      }}
 }
