@@ -1,0 +1,38 @@
+import java.io.*;
+import java.util.* ;
+
+public class Solution {
+    public static int[] ninjaAndSortedArrays(int arr1[], int arr2[], int m, int n) {
+     
+	int pointer1= m-1;  //pointing at at end of arr1 instead of 0
+	int pointer2= n-1; // at end of arr2
+	
+	int i = n+m-1; // at end of arr1 with 0s
+	
+while(pointer2>=0 && pointer1>=0) {// loop until array does not go out of bounds
+		
+		if(arr1[pointer1]> arr2[pointer2]) { // if arr1 has higher element than arr2
+			arr1[i]= arr1[pointer1]; 	// then at 0s put that value
+			i--;
+			pointer1--;		}
+
+		else {
+			arr1[i]= arr2[pointer2];// vice versa
+			i--;
+			pointer2--;	}} 
+	
+while(pointer1>=0) {   // when both arrays have diff. length, then one array will go out of bounds earlier
+	arr1[i]= arr1[pointer1];// then as arrays are already sorted
+    i--;  //put elements in first array
+    pointer1--;}
+
+
+while(pointer2>=0) {
+	arr1[i]=arr2[pointer2];
+    i--;
+    pointer2--;}
+
+
+return arr1;
+    }
+}
