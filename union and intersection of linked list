@@ -1,0 +1,166 @@
+package com.java.MyProject;
+import java.util.*;
+
+
+
+ class UILinkedList {
+	 
+	 Node head; 
+	 
+	  
+	    class Node {
+	        int data;
+	        Node next;
+	        Node(int d) {
+	            data = d;
+	            next = null;} }
+
+	   
+	    
+	    void push(int new_data)  {
+	       
+	        Node new_node = new Node(new_data);
+
+	        new_node.next = head;
+
+	        head = new_node;   }
+	    
+	    
+	    void printList()   {
+	        Node temp = head;
+	        while (temp != null) {
+	            System.out.print(temp.data + " ");
+	            temp = temp.next;      }  }
+	 
+	  
+	    public void append(int new_data)
+	    {
+	        if (this.head == null) {
+	            Node n = new Node(new_data);
+	            this.head = n;
+	            return;
+	        }
+	        Node n1 = this.head;
+	        Node n2 = new Node(new_data);
+	        while (n1.next != null) {
+	            n1 = n1.next;
+	        }
+	 
+	        n1.next = n2;
+	        n2.next = null;
+	    }
+	 
+	  
+	    boolean isPresent(Node head, int data){  /* A  method that returns true if data is
+	                                            present,  else false */
+	        Node t = head;
+	        while (t != null) {
+	            if (t.data == data)
+	                return true;
+	            t = t.next;  }
+	        return false;   }
+	 
+	    UILinkedList getIntersection(Node head1, Node head2)   {
+	        HashSet<Integer> hset = new HashSet<>();
+	        Node n1 = head1;
+	        Node n2 = head2;
+	        UILinkedList result = new UILinkedList();
+	 
+	            while (n1 != null) {
+	            if (hset.contains(n1.data)) {
+	                hset.add(n1.data);
+	            }
+	            else {
+	                hset.add(n1.data);
+	            }
+	            n1 = n1.next;
+	        }
+	 
+	        // For every element of list2 present in hset
+	        // loop inserts the element into the result
+	        while (n2 != null) {
+	            if (hset.contains(n2.data)) {
+	                result.push(n2.data);
+	            }
+	            n2 = n2.next;
+	        }
+	        return result;
+	    }
+	 
+	    UILinkedList getUnion(Node head1, Node head2)   {
+	        // HashMap stores the
+	        // elements of the lists with their count
+	        HashMap<Integer, Integer> hmap = new HashMap<>();
+	        Node n1 = head1;
+	        Node n2 = head2;
+	        UILinkedList result = new UILinkedList();
+	 
+	        // insert elements and its count of into the hmap
+	        while (n1 != null) {
+	            if (hmap.containsKey(n1.data)) {
+	                int val = hmap.get(n1.data);
+	                hmap.put(n1.data, val + 1);
+	            }
+	            else {
+	                hmap.put(n1.data, 1);
+	            }
+	            n1 = n1.next;
+	        }
+	 
+	        // same
+	        while (n2 != null) {
+	            if (hmap.containsKey(n2.data)) {
+	                int val = hmap.get(n2.data);
+	                hmap.put(n2.data, val + 1);
+	            }
+	            else {
+	                hmap.put(n2.data, 1);
+	            }
+	            n2 = n2.next;
+	        }
+	 
+	        // At last all the elements will be added
+	        // into the result that are present in the hmap
+	        for (int a : hmap.keySet()) {
+	            result.append(a);    }
+	        
+	        return result;    }
+	 
+	
+	    
+	    public static void main(String args[] ) {
+	    	
+	        UILinkedList llist1 = new UILinkedList();
+	        UILinkedList llist2 = new UILinkedList();
+	        UILinkedList union = new UILinkedList();
+	        UILinkedList intersection = new UILinkedList();
+	 
+	        
+	        llist1.push(2);
+	        llist1.push(14);
+	        llist1.push(1);
+	        llist1.push(10);
+	 
+	       
+	        llist2.push(10);
+	        llist2.push(21);
+	        llist2.push(8);
+	 
+	        intersection   = intersection.getIntersection(llist1.head,
+	                                           llist2.head);
+	        union = union.getUnion(llist1.head, llist2.head);
+	 
+	        System.out.println("First List:");
+	        llist1.printList();
+	 
+	        System.out.println("\nSecond List:");
+	        llist2.printList();
+	 
+	        System.out.println("\nIntersection List:");
+	        intersection.printList();
+	 
+	        System.out.println("\nUnion List:");
+	        union.printList();
+	    }
+}
+ 
