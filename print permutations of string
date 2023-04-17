@@ -1,0 +1,48 @@
+package com.Myproject.java;
+import java.util.*;
+
+
+
+// APPROACH: swap characters of the string using recursion//
+ 
+
+public class PrintPermutationsOfString {
+	public static void main(String[] args) {
+		
+		String s= "eqxc"; 
+	System.out.println(	findPermutations(s));	}
+	
+	
+	public static List<String> findPermutations(String s) {
+	    
+		ArrayList <String> list = new ArrayList<String>();
+		printPermutations(0,s,list);  // starting with index 0 of char in string
+		return list;
+
+		    }
+
+
+		    public static void printPermutations(int index, String s, List<String> list){
+
+		if(index== s.length()){
+				list.add(s); // when index becomes equal to length , it means that there are no more recursive
+		return; }       // calls to be made  , then add into the list
+
+		for(int i= index; i< s.length(); i++){  
+		    s= swap(i, index, s);  //  swap indexes of chars in string
+		    printPermutations(index+1, s, list ); // increase index
+		     s=   swap(i, index, s); }}  // re-swap it for backtracking
+
+
+		        public static String swap( int i, int j, String s ){
+		        	char temp;
+		        	char[] arr= s.toCharArray();  //change into a char array
+		            temp = arr[i];
+		            arr[i]= arr[j];
+		            arr[j]= temp;    // swap
+					return  String.valueOf(arr); }  // then return string value
+		        
+
+
+		
+}
