@@ -80,3 +80,82 @@ return ans;
 
 	
 }
+
+For arrays
+
+
+
+package com.Myproject.java;
+
+
+
+public class FirstLastPositionOfElement {
+	public static void main(String[] args) {
+		
+		int arr[]= {1,4, 3, 5, 5, 5, 5, 7, 12, 15};
+		int length= arr.length;
+		int element= 5;
+		
+
+int[] ans= new int [2];
+
+ans[0]= FirstPosition(arr, element,length );   //have to do 2 binary searches to find both occurrences
+ans[1]= SecondPosition(arr, element, length);
+
+
+for(int i: ans) {
+	System.out.println(i);}		}
+	
+		
+	
+	private static int SecondPosition(int[] arr, int element, int length) {
+		
+		int low = 0;
+		int high = length-1;
+		int ans=-1;
+		
+		while(low<=high) {
+			int mid= (low+high)/2;
+			
+			if(arr[mid]== element) {
+				ans= mid; // even if the element is found, we have to check whether this 
+				low = mid+1;} // is its  last occurrence or not
+
+					
+			
+			else if(arr[mid]> element) {
+				high= mid-1; }
+			
+			else {
+				low = mid+1;}}
+			
+		
+		return ans;}
+	
+
+	private static int FirstPosition(int[] arr, int element, int length) {
+		
+		int low = 0;
+		int high = length-1;
+		int ans= -1;
+		
+		while(low<= high) {
+			int mid= (low+high)/2;
+			
+			if(arr[mid] == element) { // even if the element is found, we have to check whether this 
+				ans= mid; // is its first occurrence or not
+				high= mid-1;
+					}
+			
+			else if(arr[mid]> element) {
+				high= mid-1; }
+			
+			else {
+				low = mid+1;}}
+		return ans;}
+			
+				
+	
+
+}
+
