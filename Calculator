@@ -1,0 +1,64 @@
+package com.java.MyProject;
+import java.util.*;
+
+
+public class Calculator {
+public static void main(String[] args) {
+		
+	String s= "4+9*17/8";
+	
+	Calculator(s);
+	
+
+			
+		  }
+
+private static void Calculator(String s) {
+	
+	
+	int ans= 0;
+	int currNumber = 0;
+	char sign = '+';
+	int lastNumber = 0;
+	
+	if(s.length()==0) {
+		ans=0;	}
+	
+	for (int i = 0; i <s.length(); i++) {   // ztoring every char
+		char currentChar= s.charAt(i);
+		
+if(Character.isDigit(currentChar)) { // if current char is a digit multiply by 10 to fit the next digit
+	currNumber = (currNumber*10)+ (s.charAt(i)- '0'); }
+		
+		
+ if(!Character.isDigit(currentChar) && !Character.isSpace(currentChar) ||i == s.length()-1 ) {
+	// if current char is not a digit and space or its not the last element 
+	
+	 
+	 if(sign== '+'|| sign=='-') {  // if + or - is found
+		ans+= lastNumber;   // put it in ans
+		lastNumber = (sign=='+')? currNumber : -currNumber ;} // if the sign= +, then put the number 
+	                                     //other wise put its negative form
+	
+	 else if(sign== '*') {  // if sign= * , multiply the numbers
+		 lastNumber *= currNumber;}
+	 
+	 else if(sign == '/') { // if sign= / , divide the numbers
+		 lastNumber/= currNumber;}
+	 
+	 
+	 sign= currentChar;  // after each iteration
+	 currNumber=0;  }}
+	 
+	 
+	ans+= lastNumber;
+	System.out.println(ans);
+	 
+	 
+	 
+	
+	
+ }
+	
+}
+
