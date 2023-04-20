@@ -1,0 +1,31 @@
+package com.Myproject.java;
+
+public class InsertPosition {
+public static void main(String[] args) {
+	
+	int nums[]= {1,2,4,5,7};
+	int target = 8;
+	
+	System.out.println(searchInsert(nums, target));
+	
+}
+public static int searchInsert(int[] nums, int target) {
+    
+    int low=0;
+    int high= nums.length-1;
+
+    while(low<= high){
+        int mid = (high+ low)/2;
+
+        if(nums[mid]== target){     // a simple binary search to look for the element
+            return mid;}
+        
+        else if( nums[mid]> target) {
+          high= mid-1;}
+
+          else{
+              low= mid+1; }}
+              
+     return low;   }  // when element was not found , then its best position can be found at the low
+    
+}
