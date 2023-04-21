@@ -1,0 +1,59 @@
+package com.Myproject.java;
+import java.util.*; 
+
+public class SubstringWithConcatenationOfAllWords {
+	public static void main(String[] args) {
+		
+	String	s = "barfoothefoobarman";
+	String [] words = {"foo","bar"};
+	
+	System.out.println(findSubstring(s, words));
+	
+	
+	}
+	public static List<Integer> findSubstring(String s, String[] words) {
+		
+		
+	    if (s.isEmpty() || words.length == 0) {//  if string is empty or words array is empty
+	      return new ArrayList<>();       // then, return empty list
+	    }
+
+	    
+	    List<Integer> ans = new ArrayList<>();  // ans list
+
+	   
+	    Map<String, Integer> map = new HashMap<>();  // map to store the counts of each word from words array
+	    for (String i : words) {
+	      map.put(i, map.getOrDefault(i, 0) + 1);}
+	    
+
+	    // a map to store the counts of each word in the current substring
+	    Map<String, Integer> currentCounts = new HashMap<>();
+
+	    // Initialize variables to keep track of the length of each word and the total length of all the words
+	    int wordLength = words[0].length();
+	    int totalLength = wordLength * words.length;
+
+	    // Looping through the input string, checking for concatenated substrings at each position
+	    for (int i = 0; i < s.length() - totalLength + 1; i++) {
+	    	
+	     
+	      currentCounts.clear();  // Initialize the current counts map for the new substring
+
+	      // Loop through the words in the current substring and update their counts in the current counts map
+	      for (int j = 0; j < words.length; j++) {
+	        String word = s.substring(i + j * wordLength, i + (j + 1) * wordLength);
+	        currentCounts.put(word, currentCounts.getOrDefault(word, 0) + 1);
+	      }
+
+	      // Check if the current counts map is equal to the original word counts map
+	      if (currentCounts.equals(map)) {
+	        // If they are equal, add the starting index of the current substring to the list of indices
+	        ans.add(i);
+	      }
+	    }
+
+	    // Return the list of indices
+	    return ans;
+	  }
+	}
