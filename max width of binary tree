@@ -1,0 +1,102 @@
+package com.Myproject.java;
+import java.util.*;
+
+
+
+class BNode{
+
+	BNode right;
+	BNode left;
+	int data;
+	int index;
+	  
+	
+public BNode(int data) {	
+	
+this.data= data;	
+ }}
+
+
+class Pair{   // class to store indexes of all nodes of tree
+	
+	BNode node;
+	int index;
+	
+	public Pair(BNode node, int index) {
+		
+		this.node= node;
+		this.index= index;  }}
+		
+	
+
+class Solution {
+
+public static BNode root = null;
+
+public static int  maxWidth(BNode root) {  // level order traversal
+	
+	int ans=0 ;
+	
+	Queue<Pair> q = new LinkedList<>();
+	
+	if(root== null) {
+		return 0;}
+	
+	q.offer(new Pair(root, 0));
+	
+	while(!q.isEmpty()) {
+		
+		int size= q.size();
+		int Min_index= q.peek().index;
+		
+		int first= 0 , last = 0;  // store the index of leftmost node and rightmost node
+		
+		for(int i=0; i< size; i++) {
+			
+			int current= q.peek().index-Min_index;  // current index will always be current node index- min of 
+			                                      // of previous indexes
+			BNode node= q.poll().node;
+			
+			if(i==0) {
+				first= current;}   // storing left and right index
+			
+			if(i== size-1) {
+				last= current;}
+			
+			if(node.left!= null) {     
+				q.offer(new Pair(node.left , current*2+1));}  // left index= current index*2+1
+			
+			if(node.right!= null) {
+				q.offer(new Pair(node.right , current*2+2));}	// right index= current index*2+2	}
+		
+		
+		ans= Math.max(ans, last - first +1); }  // updating the ans to get the max value
+	}
+		
+	return ans;
+}
+
+}
+
+
+public class MaxWidth {
+	public static void main(String[] args) {
+		
+		Solution tree= new Solution();
+
+		tree.root = new BNode(6);
+        tree.root.left = new BNode(8);
+        tree.root.right = new BNode(2);
+        tree.root.left.left = new BNode(5);
+        tree.root.left.right = new BNode(31);
+        tree.root.right.right = new BNode(4);
+        tree.root.right.right.left = new BNode(25);
+        tree.root.right.right.right = new BNode(14);
+        
+        
+  System.out.println( tree.maxWidth(tree.root));
+  
+  
+  
+	}
+}
