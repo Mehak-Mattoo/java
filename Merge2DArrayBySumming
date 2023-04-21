@@ -1,0 +1,63 @@
+package com.Myproject.java;
+import java.util.*;
+
+
+public class Merge2DArrayBySumming {
+public static void main(String[] args) {
+
+	
+	int[][] nums1= {{1,2},{2,3},{4,5}};
+	
+	int[][] nums2= {{1,4},{3,2},{4,1}};
+	
+	int ans [][] =mergeArrays(nums1, nums2);
+	
+	for (int i = 0; i < ans.length; i++) {
+		 
+        // Loop through all elements of current row
+        for (int j = 0; j < ans[i].length; j++) {
+            System.out.print(ans[i][j] + ",");
+        }}
+	
+
+	}
+
+	
+	 public static int[][] mergeArrays(int[][] nums1, int[][] nums2) {
+		 
+		 Map <Integer, Integer> map = new HashMap<>();
+		 
+		 for(int [] i: nums1) {  //iterates through nums1
+			map.put(i[0], i[1]); 	}
+		 
+		 for(int [] i: nums2) {  // iterates through num2
+			 if(map.containsKey(i[0])) {  // if any same value is found
+			 
+				map.put(i[0], i[1]  + map.get(i[0])); 	} // the add their values
+			 
+			 else{
+				 map.put(i[0], i[1]); } } // else put them into map
+		 
+		  List<Integer> list = new ArrayList<>(map.keySet());
+	        Collections.sort(list); // sort the ids
+		 
+		 
+		 int ans [][]= new int [map.size()] [2]; // creating a new 2d array to store ans
+		 for (int i = 0; i < list.size(); i++) {
+			
+			 int id= list.get(i);
+			 int value= map.get(id);
+			 
+			 ans[i][0]= id;  // fill it
+			 ans[i][1]= value;
+			 
+		}		
+		 
+		return ans;
+		 
+		 
+}
+	 
+
+}
+
