@@ -1,0 +1,37 @@
+package com.Myproject.java;
+
+public class AddBinary {
+public static void main(String[] args) {
+	
+	
+	String num1 ="11";
+	String num2= "1";
+	
+System.out.println(	AddBinary(num1, num2));
+}
+
+private static String AddBinary(String a, String b) {
+	
+	 StringBuilder ans = new StringBuilder();  // stores ans
+	 
+     int i = a.length() - 1;  // pointers pointing at last of the string
+     int j = b.length() - 1;
+     int carry = 0;
+     
+     while(i >= 0 || j >= 0 || carry!=0){ // traverse until both strings are empty and carry has some value
+    	 
+         int sum = carry;
+         if(i >= 0) sum += a.charAt(i--) - '0';// when string a is not empty, add the char -0 to change into char
+         if(j >= 0) sum += b.charAt(j--) - '0'; // same here
+         carry = sum > 1 ? 1 : 0;  // when sum is bigger than 1, then carry= 1, else carry =0
+         ans.append(sum % 2); }  // add the remainder of sum into ans
+     
+     if(carry != 0) ans.append(carry); // if carry has some value, append it to the ans
+     
+     return ans.reverse().toString(); 
+}	
+	
+}
+	
+
+
