@@ -1,0 +1,27 @@
+package com.Myproject.java;
+
+public class SumOfPowersOf3 {
+public static void main(String[] args) {
+	
+	
+	int num= 12;
+	
+System.out.println(	Solution(num));
+}
+
+private static boolean Solution(double num) {
+	
+	while(num>0) {
+	if(num%3==2) {
+		return false;}
+	num/=3;
+	
+	}
+	
+	return true;
+	
+
+	
+	
+}
+}
