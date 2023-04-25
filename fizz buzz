@@ -1,0 +1,42 @@
+package com.Myproject.java;
+import java.util.*;
+
+
+public class FizzBuzz {
+public static void main(String[] args) {
+	
+
+	
+String []list=	fizzBuzz(6);  // change value here
+
+for(String i: list) {
+	System.out.println(i);
+}
+}
+
+public static String[] fizzBuzz(int n) {
+    
+String ans[]= new String [n];
+
+	for(int i=1; i<n; i++) {
+		
+		String string= String.valueOf(i);
+		
+		if(i%3==0 && i%5==0) { //  prints "FizzBuzz" if i is divisible by 3 and 5.
+			ans[i]="FizzBuzz";   // add to the list
+			continue;}
+		
+		if (i%3==0) { //  prints "Fizz" if i is divisible by 3.
+			ans[i]="Fizz";  // add to the list
+			continue;}
+		
+		
+			if (i%5==0) {  //  prints "buzz" if i is divisible by 5.
+				ans[i]="Buzz";
+				continue;}
+			
+			else {      // when any other number is encountered
+				ans[i]=string;	}  // add that number
+	}
+	return ans;}
+}
