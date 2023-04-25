@@ -1,0 +1,43 @@
+package com.Myproject.java;
+
+public class AddNumbers {
+	public static void main(String[] args) {
+		
+		String n1= "34";
+		String n2= "21";
+		
+System.out.println(		Add(n1, n2));
+	}
+
+	private static String Add(String n1, String n2) {
+		
+		StringBuilder ans= new StringBuilder();
+		
+	
+		
+		int i= n1.length()-1;
+		int j= n1.length()-1;
+		
+	     int carry = 0;
+	     int sum=0;
+	     
+	     while(i >= 0 ||j  >= 0 || carry!=0){ 
+	    	 
+	    int num1=0, num2=0;	 
+	     
+	    	 if(i>=0) {
+	    	num1= n1.charAt(i--)-'0'; }
+	    	
+	    	 if(j>=0) {
+	 	    	num2= n2.charAt(j--)-'0'; }
+	    	 
+	    	 
+	    sum= num1+num2+carry;
+	    	  
+	    	carry= sum/ 10;
+	    	
+		ans.append(sum%10);
+	     }
+	return ans.reverse().toString();}
+
+}
