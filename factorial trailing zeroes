@@ -1,0 +1,31 @@
+package com.Myproject.java;
+
+public class TrailingZeroes {
+public static void main(String[] args) {
+	
+	int num= 3;
+	
+System.out.println(	solution(num));
+	
+	
+}
+
+private static long solution(int num) {
+	
+	int x=0;
+	int sum=0;
+	
+	while(num>=5) {// every number lower than 5 does not have any trailing zeroes
+		x= num/5;  // getting number shorter
+		sum+= x;
+		num=x;
+		
+	}return sum;  // stores trailing zeroes
+	
+	     
+	
+		
+	
+	
+}
+}
