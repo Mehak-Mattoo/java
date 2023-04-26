@@ -1,0 +1,17 @@
+	public static String reverseString(String str) {
+	
+char[] charArr= str.toCharArray();
+
+int i=0,j=str.length()-1;
+
+while(i<=j){
+	char c= charArr[i];
+	charArr[i]= charArr[j];
+	charArr[j]= c;
+	i++;
+	j--;}
+
+String ans = new String (charArr);
+return ans;
+	}
+}
