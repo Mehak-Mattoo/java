@@ -1,0 +1,73 @@
+package com.Myproject.java;
+
+public class DeleteNode {
+	class Node{    
+        int data;    
+        Node next;    
+            
+        public Node(int data) {    
+            this.data = data;    
+            this.next = null;    }     }   
+	
+     
+    public static Node head = null;    
+    public Node tail = null;    
+           
+    public void addNode(int data) {    
+        
+        Node newNode = new Node(data);    
+                 
+        if(head == null) {             
+            head = newNode;    
+            tail = newNode; }   
+           
+        else {                
+            tail.next = newNode;       
+            tail = newNode;    }}
+       
+        
+    public void display() {    
+       
+        Node current = head;    
+            
+        if(head == null) {    
+            System.out.println("List is empty");    
+            return;    }
+           
+        while(current != null) {    
+           
+            System.out.print(current.data + " ");    
+            current = current.next;   }}
+    
+    
+    
+    public void DeleteNode(Node node) {
+    	
+    	
+    	Node currentNode= node;
+    	Node tempNode= node.next;  // points to node next to head
+    	
+    	currentNode.data= tempNode.data;  // copying the data of temp into current
+    	currentNode.next= tempNode.next;  // the current will point to temp.next
+    	tempNode.next= null;  }   // temp will point to null  (node deleted)
+    
+    
+    public static void main(String[] args) {    
+        
+        DeleteNode sList = new  DeleteNode();    
+               
+        sList.addNode(10);    
+        sList.addNode(12);    
+        sList.addNode(3);    
+        sList.addNode(9);    
+            
+        sList.display();
+    	
+    	sList.DeleteNode(head);
+    	System.out.println("After deletion: ");
+    	sList.display();
+    	
+    	
+    }	
+    
+}
