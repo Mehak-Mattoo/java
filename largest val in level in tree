@@ -1,0 +1,96 @@
+package com.Myproject.java;
+import java.util.*;
+
+
+
+class BSTNode{
+
+	BSTNode right;
+	BSTNode left;
+	int data;
+	
+	public BSTNode(int data) {		
+	this.data= data;	}}
+
+
+class BST{
+	
+static	BSTNode rootNode;
+
+	public void insert(int data) {
+		rootNode = insert(rootNode, data);	}
+	
+
+public	static BSTNode insert(BSTNode root ,int data) {
+		
+		if(root == null) {
+			 root = new BSTNode(data);}
+		
+		else if(data < root.data) {
+		root.left = insert(root.left, data);	} // inserting at right subtree 
+		
+		else if (data> root.data){
+			root.right = insert(root.right, data); }  // inserting at left subtree
+				
+		return root;	}
+
+
+public static List<Integer> largestValues () {
+	
+	
+	List<Integer> list = new ArrayList<>();
+	
+	Queue<BSTNode> queue= new LinkedList<BSTNode>(); 
+	queue.offer(rootNode);   // adding root to queue
+	
+	
+	
+	while (!queue.isEmpty()) {
+		
+		int max= Integer.MIN_VALUE;  // value of max gets changed each iteration
+		
+		  int size = queue.size();
+		 
+		
+		for(int i=0;i<size;i++) {			
+			BSTNode tempNode= queue.poll();
+			
+		 if (tempNode.left != null) {
+             queue.add(tempNode.left); }   // adding left node
+
+         if (tempNode.right != null) {
+             queue.add(tempNode.right);}     // adding right node
+	
+	
+	   max= Math.max(max, tempNode.data);}  // comparing node data
+	   
+	   list.add(max);} // adding to list
+	   
+       return list;  }}
+
+	
+
+
+public class LargestRowValue {
+	public static void main(String[] args) {
+	
+		BST tree= new BST()	;
+
+		tree.insert(5);
+		tree.insert(2);
+		tree.insert(9);
+		tree.insert(8);
+		tree.insert(9);
+		tree.insert(11);
+
+		
+		List<Integer> list = new ArrayList<>();		
+        list = tree.largestValues();
+
+for (int i = 0; i < list.size(); i++) {
+	System.out.print(list.get(i) +" ");
+}
+		
+		
+	}}
+
