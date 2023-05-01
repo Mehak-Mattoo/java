@@ -1,9 +1,7 @@
-	 Scanner s= new Scanner(System.in);
-			 System.out.println("Enter any number:");
-		     int num1= s.nextInt();
-		     int Result = num1%4;
-		     if (Result==0) {
-		    	 System.out.println("Leap year");
-		     }else {
-				System.out.println("Normal year"); 
-		     }
+	if(year%4==0&&year %100!=0 || year%400==0){
+			return true;}
+		else{
+			return false;
+		}
+	}
+}
