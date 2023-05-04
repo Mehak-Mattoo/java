@@ -1,0 +1,29 @@
+class Solution {
+    public List<TreeNode> findDuplicateSubtrees(TreeNode root) {
+        List<TreeNode> res = new LinkedList<>();
+    traverse(root, new HashMap<>(), new HashMap<>(), res);
+    return res;
+}
+
+
+
+
+private static int traverse(TreeNode root, Map <String, Integer> map, Map<Integer, Integer> count, List<TreeNode> list) {
+
+	if(root== null) {
+		return 0;  }
+	
+	
+String str=  traverse(root.left, map, count, list) +","+ root.val+","+ traverse(root.right, map, count, list); // get the inorder of every node
+	
+if(!map.containsKey(str)) {  // if map does not contain, put it in map with id
+	map.put(str, map.size()+1); }
+
+int id = map.get(str); // and get the id
+
+count.put(id, count.getOrDefault(id, 0)+1);  // if any id is found again
+
+if(count.get(id)==2) {
+list.add(root);	}  // if any duplicate subtrees are found, add into list
+
+return id;
