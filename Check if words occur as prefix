@@ -1,0 +1,30 @@
+package com.java.MyProject;
+
+public class CheckIfWordOccursAsPrefix {
+	public static void main(String[] args) {
+		
+		
+		String sentence = "i love eating burger", searchWord = "burg";
+		
+		System.out.println(isPrefixOfWord(sentence, searchWord));
+	}
+
+	
+	 public static int isPrefixOfWord(String sentence, String searchWord) {
+	        
+	        
+	        String arr[]= sentence.split(" ");//splits the array
+	int j=0;
+
+	for(String i: arr) { // loop
+		j++;
+		if(i.startsWith(searchWord)) { // if any words starts with search word ,return its index
+			return j;}
+
+		
+		
+	}return -1;
+		
+	    }
+	
+}
