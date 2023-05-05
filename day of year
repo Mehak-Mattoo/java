@@ -1,0 +1,35 @@
+package com.java.MyProject;
+
+public class DayOfYear {
+	public static void main(String[] args) {
+		
+	
+	
+	String date=  "2019-01-29";
+	System.out.println(dayOfYear(date));
+}
+	
+	  public static int dayOfYear(String date) {
+	       int months[]= {31,28,31,30,31,30,31,31,30,31,30,31};
+		
+		String arr[]= date.split("-");// split date into array
+		
+		int yy= Integer.valueOf(arr[0]);
+		int mm= Integer.valueOf(arr[1]);  // get the values
+		int dd= Integer.valueOf(arr[2]);
+		
+		int days=0;
+		
+		for (int i = 0; i < mm-1; i++) {// loop until month
+			days+= months[i];}  //add the days
+		
+		 if((((yy % 4 == 0) && (yy% 100!= 0)) || (yy%400 == 0)) && mm > 2){ // check for leap year
+			days++; } // if yes, add a day
+		
+		days+= dd; // add the date days
+		
+		return days;
+		 
+	    }
+	
+}
