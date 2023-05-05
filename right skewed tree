@@ -1,0 +1,81 @@
+package com.java.MyProject;
+
+class Node{
+	
+	Node left, right;
+     int  data;
+
+public Node(int data) {
+	 this.data= data;  }
+}
+class BinaryTree{
+	static Node root;
+
+	
+	public void insert(int data) {
+		root = insert(root, data);	}
+	
+	
+public	static Node insert(Node root ,int data) {
+		
+		if(root == null) {
+			 root = new Node(data);}
+		
+		else if(data < root.data) {
+		root.left = insert(root.left, data);	} // inserting at right subtree 
+		
+		else if (data> root.data){
+			root.right = insert(root.right, data); }  // inserting at left subtree
+				
+		return root;		}
+
+
+static Node dummy= new Node(-1);
+
+public Node increasingBST(Node root) {
+ Node ans= dummy;  // save dummy address
+
+ helper(root);
+ return ans.right;   
+}
+
+ public static void helper(Node root) {
+	 
+	 if(root== null) {
+		 return;}
+	 
+	 helper(root.left);  // recurr down left subtree
+	 root.left= null;  // set left tree to null
+	 
+	 dummy.right= root; //  set dummy right to root
+	 dummy= root;
+	 helper(root.right); } // recurr down right subtree
+ 
+ static void traverseRightSkewed(Node root)
+ {
+     if(root == null)
+     {
+         return;
+     }
+     System.out.print(root.data + " ");
+     traverseRightSkewed(root.right);       
+ }
+}
+
+
+public class RightSkewedTree {
+	public static void main(String[] args) {
+		
+		BinaryTree tree= new BinaryTree();
+		
+		tree.insert(7);
+		tree.insert(9);
+		tree.insert(10);
+
+		
+		tree.increasingBST(tree.root);
+		
+		tree.traverseRightSkewed(tree.root);
+	}
+
+}
