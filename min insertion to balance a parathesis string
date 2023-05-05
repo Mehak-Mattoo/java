@@ -1,0 +1,49 @@
+package com.java.MyProject;
+
+public class MinInsertionToBalanceString {
+public static void main(String[] args) {
+
+	String s = "(()))";
+	
+	System.out.println(minInsertions(s));
+	
+	
+}
+public static int minInsertions(String s) {
+    int countBraces = 0;
+    int ans = 0;
+    for(int i = 0;i<s.length();i++){
+        if(s.charAt(i) == '('){
+            countBraces += 1;
+        }
+        else{
+            //Whenever a closing bracket is encountered, one case can be it is followed by another closing bracket and preceeded/not preceeded by an opening bracket(handled in this following if block)
+            if(i+1<s.length() && s.charAt(i+1) == ')'){
+                if(countBraces > 0){
+                    countBraces--; // It's balanced. Just decrement the opening bracket
+                }
+                else{
+                    //It means we need to add 1 opening bracket --> "("
+                    ans += 1;
+                }
+                i++;
+            }
+            else{
+                //Whenever a closing bracket is encountered, another case can be it is not followed by another closing bracket and preceeded/not preceeded by an opening bracket(handled in this following if block)
+                if(countBraces > 0){
+                    countBraces--;
+                    ans += 1;//Add the last closing bracket to balance
+                }
+                else{
+                    
+                    ans += 2;//Add the last closing bracket and first opening bracket
+                }
+            }
+            //Finally we should return the 2times the number of countBraces
+        }
+    }
+    return ans+countBraces*2;
+}
+
+
+}
