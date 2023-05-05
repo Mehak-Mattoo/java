@@ -1,0 +1,32 @@
+package com.java.MyProject;
+
+import java.util.*;
+
+public class LongestWordInDictionary {
+public static void main(String[] args) {
+	
+	String [] words = {"w","wo","wor","worl","world"};
+	
+	
+System.out.println(	Solution(words));
+}
+
+private static String Solution(String[] words) {
+	 Arrays.sort(words);
+		String ans = "";
+
+	HashSet<String> set= new HashSet<>();
+
+	for(String i: words) { // if there is only one element in array or set has predecesor elements with same char
+		if(i.length()==1 || set.contains(i.substring(0, i.length()-1))) {
+			
+			if(i.length()> ans.length()) { // if any longer word is found
+				ans= i;}
+				set.add(i); }} //insert into set
+
+
+	return ans;	  
+	    
+	
+}
+}
