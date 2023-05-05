@@ -1,0 +1,70 @@
+package com.java.MyProject;
+
+public class InsertInBST {
+	
+	class Node {
+        int key;
+        Node left, right;
+
+        public Node(int item)
+        {
+            key = item;
+            left = right = null; } }
+  
+    Node root;
+
+    
+    InsertInBST() {
+    	root = null; }
+
+    InsertInBST(int value) {
+    	root = new Node(value); }
+
+    
+    void insert(int key) {
+    	root = insertRec(root, key); }
+
+  
+    Node insertRec(Node root, int key)
+    {
+        // If the tree is empty,
+        // return a new node
+        if (root == null) {
+            root = new Node(key);
+            return root;
+        }
+
+        // Otherwise, recur down the tree
+        else if (key < root.key)
+            root.left = insertRec(root.left, key);
+        else if (key > root.key)
+            root.right = insertRec(root.right, key);
+
+        
+        return root;  }
+
+    void inorder() { inorderRec(root); }
+
+    void inorderRec(Node root) {
+        if (root != null) {
+            inorderRec(root.left);
+            System.out.print(root.key + " ");
+            inorderRec(root.right);}  }
+
+  
+    public static void main(String[] args)
+    {
+    	InsertInBST tree = new InsertInBST();
+
+  
+        tree.insert(5);
+        tree.insert(42);
+        tree.insert(24);
+        tree.insert(9);
+      
+
+
+        tree.inorder();
+    }
+
+}
