@@ -1,0 +1,33 @@
+package com.MyProject.java;
+
+public class ValueOfSTring {
+public static void main(String[] args) {
+	
+	
+	String[]  strs = {"alic3", "bob","3","4","00000"};
+	
+	System.out.println(solution(strs));
+	
+}
+
+private static int solution(String[] strs) {
+	
+	
+int max=0;
+int curr=0;
+
+for(int i=0; i<strs.length;i++) {
+
+try {    // program will throw an error when a numeral is found with letters, in array
+	curr= Integer.parseInt(strs[i]);}  // get its numeric representation
+
+ catch (Exception e){  // else is a word, get its length
+	 curr= strs[i].length();
+ }
+
+if(max<curr) { // get the max out of two
+	max= curr;}}
+	
+	return max;
+
+}}
