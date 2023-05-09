@@ -1,0 +1,21 @@
+import java.util.* ;
+import java.io.*; 
+import java.util.Scanner;
+class Solution {
+	
+    static void printSubstrings(String input) {
+        for(int x = 0; x < input.length(); x++){
+           String ans = "";
+           for(int y =x; y < input.length();y++){
+               ans+=input.charAt(y);
+               System.out.println(ans);
+           }
+       }
+    }
+    
+	public static void main(String args[]) {
+		Scanner sc = new Scanner(System.in);
+        String input = sc.nextLine();
+        printSubstrings(input);
+	}
+}
