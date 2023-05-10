@@ -1,0 +1,49 @@
+package com.MyProject.java;
+
+public class MinNumOfOperationToMakeArr1 {
+public static void main(String[] args) {
+	
+	int nums[]= {2,6,3,4};
+	
+	
+System.out.println(	Solution(nums));
+	
+}
+
+private static int Solution(int[] nums) {
+	
+	int count=0;
+	int res = Integer.MAX_VALUE;
+	
+	for (int i : nums) {  // if there is 1 present in nums, then
+		if(i== 1) {
+			count++;}}
+		
+		if(count>0) {  // all elements can be made 1 with nums.length - number of 1s
+			return nums.length-count; }
+	
+		
+
+	for (int i = 0; i < nums.length; i++) {
+		int g= nums[i];
+		
+		for (int j = i + 1; j < nums.length; j++) {
+			g= gcd(g, nums[j]);  // calculate gcd
+			
+			if(g==1) {  // if found==1
+				res= Math.min(res, j-i); }  }} // then we calculate the min ops
+	
+	if(res== Integer.MAX_VALUE) {// if res value remain unchanged, then it means its imposiible to convert arr elements ==1
+		return -1;}
+	
+	return res + nums.length - 1; }
+
+
+private static int gcd(int a, int b) {
+	
+	if(a==0) {
+		return b;}
+	
+	 return gcd(b%a, a); }
+
+}
