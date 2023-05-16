@@ -1,0 +1,40 @@
+package com.MyProject.java;
+import java.util.*;
+
+public class PermutationSeq {
+public static void main(String[] args) {
+	
+	int n = 3, k = 3;
+	
+	System.out.println(getPermutation(n, k));
+}
+public static String getPermutation(int n, int k) {
+	
+    List<Integer> list = new ArrayList<>();
+    StringBuilder ans = new StringBuilder();
+    
+    int factorial= 1;
+    
+    for(int i=1;i<n;i++) {// store the factorial of n    	
+    	factorial*=i;
+    	list.add(i);}
+    
+    list.add(n);
+    k--;  // because of 0-based indexing of list
+    
+    while(true){  // loop will break when list becomes empty
+           
+        ans.append(list.get(k/(factorial)));  // add the number divided by k with factorial == 1 digit of ans
+        list.remove(k/factorial); // remove that number from list
+        
+        if(list.isEmpty()) {
+        	break;}
+        
+  
+        k=k%factorial;  // get the modulo to get the next digit of permutation
+        factorial/= list.size();} // reduce the factorial one step
+    
+    return ans.toString();
+}
+}
+
