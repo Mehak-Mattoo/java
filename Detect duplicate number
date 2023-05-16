@@ -1,0 +1,14 @@
+package com.MyProject.java;
+
+public class SingleNumber {
+	public static void main(String[] args) {
+		
+		int nums[]= {3,5,7,3,7,1,5};
+		int ans=0;
+		
+		for (int i = 0; i < nums.length; i++) {  // XOR with dupliacte numbers=0
+			ans^= nums[i] ;}   // XOR with a number and 0== number
+	System.out.println(ans);} // at the end, all duplicate num ==0 and only one num will remain with Xor 0= num
+	
+
+}
