@@ -1,0 +1,48 @@
+package com.java.MyProject;
+import java.util.*;
+
+public class WordBreak {
+public static void main(String[] args) {
+	
+String	s = "catsandog";
+
+List<String> wordDict = new ArrayList<>();
+
+wordDict.add("cats");
+wordDict.add("dog");
+wordDict.add("sand");
+wordDict.add("and");
+wordDict.add("cat");
+
+System.out.println(wordBreak(s, wordDict));}
+
+
+public static boolean wordBreak(String s, List<String> wordDict) {
+		
+	HashMap<String, Boolean> map= new HashMap<>();
+	return IsPossible(s,wordDict,map);}
+
+
+private static boolean IsPossible(String s, List<String> wordDict, HashMap<String, Boolean> map) {
+
+if(map.containsKey(s)) {  // if map contains string , get its associated boolean value 
+	return map.get(s);}
+
+
+if(s.isEmpty()) {  // if string is empty return true
+	return true;}
+
+	for(String word: wordDict) {  //loop over
+		
+		if(s.startsWith(word)) { // if the string starts with looping variable 
+			
+			if(IsPossible(s.substring(word.length()), wordDict, map)) {// and it is possible to		
+				map.put(s, true);       // construct string out of list , put true in map
+				return true;}}}
+	
+	map.put(s, false);  // oherwise false
+	return false;}
+
+    
+	
+}
