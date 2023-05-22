@@ -1,0 +1,81 @@
+package com.MyProject.java;
+
+
+class Node{
+	
+	Node left, right;
+     int  data;
+
+public Node(int data) {
+	 this.data= data;  }}
+
+
+class BinaryTree{
+	static Node root;
+
+static void add(int data) {
+
+	Node newNode= new Node(data);
+	
+	if(root== null) {
+		root= newNode;  }
+	
+	else {
+		Node focusNode= root;
+		Node parent;
+		
+		while(true) {
+			parent= focusNode;
+			
+			if(data< focusNode.data) { //  smaller data will be at left side
+				focusNode= focusNode.left;  // changing focus to left side
+				if(focusNode== null) {
+					parent.left= newNode;
+					return;   }}
+				
+				else {
+					focusNode= focusNode.right;  // changing focus to right side
+					if(focusNode== null) {
+						parent.right= newNode;
+						return;  }}
+		
+	
+}}}
+
+public  static int helper(Node root, int sum) {
+	
+	if(root== null) {  
+		return 0;}
+	
+	sum= sum*10 + root.data;  // to move ahead fr next digit
+	
+	
+	if(root.right== null && root.left == null) {  // when leaf node is encountered, return sum
+		return sum;	}
+	
+	
+	
+	return helper(root.left, sum)+ helper(root.right, sum);}  // keep on adding left and children
+
+
+public  static int sumNumbers(Node root) {
+	
+	return helper(root, 0); }
+
+
+}
+public class SumRootToLeaf {
+	public static void main(String[] args) {
+		
+		BinaryTree tree= new BinaryTree()	;
+
+		tree.root=new Node(2);
+		tree.root.left = new Node(4);
+		tree.root.right= new Node(3);
+		tree.root.left.left = new Node(13);
+		
+		
+	System.out.println(	tree.sumNumbers(tree.root));
+	}
+
+}
