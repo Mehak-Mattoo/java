@@ -1,0 +1,52 @@
+package com.MyProject.java;
+
+import java.util.Stack;
+
+public class ReversePolishNotation {
+	public static void main(String[] args) {
+		
+		String tokens[]=  {"2","3","+","3","*"};
+		
+		System.out.println(evalRPN(tokens));} 
+	
+	
+	
+	public static int evalRPN(String[] tokens) {
+		
+		Stack<Integer> stack= new Stack();
+		
+		 int x,y=0;
+	
+for(String i: tokens) { //if any operator is found, pop numbers out of stack and do the operator function on them
+			
+		if(i=="+") {
+			x = stack.pop();
+			y = stack.pop();
+
+		stack.push(x+y);}
+		
+		else if(i=="-") {
+			x = stack.pop();
+			y = stack.pop();
+			stack.push(x-y);}
+		
+		else if(i=="*") {
+			x = stack.pop();
+			y = stack.pop();
+			stack.push(x*y);}
+		
+		else if (i=="/")  {
+			x = stack.pop();
+			y = stack.pop();
+			stack.push(x/y);}
+		
+		 else {  // if the first element of arr is num , get its integer value and push in stack
+			 int num = Integer.valueOf(i);
+             stack.push(num);} }
+		
+		
+		
+		return stack.peek();  // return the value at top of stack
+	}
+
+}
