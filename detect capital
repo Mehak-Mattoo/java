@@ -1,0 +1,39 @@
+package com.MyProject.java;
+
+public class DetectCapital {
+public static void main(String[] args) {
+	
+	
+	String s= "Java";
+	
+	System.out.println(Solution(s));
+}
+
+private static boolean Solution(String s) {
+	
+	if(s.length()<=1 ) {
+		return true;}
+
+	
+	if(Character.isUpperCase(s.charAt(0))) { // if first and second letter of word are in uppercase then all other
+		if(Character.isUpperCase(s.charAt(1))){  // letter letter must be too , if not return false
+			
+			for(int i = 2; i < s.length(); i++) {
+                if(!Character.isUpperCase(s.charAt(i)))  {
+                    return false;}}}
+		
+		else { // if second letter is lowercase, then all letter must be too
+            for(int i = 2; i < s.length(); i++)  {
+                if(Character.isUpperCase(s.charAt(i))) {
+                    return true;}}	}}
+		
+		 else  { // if all letters are in lowercase, return true
+	       
+	            for(int i = 1; i < s.length(); i++)   {	   // if            
+	                if(Character.isUpperCase(s.charAt(i)))      {
+	                    return false;} }}
+
+	        // If false is not returned, then the word is valid.
+	        // Hence, return true.
+
+	        return true;}}
