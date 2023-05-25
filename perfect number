@@ -1,0 +1,32 @@
+package com.MyProject.java;
+
+public class PerfectNum {
+public static void main(String[] args) {
+	
+	int num=28;
+	
+	System.out.println(PerfectNumber(num));
+}
+
+private static boolean PerfectNumber(int num) {
+	
+
+	int sum=1;
+	
+	if(num==1) {
+		return false;}
+	
+	
+	for (int i = 2; i*i <=num; i++) {  // loop runs upto the last number square of i that is less than num
+			
+		if(num%i==0) {  // if its is totally divisible , then add it into sum
+			sum+=i +num/i; }}
+	
+	if(sum==num) {
+		return true;}
+	
+	
+	
+	return false;
+}
+}
