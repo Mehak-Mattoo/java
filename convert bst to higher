@@ -1,0 +1,73 @@
+package com.MyProject.java;
+import java.util.LinkedList;
+import java.util.Queue;
+
+
+class BSTNode{
+
+	BSTNode right;
+	BSTNode left;
+	int data;
+	
+	public BSTNode(int data) {		
+	this.data= data;	}}
+
+
+class BST{
+	
+static	BSTNode rootNode;
+
+	public void insert(int data) {
+		rootNode = insert(rootNode, data);	}
+	
+
+public	static BSTNode insert(BSTNode root ,int data) {
+		
+		if(root == null) {
+			 root = new BSTNode(data);}
+		
+		else if(data < root.data) {
+		root.left = insert(root.left, data);	} // inserting at right subtree 
+		
+		else if (data> root.data){
+			root.right = insert(root.right, data); }  // inserting at left subtree
+				
+		return root;		}
+
+static int sum=0;
+public static void GreaterTree(BSTNode root ) {
+	
+
+	
+	if(root!=null) {  // first recurr down right subtree which holds the max value
+		GreaterTree(root.right);
+		
+		sum+= root.data; // get its value and add it into sum
+		root.data= sum; // update it with sum
+		
+		System.out.print(root.data +" , ");
+		GreaterTree(root.left);	} // then recurr down on left subtree
+	
+	
+}
+}
+
+
+public class ConvertBSTToHigher {
+	public static void main(String[] args) {
+		
+	BST tree= new BST();
+
+	tree.insert(5);
+	tree.insert(3);
+	tree.insert(7);
+	tree.insert(1);
+	
+	
+tree.GreaterTree(tree.rootNode);
+
+}}
+
+
+
+
