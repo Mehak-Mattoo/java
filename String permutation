@@ -1,0 +1,33 @@
+package com.MyProject.java;
+import java.util.Arrays;
+
+public class StringPermutation {
+public static void main(String[] args) {
+	
+	
+	String  s1 = "ab", s2 = "eidbaooo";
+	
+	System.out.println(checkInclusion(s1, s2));
+}
+
+
+public static boolean checkInclusion(String s1, String s2) {
+	
+	s1= sort(s1);
+	
+	for (int i = 0; i <= s2.length()- s1.length(); i++) {
+		
+		if(s1.equals(sort(s2.substring(i, i+s1.length())))) { // if s1 becomes equal to any substring of s2
+			return true; }}
+	
+	return false;
+}
+
+
+static String sort(String str) {  // sorts strings
+	char[] s = str.toCharArray();
+	
+	Arrays.sort(s);
+	return new String (s);
+}
+}
