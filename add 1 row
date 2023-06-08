@@ -1,0 +1,108 @@
+package com.MyProject.java;
+
+import java.util.*;
+class Pair
+{
+	TreeNode first;
+	Integer second;
+	Pair(TreeNode first,Integer second)
+	{
+		this.first = first;
+		this.second = second;
+	}
+}
+// Class of TreeNode
+class TreeNode {
+	int val;
+	TreeNode left;
+	TreeNode right;
+
+	// Constructor
+	TreeNode(int v) {
+		val = v;
+		left = right = null;
+	}
+}
+
+class Add1Row {
+	public static TreeNode addOneRow(TreeNode root, int val, int depth) {
+		
+		
+		if (depth == 1) {// if depth is 1, make a new node with value val
+			TreeNode node = new TreeNode(val);
+			
+			node.left = root;  // join node with the root node
+			return node;}
+			
+		 else {
+			
+			Stack<Pair> st = new Stack<>();
+			
+			st.push(new Pair(root, 1)); // push the root node with its level
+			
+			while (!st.empty()) {
+				Pair pair = st.pop();
+				TreeNode node = pair.first;
+				int level = pair.second;
+				
+				if (node == null)
+					continue;
+				
+				if (level == depth - 1) {// make a node with the value and join them
+				
+					TreeNode temp = new TreeNode(val);
+					temp.left = node.left;
+					node.left = temp;
+				
+					TreeNode temp2 = new TreeNode(val);  // vice- versa
+					temp2.right = node.right;
+					node.right = temp2;
+					continue;
+				}
+				
+				st.push(new Pair(node.left, level + 1)); // push the node's left and node's right in the stack
+				st.push(new Pair(node.right, level + 1));
+			}
+		}
+		// return the updated roots
+		return root;
+	}
+
+	
+	public static void levelOrder(TreeNode root) {//  level order traversal
+		Queue<TreeNode> queue = new LinkedList<>();
+		if (root == null) {
+			System.out.println("null");
+			return;
+		}
+		queue.add(root);
+
+		while (!queue.isEmpty()) {
+			int len = queue.size();
+			
+			while (len > 0) {
+				TreeNode temp = queue.poll();
+				System.out.print(temp.val + " , ");
+				
+				if (temp.left != null)
+					queue.add(temp.left);
+				
+				if (temp.right != null)
+					queue.add(temp.right);
+				len--;}}	}
+
+	// Driver Code
+	public static void main(String[] args) {
+		TreeNode root = new TreeNode(1);
+		root.left = new TreeNode(2);
+		root.left.left = new TreeNode(4);
+		root.left.right = new TreeNode(5);
+		root.right = new TreeNode(3);
+		root.right.right = new TreeNode(6);
+		
+		
+		int L = 2;  // level
+		int V = 3;  // value
+		levelOrder(addOneRow(root, V, L));
+	}
+}
