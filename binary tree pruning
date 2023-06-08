@@ -1,0 +1,87 @@
+package com.MyProject.java;
+import java.util.*;
+
+
+class Node{
+	
+	Node left, right;
+     int  data;
+
+public Node(int data) {
+	 this.data= data;  }
+}
+class BinaryTree{
+	static Node root;
+
+static void add(int data) {
+
+	Node newNode= new Node(data);
+	
+	if(root== null) {
+		root= newNode;  }
+	
+	else {
+		Node focusNode= root;
+		Node parent;
+		
+		while(true) {
+			parent= focusNode;
+			
+			if(data< focusNode.data) { //  smaller data will be at left side
+				focusNode= focusNode.left;  // changing focus to left side
+				if(focusNode== null) {
+					parent.left= newNode;
+					return;   }}
+				
+				else {
+					focusNode= focusNode.right;  // changing focus to right side
+					if(focusNode== null) {
+						parent.right= newNode;
+						return;  }}
+		}}}
+
+static void inorderPrint(Node root)
+{
+    if (root == null)
+        return;
+    inorderPrint(root.left);
+    System.out.print(root.data+ " ");
+    inorderPrint(root.right); }
+
+
+static Node TrimTree(Node root)
+{
+    if (root==null)
+        return null;
+ 
+    root.left = TrimTree(root.left);
+    root.right = TrimTree(root.right);
+ 
+    // prune tree if the node's value is 0 and children are null
+    if (root.data == 0 && root.left == null
+        && root.right == null) {
+        return null;  }
+ 
+    // Otherwise, leave the node the way it is
+    return root;
+}}
+
+
+public class BinaryTreePruning {
+public static void main(String[] args) {
+BinaryTree tree= new BinaryTree()	;
+
+tree.root=new Node(1);
+tree.root.left = new Node(1);
+tree.root.right= new Node(1);
+tree.root.left.left = new Node(0);
+tree.root.left.right= new Node(0);
+tree.root.right.left= new Node(1);
+tree.root.right.right= new Node(1);
+
+
+
+Node ans = tree.TrimTree(tree.root);
+tree.inorderPrint(ans);
+
+}}
