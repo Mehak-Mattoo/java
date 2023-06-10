@@ -1,0 +1,42 @@
+package com.java.MyProject;
+
+import java.util.HashMap;
+
+public class ReplaceArrayElements {
+public static void main(String[] args) {
+	
+	int[] nums= {1,2,4,6};
+	
+	int [][]operations = {{1,3},{4,7},{6,1}};
+	
+	
+	int [] ans= arrayChange(nums, operations);
+	
+	for(int i: ans) {
+		System.out.print(i+",");}
+	
+}
+public static int[] arrayChange(int[] nums, int[][] opt) {
+	
+	HashMap<Integer, Integer> map= new HashMap<>();
+	
+	for (int i = 0; i < nums.length; i++) {
+		map.put(nums[i], i);}  // put all arr elements in map with their order
+	
+	
+	for (int i = 0; i < opt.length; i++) {
+		
+		int oldval= opt[i][0];  
+		int newval= opt[i][1];
+		
+		if(map.containsKey(oldval)) {// if map has arr element
+			
+			int index= map.get(oldval);  // get its index
+			nums[index]= newval;  // replace it in arr
+			
+			map.put(newval, index);}}
+	
+	
+	return nums;}
+
+}
