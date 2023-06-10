@@ -1,0 +1,63 @@
+package com.java.MyProject;
+import java.util.*;
+
+
+public class MinimumIndexSumOfTwoLists {
+public static void main(String[] args) {
+	
+	List <String> list1= new ArrayList<String>();
+	List <String> list2= new ArrayList<String>();
+	
+	list1.add("Shogun");	
+	list1.add("Tapioca Express");
+	list1.add("Burger King");
+	list1.add("KFC");
+	
+	 
+	list2.add("KFC");
+	list2.add("Shogun");	
+	list2.add("Burger King");
+	
+	
+String [] anStrings= 	Solution(list1,list2); 
+
+
+for (String s : anStrings) {
+	System.out.println(s); }}
+	
+
+private static String[] Solution(List<String> list1, List<String> list2) {
+	
+	HashMap<String, Integer> map = new HashMap<>();
+	List<String> curr= new ArrayList<>();
+	
+	
+	for (int i = 0; i < list1.size(); i++) {
+	map.put(list1.get(i), i); } // put all elements first
+						
+	
+	int min=Integer.MAX_VALUE;
+	
+	for (int i = 0; i < list2.size(); i++) { // check if list2 has any same element
+		
+	if(map.containsKey(list2.get(i))) {  
+		 int sum = i + map.get(list2.get(i)); //yes, then enter its frequency adjacent to string
+		 
+		 if(sum< min) {  // if current sum is less , then update min
+			 min=sum;
+			 
+			 
+	     curr.clear();  //then clear the list, as it serves no purpose
+         curr.add(list2.get(i));}  // and add the element
+         
+     else if(sum == min) {  // even if sum==min, still add into list
+         curr.add(list2.get(i));}  }}
+	
+	
+	return  curr.toArray(new String[curr.size()]);
+}
+			
+	
+}
+
+
