@@ -1,0 +1,52 @@
+package com.java.MyProject;
+
+
+
+public class LCMEqualToK {
+public static void main(String[] args) {
+	
+	int nums[]= {3,6,2,7,1};
+	int k=6;
+	
+	
+System.out.println(	Solution(nums,k));}
+
+
+private static int Solution(int[] nums, int k) {
+	int ans=0;
+	
+	for (int i = 0; i < nums.length; i++) {
+		int lcm = nums[i];		
+				
+		for (int j = i; j < nums.length; j++) {
+			lcm= lcm(lcm, nums[j]);  // getting the lcm
+			
+			if(lcm==k) {  // if lcm is equal to k, increase the ans
+				ans++;}
+			
+			if(lcm>k) { // too many subarrays are being calculated ,break out of loop
+				break;}}
+	}
+	
+	
+	return ans;}
+	
+	
+	static int lcm(int a,int b) {  // a*b= lcm(a,b) * gcd (a,b)
+		 return (a * b) / gcd(a, b);}  //== lcm
+	
+
+	private static int gcd(int a, int b) {
+		
+		if(a==0) {
+			return b;}
+		
+		if(b==0) {
+			return a;}
+		
+		 return gcd(b%a, a);}
+	
+	
+	
+}
+
