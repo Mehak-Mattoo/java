@@ -1,0 +1,34 @@
+package com.java.MyProject;
+
+public class SingleElementInSortedArray {
+public static void main(String[] args) {
+	
+	
+	int[] nums = {1,1,2,3,3,4,4};
+	
+System.out.println(	Solution(nums));
+	
+}
+
+private static int Solution(int[] nums) {
+	
+	int low =0;
+	int high= nums.length-1;
+	
+	while(low<high) {
+		
+		int mid= (low+high)/2;
+		
+		if(mid%2!=0) {// if mid comes out to be odd, make it even
+			mid--;}
+		
+		if(nums[mid]!=nums[mid+1]) {  // if the element adjacent to mid is not the same
+			high= mid;}
+		
+		else {
+			low= mid+2;}	}
+	
+	return nums[low];
+	
+}
+}
