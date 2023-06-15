@@ -1,0 +1,62 @@
+package com.myproject.java;
+
+public class DetectLoop { 
+	
+	class Node {    
+        int data;    
+        Node next;    
+            
+        public Node(int data) {    
+            this.data = data;    
+            this.next = null;    }     }    
+     
+    public static Node head = null;    
+    public Node tail = null;    
+           
+    public void addNode(int data) {    
+        
+        Node newNode = new Node(data);    
+                 
+        if(head == null) {             
+            head = newNode;    
+            tail = newNode; }   
+           
+        else {                
+            tail.next = newNode;       
+            tail = newNode;    }}
+       
+        
+   
+    
+    public static boolean detectLoop(Node head) {
+    	
+    	Node slowNode= head;
+    	Node fastNode =head;
+    	
+    	while(slowNode!= null && fastNode!= null && fastNode.next!= null) {// until every pointer does not become null
+    		fastNode= fastNode.next.next; // fast pointer moves two places
+    		slowNode= slowNode.next;// slow pointer moves 1 space
+    		
+    		if(slowNode== fastNode) {// if they intersect, loop  is present
+    			return true;}}
+    	
+    	return false;   }
+    
+    
+    
+
+
+public static void main(String[] args) {
+
+	  DetectLoop sList = new  DetectLoop();    
+      
+      sList.addNode(1);    
+      sList.addNode(2);    
+      sList.addNode(3);    
+      sList.addNode(4);    
+        
+   
+      
+      System.out.println(sList.detectLoop(head));
+}
+}
