@@ -1,0 +1,93 @@
+package com.myproject.java;
+import java.util.*;
+
+class BTNode{
+	
+	BTNode left;
+	BTNode right;
+     int  data;
+
+public BTNode(int data) {
+	 this.data= data;  }
+}
+class Tree{
+	static BTNode root, root2;
+
+static void add(int data) {
+
+	BTNode newNode= new BTNode(data);
+	
+	if(root== null) {
+		root= newNode;  }
+	
+	else {
+		BTNode focusNode= root;
+		BTNode parent;
+		
+		while(true) {
+			parent= focusNode;
+			
+			if(data< focusNode.data) { //  smaller data will be at left side
+				focusNode= focusNode.left;  // changing focus to left side
+				if(focusNode== null) {
+					parent.left= newNode;
+					return;   }}
+				
+				else {
+					focusNode= focusNode.right;  // changing focus to right side
+					if(focusNode== null) {
+						parent.right= newNode;
+						return;  }}
+		
+	
+}}}
+
+static boolean isIsomorphic(BTNode root1, BTNode root2)  { 
+    if(root1==null && root2==null) { // if both trees are null, then they are isomorphic
+        return true;}
+    
+        if(root1==null || root2==null){// if one trees is not null, then they are not isomorphic
+        return false;}
+        
+        if(root1.data!=root2.data) { // if both trees data do not match, then they are not isomorphic
+        return false;}
+     
+ return isIsomorphic(root1.left,root2.left) && isIsomorphic(root1.right,root2.right)|| 
+     isIsomorphic(root1.left,root2.right) && isIsomorphic(root1.right,root2.left);
+        
+   // check for both subtrees, if either return true, return true     
+       
+        }}
+
+
+public class IsomorphicTrees {
+public static void main(String[] args) {
+Tree tree= new Tree()	;
+
+tree.root=new BTNode(4);
+tree.root.left = new BTNode(7);
+tree.root.right= new BTNode(9);
+tree.root.left.left = new BTNode(13);
+tree.root.left.right= new BTNode(20);
+tree.root.right.left= new BTNode(23);
+tree.root.right.right= new BTNode(70);
+
+tree.root2=new BTNode(4);
+tree.root2.left = new BTNode(7);
+tree.root2.right= new BTNode(9);
+tree.root2.left.left = new BTNode(13);
+tree.root2.left.right= new BTNode(20);
+tree.root2.right.left= new BTNode(23);
+tree.root2.right.right= new BTNode(70);
+
+
+
+
+System.out.println(tree.isIsomorphic(tree.root,tree.root2));
+
+
+
+
+}
+
+}
