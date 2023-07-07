@@ -1,0 +1,54 @@
+package com.myproject.java;
+import java.util.*;
+
+public class MaxInWindow {
+public static void main(String[] args) {
+	
+	int arr[]= {1 ,2, 3, 1, 4, 5, 2, 3, 6};
+	
+	
+	ArrayList<Integer>list=new ArrayList<>();	
+	
+	list = max_of_subarrays(arr, arr.length, 3);
+	
+	for(int i: list) {
+		System.out.print(i+" , ");
+	}
+	
+}
+
+
+static int Max(int[] arr, int i,int j){
+    int max=arr[i];
+    
+    for(int k=i+1;k<=j;k++)  {  // return the max element
+        max=Math.max(max,arr[k]); }
+  
+    return max;}
+
+static ArrayList<Integer> max_of_subarrays(int arr[], int n, int k) {
+    
+    ArrayList<Integer>list=new ArrayList<>();
+    int max=arr[0];
+    
+    for(int i=0;i<k;i++)   {
+        max=Math.max(max,arr[i]);   }// get the max in the window
+    
+    
+    list.add(max); // add into the list
+    
+    for(int i=1;i<=n-k;i++)    {  // loop until window
+    	
+    	
+    	  if(max==arr[i-1])        {
+              max=Max(arr, i, i+k-1);    }
+    	  
+    	  
+          else{
+        max=Math.max(max, arr[i+k-1]);}  // get the max 
+      
+        list.add(max);} // add in the list
+    
+    return list;}
+
+}
