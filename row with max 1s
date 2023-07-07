@@ -1,0 +1,33 @@
+package com.myproject.java;
+
+public class RowWithMax1 {
+public static void main(String[] args) {
+	
+	int arr[][] = {{0, 1, 1, 1},
+	           {0, 0, 1, 1},
+	           {1, 1, 1, 1}, // sorted 2D array
+	           {0, 0, 0, 0}};
+	
+	System.out.println("Row "+ rowWithMax1s(arr, 4, 4));
+}
+
+static int rowWithMax1s(int arr[][], int n, int m) {
+	
+	int row=0; // start at the first row
+	int column= m-1;  // at the last column
+	int ans=-1;
+	
+	while(row<n && column>-1) {
+		
+		if(arr[row][column]==1) { // if 1 is found
+			ans= row; 
+			column--;}  // go left
+		
+		else {
+			row++;}// else go down
+		
+		
+	}
+	return ans;
+}
+} 
