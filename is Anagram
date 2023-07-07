@@ -1,0 +1,27 @@
+package com.myproject.java;
+
+import java.util.Arrays;
+
+public class IsAnagram {
+	public static void main(String[] args) {
+		
+	String	a = "geeksforgeeks", b = "forgeeksgeeks";
+	
+	char ArrayA []= a.toCharArray();
+	char ArrayB []= b.toCharArray();// convert into char array
+	
+	Arrays.sort(ArrayA);
+	Arrays.sort(ArrayB);// sort them
+	
+	String ans1= new String(ArrayA);// convert into strings
+	String ans2= new String(ArrayB);
+		
+	if(ans1.equals(ans2)) {  // if they are equal , print yes
+		System.out.println("Yes");}
+	
+	else {
+		System.out.println("No");}
+		
+	}}
+
+
