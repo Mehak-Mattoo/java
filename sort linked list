@@ -1,0 +1,84 @@
+package com.myproject.java;
+import java.util.*;
+
+
+public class Sortlist { 
+	
+	class Node{    
+        int data;    
+        Node next;    
+            
+        public Node(int data) {    
+            this.data = data;    
+            this.next = null;    }     }    
+     
+    public static Node head = null;    
+    public Node tail = null;    
+           
+    public void addNode(int data) {    
+        
+        Node newNode = new Node(data);    
+                 
+        if(head == null) {             
+            head = newNode;    
+            tail = newNode; }   
+           
+        else {                
+            tail.next = newNode;       
+            tail = newNode;    }}
+       
+        
+    public void display() {    
+       
+        Node current = head;    
+            
+        if(head == null) {    
+            System.out.println("List is empty");    
+            return;    }
+           
+        while(current != null) {    
+           
+            System.out.print(current.data + " ");    
+            current = current.next;   }} 
+    
+static Node sortList (Node head) {
+	
+	
+	 ArrayList<Integer> list = new ArrayList<>();
+     Node curr = head;
+     while(curr!=null){  // add all the list data into arraylist
+         list.add(curr.data);
+         curr = curr.next;  }
+     
+     
+     Collections.sort(list); // sort it
+    
+     curr = head;
+     for(int num : list){// traverse the list and exchange the data
+         curr.data = num;
+         curr = curr.next; }
+     
+     
+     return head;}
+
+	  
+  public static void main(String[] args) {    
+            
+        Sortlist sList = new  Sortlist();    
+               
+        sList.addNode(1);    
+        sList.addNode(2);    
+        sList.addNode(0);    
+        sList.addNode(1);   
+        
+        sList.sortList(head);
+            
+        sList.display();
+        
+ 
+       
+} 
+
+
+
+}
