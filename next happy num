@@ -1,0 +1,41 @@
+package com.myproject.java;
+import java.util.*;
+
+public class NextHappy {
+public static void main(String[] args) {
+	
+	System.out.println(nextHappy(5)); }
+
+static int nextHappy(int N){
+	
+    int nextHappyNumber = N + 1;
+
+    while (true) {// loop until next happy number is found
+        if (isHappy(nextHappyNumber)) {
+            return nextHappyNumber;  }
+        
+        nextHappyNumber++;    }}
+
+private static boolean isHappy(int nextHappyNumber) {
+    HashMap<Integer, Integer> map = new HashMap<>();
+
+
+    while (!map.containsKey(nextHappyNumber)) {
+        map.put(nextHappyNumber, 1);
+
+        int sum = 0;
+        while (nextHappyNumber > 0) {
+            int a = nextHappyNumber % 10; // get the last digit
+
+            sum += a * a;  // multiply the num
+            nextHappyNumber = nextHappyNumber / 10; // shorten the digit
+        }
+
+        if (sum == 1) { // if sum= 1 return 
+            return true;        }
+        
+        nextHappyNumber = sum;  }
+    return false;
+    
+}	}
+
