@@ -1,0 +1,32 @@
+package com.myproject.java;
+
+public class ProductArr {
+public static void main(String[] args) {
+	
+	int nums[]= {10, 3, 5, 6, 2};
+long ans[]=	productExceptSelf(nums, nums.length);
+
+for(long i:ans) {
+	System.out.print(i+",");
+}
+	
+}
+
+public static long[] productExceptSelf(int nums[], int n) { 
+    
+    
+    long[] res=new long[n];
+    long productstart=1,productend=1;
+    
+    for(int i=0; i<n; i++){
+        res[i]=productstart;
+        productstart*=nums[i];  }// put all the product in result array
+    
+    
+    
+    for(int i=n-1; i>-1; i--){  // iterating from end
+        res[i]*=productend; //
+        productend*=nums[i];   }
+   
+    return res;} 
+}
