@@ -1,10 +1,26 @@
-	int arr[]= {0,3,20,4,7,5};
-	
-	int target= 2;
-	int i;
-	for ( i = target; i < arr.length; i++) {
-		System.out.print(arr[i]+" , ");}
-	if(i== arr.length) {
-		for (int j = 0; j <target; j++) {
-			System.out.print(arr[j]+" , ");}
-	}
+class Solution {
+    public void rotate(int[] nums, int k) {
+
+      k%= nums.length;// keeps k within array bounds
+
+      reverse(nums, 0, nums.length-1);  // reverse the entire array
+
+      reverse(nums, 0,k -1); // reverse first array elements
+
+      reverse(nums, k, nums.length-1); // reverse remaining elements
+
+    }
+    
+    public static void reverse(int[]nums, int start, int end){
+
+        while(start<end){
+            int temp= nums[start];
+            nums[start]= nums[end];
+            nums[end]= temp;
+
+            start++;
+            end--;}
+        
+    }
+    
+    }
