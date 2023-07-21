@@ -1,0 +1,27 @@
+class Solution {
+    public boolean canJump(int[] nums) {
+
+        if(nums.length<=1){
+            return true;
+        }
+        
+        int index= 1;
+        int jump= nums[0];
+
+        while(jump>0){
+            if(index== nums.length-1){// if we reach the last index index,return true
+                return true;}
+            
+            jump= Math.max(jump-1, nums[index]);// jump-1== because in process of moving forward, we have to include current jump as well.
+
+            //deciding whether to take the same step as before or take max jump
+            index++;
+        }
+
+
+
+
+
+        return false;
+    }
+}
