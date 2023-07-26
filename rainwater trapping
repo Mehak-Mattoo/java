@@ -1,0 +1,26 @@
+class Solution {
+    public int trap(int[] height) {
+        int waterTrapped= 0;
+        int n=height.length;
+
+
+        int[]left= new int[n];
+        int[]right= new int[n]; 
+
+        left[0]= height[0];
+        right[n-1]= height[n-1];
+      
+
+        for(int i=1; i<n;i++){ // from start
+   left[i]= Math.max(left[i-1],height[i]) ;  } //put the max out of left  and height arr
+
+
+for(int i=n-2; i>-1;i--){ // from end
+
+    right[i]= Math.max( right[i+1], height[i]);}
+
+    for(int i=0;i<n;i++){ // now get the min out of 2 - current building height as water cannot be trapped there.
+      waterTrapped+= (Math.min(left[i], right[i])-height[i]);  }
+return waterTrapped;
+    }
+}
