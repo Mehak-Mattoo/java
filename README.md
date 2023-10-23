@@ -1,1 +1,1 @@
-# myCodes Just me practicing codes to become better
+# myCodes Just me practising my java codes to become better
