@@ -1,0 +1,42 @@
+class Solution {
+    public void setZeroes(int[][] matrix) {
+        
+    boolean rowCheck=false;
+    boolean colCheck=false;
+
+    // first marking the first col and row wwith 0
+
+    for(int i=0; i<matrix.length;i++){
+        for(int j=0; j<matrix[0].length;j++){
+        
+            if(matrix[i][j]==0){
+                if(i==0)
+                    rowCheck=true;
+                    if(j==0)
+                        colCheck=true;
+matrix[0][j]=0;
+matrix[i][0]=0;}}}
+
+
+// leaving the first row and col, turning the remaining numbers to 0 by looking at the 1st row and col
+
+ for(int i=1; i<matrix.length;i++){
+        for(int j=1;j<matrix[0].length;j++){
+
+  if(matrix[i][0] == 0 || matrix[0][j] == 0) {
+                matrix[i][j] = 0;}   }}
+
+// first doing the row, if there ever was 0 in it , change full row to 0 and vice-versa
+if(rowCheck){
+       for(int j = 0; j < matrix[0].length; j++) {
+            matrix[0][j] = 0;
+        }
+}
+if(colCheck){
+       for(int i = 0; i< matrix.length; i++) {
+            matrix[i][0] = 0;
+        }
+}
+
+    }
+}
