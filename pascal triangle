@@ -1,0 +1,27 @@
+Given an integer numRows, return the first numRows of Pascal's triangle.
+
+class Solution {
+  
+    public List<List<Integer>> generate(int numRows) {
+
+   List<List<Integer>> list = new ArrayList<>();
+
+   List<Integer> row, pre = null; // pre= previous row, row = curr row
+
+for (int i = 0; i < numRows; i++) {
+ row = new ArrayList<>();
+
+  for (int j = 0; j <= i; j++) {  
+      if (j == 0 || j == i) {// when corners are reached, put 1
+            row.add(1);
+        } else {
+              row.add(pre.get(j-1) + pre.get(j));// else get the previous val+ current num
+        }
+    }
+
+      pre = row;
+            list.add(row);
+}
+ return list;
+    }
+}
