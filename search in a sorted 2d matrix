@@ -1,0 +1,75 @@
+//brute
+class Solution {
+    public boolean searchMatrix(int[][] matrix, int target) {
+
+
+    for(int i=0; i<matrix.length; i++){
+            for(int j= 0;j <matrix[0].length;j++){// looking the target n times
+if(matrix[i][j]== target){
+   
+    return true;
+
+}
+            }
+        }return false;
+    }    
+
+        
+    
+}
+
+
+// better using binary search
+class Solution {
+    public boolean searchMatrix(int[][] matrix, int target) {
+
+
+    for(int i=0; i<matrix.length; i++){
+        if( matrix[i][0] <= target && target<= matrix[i][matrix[0].length-1]){
+           return binarySearch(matrix[i], target);
+        }
+
+    }
+     return false; }
+
+
+ public static boolean binarySearch(int [] nums, int target) {
+        int n = nums.length; 
+        int low = 0, high = n - 1;
+
+        while (low <= high) {
+            int mid = (low + high) / 2;
+            if (nums[mid] == target) return true;
+            else if (target > nums[mid]) low = mid + 1;
+            else high = mid - 1;
+        }
+        return false;
+    }
+        
+    
+}
+
+
+
+//optimal
+
+class Solution {
+    public boolean searchMatrix(int[][] matrix, int target) {
+      int n = matrix.length;
+        int m = matrix[0].length;
+
+        int low = 0, high = n * m - 1;
+          while (low <= high) {
+            int mid = (low + high) / 2;
+            int row = mid / m; //  by flattening the 2d into 1d array, we needed to find the row col
+            int col = mid % m;
+            if (matrix[row][col] == target) return true;
+            else if (matrix[row][col] < target) low = mid + 1;
+            else high = mid - 1;
+        }
+        return false;
+
+    }
+        
+    
+}
