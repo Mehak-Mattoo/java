@@ -46,12 +46,16 @@ public static LNode mergeTwoLists(LNode list1, LNode list2) {
 			 list2= list2.next;}		 
 		     previous= previous.next;}
 	
-	 if(list1== null) {
-		 previous.next= list1;}
-		
+	 while(list1!= null) {
+		 previous.next= list1; 
+        previous=list1; 
+        list1=list1.next;}	
 
- if((list2== null)) {
-	 previous.next= list2;}
+  while(list2!= null) {
+		 previous.next= list2;       
+        previous=list2; 
+        list2=list2.next;
+         }
 		 
 	return dummyNode.next;	}
 
