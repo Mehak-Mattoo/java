@@ -1,0 +1,49 @@
+class Solution {
+    public List<Integer> getRow(int rowIndex) {
+    List<List<Integer>> list = new ArrayList<>();
+// generating all rows upto rowIndex
+
+for (int i = 1; i <= rowIndex+1; i++) {
+List<Integer> row= new ArrayList<>(); // pre= previous row, row = curr row
+
+  for (int j = 0; j < i; j++) {  
+      if (j == 0 || j == i-1) {// when corners are reached, put 1
+            row.add(1);
+        } else {
+               row.add(list.get(i-2).get(j-1)+ list.get(i-2).get(j)); // else get the previous val+ current num
+        }
+    }
+
+       list.add(row);
+       if(i==rowIndex+1){
+return row;  }     
+}
+ return new ArrayList<>();  
+
+
+
+
+
+class Solution {
+    public List<Integer> getRow(int rowIndex) {
+    List<Integer> list = new ArrayList<>();// using formula 
+long start=1;
+list.add((int)start);
+
+for (int i = 0; i <rowIndex; i++) {
+
+start*= (rowIndex-i);
+start/= (i+1);
+
+list.add((int)start);}
+return list;
+
+
+    }
+}
+ 
+     
+    }
+}
+
+
