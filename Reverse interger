@@ -1,43 +1,22 @@
-package com.java.MyProject;
-import java.util.*;
+class Solution {
+    public int reverse(int x) {
+        
+ int reverse=0;
 
-public class ReverseInteger {
-public static void main(String[] args) {
-		
-	int x= 777877786;
-	
-System.out.println(	ReverseInteger(x));
-	
-	
-	}
+while(x!=0){
+int lastDigit= x%10;
+x= x/10;
 
-private static int ReverseInteger(int x) {
-	
+if(reverse > Integer.MAX_VALUE/10|| reverse < Integer.MIN_VALUE/10){
+    return 0; // ensures that before the new digit is added, the resulting number will not exceed the 32-bit integer limits.
+}
+reverse = reverse*10+lastDigit;
+ }
 
-	int reverse=0;
-	
-	while(x!=0) {  // loop until x becomes 0
-	 int mod = x%10;  // getting remainder of x
-	  x/=10;     // getting x shorter
-	  
-	  
-	  
-	  // check for restraints
- if(reverse> Integer.MAX_VALUE/10 || reverse== Integer.MAX_VALUE /10 && mod>7) { // if ans > max or 
-		
- return 0;}  //checking only upto integer max value/10 because if tehry are same,then ans lies there and
-            // and if its remainder larger than 7 i.e that last ones plave value of max
-	  
-if(reverse< Integer.MIN_VALUE/10 || reverse== Integer.MIN_VALUE/10 && mod<-8) {
-return 0;}   // same for min as well
-	  
- reverse= (reverse*10) +mod;  // finally multiply ans with 10 to shift the num left and add remainder
-	                             // to get the reverse
-	  
-	}
-	return reverse;
-	
-	
-	
-	
-}}
+
+
+ return reverse;
+
+
+    }
+}
