@@ -1,0 +1,42 @@
+import java.util.*;
+
+
+public class Solution {
+    public static int[] getFrequencies(int []v) {
+    
+        TreeMap <Integer,Integer>mp= new TreeMap<>();
+        int arr[]= new int[2];
+
+        for (int i = 0; i < v.length; i++) {
+            if(mp.containsKey(v[i])){
+                mp.put(v[i],mp.get(v[i])+1);
+            }else{
+                mp.put(v[i],1);
+            }
+        }
+
+   int maxFreq = 0, minFreq = v.length;
+   int maxEle = 0, minEle = 0;
+
+   for (Map.Entry<Integer, Integer> map : mp.entrySet()) {
+
+ int count = map.getValue();
+int element = map.getKey();
+
+if(count>maxFreq){
+    maxEle= element;
+    maxFreq= count;}
+
+   
+if(count<minFreq){
+    minEle= element;
+    minFreq= count;
+} }
+
+arr[0]= maxEle;
+arr[1]= minEle;
+
+return arr;
+
+    }
+}
