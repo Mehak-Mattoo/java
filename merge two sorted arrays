@@ -37,27 +37,47 @@ while(pointer2>=0) {
 return arr1;
     }
  
-		    public static void main(String[] args) {
-		    	
-		        int arr1[] = {1, 4, 5, 8,0,0,0};
-		        int n1 = 4; // size of elements other than 0(has to be changed for diff. arrays)
-		 
-		        int arr2[] = {3, 9, 10};
-		        int n2 = arr2.length;
-		        
-		        System.out.println("First Array: ");
-		    	for (int i : arr1) {
-					System.out.print(i+ " ");}     
-		        
-		        
-		 System.out.println("\n\nSecond Array: ");
-		    	for (int i : arr2) {
-					System.out.print(i+ " ");}	
-		    	
-		      int [] arr=  mergeSortedArrays(arr1, arr2, n1, n2);
-		      
-		      System.out.println("\n\nAfter merging: ");
-		      for(int i: arr) {
-		    	  System.out.print(i+" ");
-		      }}
+
+
+import java.util.*;
+public class Solution {
+    public static List< Integer > sortedArray(int []a, int []b) {
+        
+        ArrayList<Integer> list = new ArrayList<>();
+
+        int i= 0, j=0;
+
+        int aSize=a.length, bSize= b.length;
+
+        while(i<aSize&& j<bSize){
+
+if(a[i]> b[j] ){
+    if( list.size()==0|| list.get(list.size()-1)!= b[j]){// last element in list must not be equal to current element
+    list.add(b[j]);}
+    j++;
+}
+
+else{
+    if(list.size()==0|| list.get(list.size()-1)!= a[i]){
+    list.add(a[i]);}
+    i++;
+}}
+
+
+while(i<aSize){
+     if(list.get(list.size()-1)!= a[i]){
+        list.add(a[i]);}
+        i++;
+    
+}
+
+while(j<bSize){
+ if(list.get(list.size()-1)!= b[j]){ 
+        list.add(b[j]);}
+        j++;} 
+
+
+
+return list;
+    }
 }
