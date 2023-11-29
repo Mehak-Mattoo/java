@@ -1,42 +1,68 @@
-class Solution {
-    public void setZeroes(int[][] matrix) {
-        
-    boolean rowCheck=false;
-    boolean colCheck=false;
+import java.util.* ;
+import java.io.*; 
+public class Solution {
+    public static ArrayList<ArrayList<Integer>> zeroMatrix(ArrayList<ArrayList<Integer>> matrix, Integer n, Integer m) {
+       
 
-    // first marking the first col and row wwith 0
+int []row= new int[n];
+int []col= new int[m];
 
-    for(int i=0; i<matrix.length;i++){
-        for(int j=0; j<matrix[0].length;j++){
-        
-            if(matrix[i][j]==0){
-                if(i==0)
-                    rowCheck=true;
-                    if(j==0)
-                        colCheck=true;
-matrix[0][j]=0;
-matrix[i][0]=0;}}}
+for (int i = 0; i <n; i++) {
+    for (int j = 0; j < m; j++) { // traversing in the matrix to find zeroes
+        if(matrix.get(i).get(j)==0){
+            row[i]=1;  // when found mark their row and cols as 1
+            col[j]=1;} }}
+
+
+for (int i = 0; i <n; i++) {
+    for (int j = 0; j < m; j++) {  // set 1s to 0
+
+    if(row[i]==1 || col[j]==1){
+matrix.get(i).set(j, 0);}}}
+
+
+return matrix;
+
+
+
+int col0=1;
+
+for (int i = 0; i <n; i++) {
+    for (int j = 0; j < m; j++) { 
+
+  if (matrix.get(i).get(j) == 0) {
+                    // mark i-th row:
+                    matrix.get(i).set(0, 0);
+
+    if (j != 0){
+   matrix.get(0).set(j, 0);}
+else{
+    col0 = 0;
+}}}}
 
 
 // leaving the first row and col, turning the remaining numbers to 0 by looking at the 1st row and col
 
- for(int i=1; i<matrix.length;i++){
-        for(int j=1;j<matrix[0].length;j++){
+for (int i = 1; i <n; i++) {
+    for (int j = 1; j < m; j++) { 
 
-  if(matrix[i][0] == 0 || matrix[0][j] == 0) {
-                matrix[i][j] = 0;}   }}
+if(matrix.get(i).get(j)!=0){
+    if( matrix.get(i).get(0)==0 ||  matrix.get(0).get(j)==0){
+matrix.get(i).set(j, 0);
+    }
+}}}
 
 // first doing the row, if there ever was 0 in it , change full row to 0 and vice-versa
-if(rowCheck){
-       for(int j = 0; j < matrix[0].length; j++) {
-            matrix[0][j] = 0;
-        }
-}
-if(colCheck){
-       for(int i = 0; i< matrix.length; i++) {
-            matrix[i][0] = 0;
-        }
-}
+if(matrix.get(0).get(0)==0){
+      for (int j = 0; j < m; j++) {   
+       matrix.get(0).set(j, 0);   
+}}
 
-    }
+if(col0==0){
+ for (int i = 0; i <n; i++) {  
+     matrix.get(i).set(0, 0); 
 }
+}
+return matrix;
+
+    }}
