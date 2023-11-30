@@ -1,59 +1,89 @@
-package com.java.MyProject;
+import java.util.*;
+public class Solution {
+    public static int[] spiralMatrix(int [][]MATRIX) {
+        // Write your code here.
+               List<Integer> ans = new ArrayList<>();
 
-import java.util.ArrayList;
+        // rows
 
-public class SpiralTraversalThroughMatrx {
-	public static void main(String[] args) {
-		
-		int r = 3, c = 4; 
-		int	matrix[][] = {{1, 2, 3, 4},
-				           {5, 6, 7, 8},
-				           {9, 10, 11, 12}};
-		
-		ArrayList<Integer>list = new ArrayList<>();
-		list= spirallyTraverse(matrix, r, c);
-		
-		for(int i:list) {
-			System.out.print(i+" , ");
-		}
-	
-	}
-	
-	
-	 static ArrayList<Integer> spirallyTraverse(int matrix[][], int r, int c){
-		 
-			ArrayList<Integer>list = new ArrayList<>();
-			
-		int leftCol=0, rightCol= c-1;
-		int topRow=0, bottomRow= r-1;
-		
-		
-			while(leftCol<=rightCol&& topRow<=bottomRow) {// move until whole matrix is  not printed out
-				for(int i=leftCol; i<=rightCol;i++) { // move from left to right
-					list.add(matrix[topRow][i]); }
-				
-				topRow++;
-				
-				for(int i=topRow; i<=bottomRow;i++) { // top to down
-					list.add(matrix[i][rightCol]); }
-				
-				rightCol--;
-				
-				  if(topRow>bottomRow) break;
-				  
-				for(int i=rightCol; i>=leftCol;i--) { // right to left
-					list.add(matrix[bottomRow][i]); }
-				
-				bottomRow--;
-				
-				  if(leftCol>rightCol) break;
-				  
-				  for(int i=bottomRow; i>=topRow;i--) { // bottom to up
-						list.add(matrix[i][leftCol]); } 
-				  leftCol++; }
-		
-			return list;
-			
-		 
-	 }
-}
+        int n = MATRIX.length; 
+
+        // columns.
+
+        int m = MATRIX[0].length;
+
+        int top = 0; // at 0th index of first row.
+
+        int left = 0; // at 0th index of last row.
+
+        int right = m-1; // last index of first row.
+
+        int bottom = n-1; // last index of last row.
+
+        // iterate from left to right..
+
+       while( top <= bottom && left <= right ){
+
+           for(int i=left; i<=right; i++){
+
+           ans.add(MATRIX[top][i]); // row remain same
+
+       }
+
+       top++; // shift down by one.
+
+       // top to bottom.
+
+       for(int i=top; i<= bottom; i++){
+
+           ans.add(MATRIX[i][right]); // col remain same.
+
+       }
+
+       right--; // col decrease by 1.
+
+ 
+
+       // right to left..
+
+       if(top <= bottom){
+
+       for(int i = right; i >= left; i--){
+
+        ans.add(MATRIX[bottom][i]); // row remain same.
+
+       }
+
+        bottom--; // shift to the col m-1.
+
+       }
+
+       //bottom to top..
+
+       if(left <= right){
+
+           for(int i = bottom; i >= top; i--){
+
+               ans.add(MATRIX[i][left]); // col remain same.
+
+           }
+
+           left++; // incease by one.
+
+       }
+
+       }
+
+       int[] result = new int[ans.size()];
+
+         for(int i=0; i<ans.size(); i++){
+
+            result[i] = ans.get(i); 
+
+         }
+
+         return result;
+
+             }
+
+       }
