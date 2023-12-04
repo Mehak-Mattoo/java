@@ -1,24 +1,32 @@
-package com.java.MyProject;
+import java.util.Arrays;
 
-public class MissingAndRepeating {
-public static void main(String[] args) {
-	
-	int arr[]= {6,1,3,2,3,6};  //1,2,3,4,6
-	
-	for (int i = 0; i < arr.length; i++) {
-		for (int j = i+1; j < arr.length; j++) {
-			
-			if(arr[i]< arr[j]) {
-				int temp = arr[i];
-				arr[i]= arr[j];
-				arr[j]= temp; }
-			
-			if(arr[i]== arr[j]) {
-				System.out.println("Repeating: "+ arr[i]);  }
-			
-			 
-		}
-	}
-	
+public class Solution {
+    public static int[] findMissingRepeatingNumbers(int []a) {
+        
+        int missing=-1, repeating=-1;
+
+
+    int arr[]= new int[a.length+1];
+    
+        for (int i = 0; i < a.length; i++) {
+          arr[a[i]]++;}
+
+for (int j = 1; j <=arr.length; j++) {
+    if(arr[j]==2){
+        repeating= j;}
+    
+    else if(arr[j]==0){
+        missing= j;}
+        
+    if (repeating != -1 && missing != -1){
+                break;} }
+
+
+for (int i = 0; i < a.length; i++) {
+    sum1+= a[i];
 }
+
+
+    return new int[]{repeating,missing};
+    }
 }
