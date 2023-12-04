@@ -81,3 +81,36 @@ while(j<bSize){
 return list;
     }
 }
+
+
+// when one array cannot accomodate both elements of array
+
+import java.util.Arrays;
+
+public class Solution {
+    public static void mergeTwoSortedArraysWithoutExtraSpace(long []a, long []b){
+      int i= a.length;
+      int j= b.length;
+      int left= i-1;
+      int right= 0;
+
+
+
+while(left>=0&& right<j){
+
+    if(a[left]>b[right]){
+        long temp = a[left];
+        a[left]= b[right];
+        b[right]= temp;
+
+left--;
+right++;}
+
+else{
+    break;}} // as both arrays have correct elements
+
+    Arrays.sort(a);
+     Arrays.sort(b);}
+
+    
+}
