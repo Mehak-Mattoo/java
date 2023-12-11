@@ -1,34 +1,37 @@
-package com.java.MyProject;
+class Solution {
+    public int singleNonDuplicate(int[] nums) {
 
-public class SingleElementInSortedArray {
-public static void main(String[] args) {
-	
-	
-	int[] nums = {1,1,2,3,3,4,4};
-	
-System.out.println(	Solution(nums));
-	
-}
+        if( nums.length==1){
+            return nums[0];}
 
-private static int Solution(int[] nums) {
-	
-	int low =0;
-	int high= nums.length-1;
-	
-	while(low<high) {
-		
-		int mid= (low+high)/2;
-		
-		if(mid%2!=0) {// if mid comes out to be odd, make it even
-			mid--;}
-		
-		if(nums[mid]!=nums[mid+1]) {  // if the element adjacent to mid is not the same
-			high= mid;}
-		
-		else {
-			low= mid+2;}	}
-	
-	return nums[low];
-	
-}
+            // edge cases: to keep low and high at 1 & n-2
+       
+        if(nums[0]!= nums[1]){
+            return nums[0];}
+         
+        if(nums[nums.length-1]!= nums[nums.length-2]){
+            return nums[nums.length-1];}
+
+             int low=1, high= nums.length-2;
+
+
+         while(low<=high){
+             int mid= (high+low)/2;
+
+//single element = elemnt adjacent to it must not be equal
+            if(nums[mid]!= nums[mid-1] && nums[mid]!= nums[mid+1]){
+                 return nums[mid];}
+
+// we are in left half--> element is in right half
+            if(mid%2 ==1 && nums[mid]== nums[mid-1] || mid %2==0 && nums[mid] ==  nums   [mid+1] ){
+            low= mid+1; }
+            else{
+                high= mid-1;}
+            
+             
+         } return -1;  
+        
+
+    
+    }
 }
