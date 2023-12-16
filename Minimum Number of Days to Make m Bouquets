@@ -3,8 +3,9 @@ class Solution {
 
         int n= bloomDay.length;
 
-        if(m*k>n){  // if number of bouquets* k > arr.length == not possible to form bouquets
-        return -1;}
+        long val=(long)m*k;
+        if( val > bloomDay.length){  // if number of bouquets* k > arr.length == not possible to form bouquets
+         return -1; }
 
          int min=Integer.MAX_VALUE, max= Integer.MIN_VALUE;
 
@@ -35,6 +36,63 @@ class Solution {
                   count=0;  }}
 
                   bouquets+= count/k; // at the end again
+
+               if( bouquets>= m){
+                   return true;  }
+
+return false; }
+
+}
+
+
+class Solution {
+    public int minDays(int[] bloomDay, int m, int k) {
+
+        int n= bloomDay.length;
+
+        long val=(long)m*k;
+        if( val > bloomDay.length){  // if number of bouquets* k > arr.length == not possible to form bouquets
+         return -1; }
+
+         int min=Integer.MAX_VALUE, max= Integer.MIN_VALUE;
+
+// min= first possibility  max== one of the possible ans
+
+        for(int i=0; i<bloomDay.length; i++){ 
+            min= Math.min(min, bloomDay[i]);
+            max= Math.max(max, bloomDay[i]);        }
+
+            int low= min, high= max, ans= max;
+
+
+        while(low<=high){
+
+            int mid= (low+high)/2;
+
+             if(isPossible(bloomDay, m, k , mid)){
+                 ans=  mid; 
+
+                 high= mid-1;}
+
+            else{
+                low= mid+1;
+            }   }
+      
+     return ans;}   
+    
+
+    public static boolean isPossible(int arr[], int m, int k, int day){
+        int count=0, bouquets=0;
+
+          for(int i=0; i<arr.length; i++){ // if day <= curr day then it is blooming
+              if(arr[i]<= day){  // get the adjacent blooming flowers
+                  count++;  }
+              
+              else{ // if they are not blooming
+                  bouquets+= (count/k); // find how many bouquets can be formed
+                  count=0;  }}
+
+                  bouquets+= (count/k) ; // at the end again
 
                if( bouquets>= m){
                    return true;  }
