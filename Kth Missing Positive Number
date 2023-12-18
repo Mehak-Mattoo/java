@@ -1,0 +1,41 @@
+class Solution {
+    public int findKthPositive(int[] arr, int k) {
+
+int n= arr.length;
+
+int low= 0, high= n-1;
+
+while(low<=high){
+    int mid= (low+high)/2;
+    int missing= arr[mid] - (mid+1); 
+
+    if(missing< k){
+        low= mid+1;}
+    
+    else{
+        high= mid-1;
+    }
+}
+
+return high+1+k;
+
+
+
+//shift k by 1 step if the current element <= k. And whenever we get a number > k, we can conclude that k is the missing number.
+
+        for(int i=0; i<n; i++){
+
+            if(arr[i]<= k){
+                k++; }
+            else{
+                break;
+            }
+            
+            
+        }return k;
+        
+    }
+
+
+
+}
