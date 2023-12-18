@@ -1,0 +1,85 @@
+import java.util.Arrays;
+
+public class Solution {
+    public static int aggressiveCows(int []stalls, int k) {
+
+Arrays.sort(stalls);
+
+int n= stalls.length;
+int low=1;
+int high= stalls[n-1]- stalls[0];
+
+
+for (int i = low; i <= high; i++) {
+
+    if(canPlace(stalls, i, k)== false){
+        return i-1;} // return the last true ans
+
+     }
+
+return high;
+    }
+
+    public static boolean canPlace (int stalls[], int distance, int k){
+    int n= stalls.length, count=1, lastCow= stalls[0]; // first cow will be placed at the front
+
+    for (int i = 1; i < n; i++) {
+        if(stalls[i]- lastCow >= distance){//if the distance b/w curr element- last cow place is possible
+count++; // increase the no. of cows
+lastCow= stalls[i];}  // update the position of last cow ahead
+
+if(count>= k){ // if we could accomodate all cows
+    return true;  }   
+   
+    }
+
+    return false; }
+}
+
+
+
+//binary search
+
+
+import java.util.Arrays;
+
+public class Solution {
+    public static int aggressiveCows(int []stalls, int k) {
+
+Arrays.sort(stalls);
+
+int n= stalls.length;
+int low=1;
+int high= stalls[n-1]- stalls[0];
+
+
+while(low<= high){
+
+int mid= (low+high)/2;
+
+    if(canPlace(stalls, mid, k)== true){
+        low= mid+1;} // return the last true ans
+
+        else{
+            high= mid-1;}
+     }
+
+return high;
+    }
+
+    public static boolean canPlace (int stalls[], int distance, int k){
+    int n= stalls.length, count=1, lastCow= stalls[0]; // first cow will be placed at the front
+
+    for (int i = 1; i < n; i++) {
+        if(stalls[i]- lastCow >= distance){//if the distance b/w curr element- last cow place is possible
+count++; // increase the no. of cows
+lastCow= stalls[i];}  // update the position of last cow ahead
+
+if(count>= k){ // if we could accomodate all cows
+    return true;  }   
+   
+    }
+
+    return false; }
+
+}
