@@ -38,3 +38,70 @@ class Solution {
             return ((double) middle1 + (double) middle2) / 2.0;
         }
 }}
+
+
+
+
+
+
+class Solution {
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+
+        int n1 = nums1.length;
+        int n2 = nums2.length;
+
+        int combined= n1+n2;
+
+        //to eliminate extra space , we are using just pointers
+
+        int index1=combined/2;
+        int index2= index1-1;
+        int el1= -1, el2= -1,  count=0;
+
+        int i= 0, j=0;
+
+        while(i<n1 && j<n2){ // look for elements at half of arrays and store them
+            if(nums1[i]< nums2[j]){
+                if(count==index1){
+                    el1=nums1[i];   }
+
+                if(count== index2){
+                    el2= nums1[i];    }    
+                     count++; 
+                      i++;  }
+
+            else{
+              if(count==index1){
+                    el1=nums2[j];   }
+
+                if(count== index2){
+                    el2= nums2[j];    }  
+                    count++; 
+                    j++;   }        }
+        
+        while(i< n1 ){
+            if(count==index1){
+            el1=nums1[i];   }
+
+            if(count== index2){
+            el2= nums1[i];    } 
+            i++;
+            count++;  }
+
+        while(j <n2 ){
+           if(count==index1){
+            el1=nums2[j];   }
+
+            if(count== index2){
+            el2= nums2[j];    }  
+            count++; 
+            j++;   }   
+        
+        
+
+ if (combined % 2 == 1) {
+return (double) el1;  }
+
+ return (double)((double)( el1 + el2)) / 2.0;
+ 
+}}
