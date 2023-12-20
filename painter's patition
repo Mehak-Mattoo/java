@@ -1,0 +1,81 @@
+class Solution {
+    public int splitArray(int[] nums, int k) {
+        
+        int n= nums.length;
+        int low=Integer.MIN_VALUE;
+        int high= 0;
+
+        for(int i=0; i<nums.length; i++){
+            low= Math.max(low, nums[i]);
+            high+= nums[i];  }
+        
+        for(int i= low; i<= high; i++){
+            if(isPossible(nums, i)==k){
+                return i; }  }
+
+            return low;             
+        
+        
+        }
+
+        public static int isPossible(int []nums, int curr){
+            int n= nums.length, painter=1, area=0;
+
+            for(int i=0; i<nums.length; i++){
+                if(nums[i]+ area <=curr){
+                    area+= nums[i];
+
+                }else{
+                    painter++;
+                    area= nums[i];  }  }
+
+        return painter;            
+    }
+}
+
+
+
+
+class Solution {
+    public int splitArray(int[] nums, int k) {
+        
+        int n= nums.length;
+        int low=Integer.MIN_VALUE;
+        int high= 0;
+
+        for(int i=0; i<nums.length; i++){
+            low= Math.max(low, nums[i]);
+            high+= nums[i];  }
+        
+while(low<= high){
+    int mid= (low+high)/2;
+
+    int curr= isPossible(nums, mid);
+
+    if(curr > k){
+        low= mid+1;}
+    
+    else{
+        high = mid-1;
+    }
+}
+
+            return low;             
+        
+        
+        }
+
+        public static int isPossible(int []nums, int curr){
+            int n= nums.length, painter=1, area=0;
+
+            for(int i=0; i<nums.length; i++){
+                if(nums[i]+ area <=curr){
+                    area+= nums[i];
+
+                }else{
+                    painter++;
+                    area= nums[i];  }  }
+
+        return painter;            
+    }
+}
