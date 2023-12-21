@@ -1,0 +1,61 @@
+import java.util.ArrayList;
+public class Solution
+{
+    public static int maximumOnesRow(ArrayList<ArrayList<Integer>> matrix, int n, int m)
+    {
+        int max=-1, ans= -1;
+
+        for (int i = 0; i < n; i++) {
+            int count=0;
+            for (int j = 0; j <m ; j++) {
+                    count+= matrix.get(i).get(j);  } // just summing up all the ones
+
+            if(count> max){
+                max= count;
+                ans= i; }                
+            }
+            return ans;
+        }
+    }
+
+
+
+
+import java.util.ArrayList;
+public class Solution
+{
+    public static int maximumOnesRow(ArrayList<ArrayList<Integer>> matrix, int n, int m) {
+       
+       int max= -1, index= -1;
+
+       for (int i = 0; i < n; i++) {
+int count= m- binarySearch(matrix.get(i), m);// after getting the first occurence of 1, 
+                      //subtract the arr size with it to get count of 1
+
+if(count> max){
+    max= count;
+    index= i; }  }
+           
+return index;
+        }
+
+
+    public static int binarySearch(ArrayList<Integer> arr, int m){
+
+int low=0, high= m-1, ans= m;
+
+while(low<=high){  // get the first occurence of 1
+    int mid= (low+ high)/2;
+
+    if(arr.get(mid)==1){
+        ans= mid;
+        high= mid-1;   }
+
+    else{
+        low= mid+1;  } }
+
+
+    return ans;    
+    }    
+    }
+
