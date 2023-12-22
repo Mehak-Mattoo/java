@@ -23,3 +23,49 @@ class Solution {
         return result;                   
     }
 }
+
+
+
+
+
+
+int low=0, high = m-1;
+
+        while (low<=high){
+            int mid= (low+high)/2;
+            int max= maxElement(mat, mid);
+
+            int left= (mid-1>=0) ? mat[max][mid-1]:-1;
+            int right= (mid+1 <m) ? mat[max][mid+1]:-1;
+
+
+            if(mat[max][mid] > left && mat[max][mid]>right ){
+                return new int []{ max, mid};} 
+            
+            
+            else if (mat[max][mid] <left ){
+                high = mid-1; } // if left has greater element, look there
+
+            else {
+                low= mid+1;  } }
+
+return new int []{-1,-1};
+                      
+    }
+
+
+    public int maxElement(int[][] matrix, int mid) { // find the max element in a row
+        int index = -1;
+        int max = Integer.MIN_VALUE;
+
+        for (int i = 0; i < matrix.length; i++) {
+            int el = matrix[i][mid];
+
+            if (el > max) {
+                max = Math.max(max, el);
+                index = i;
+            }
+        }
+        return index;
+    }
+}
