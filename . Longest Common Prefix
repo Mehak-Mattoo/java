@@ -1,0 +1,25 @@
+class Solution {
+    public String longestCommonPrefix(String[] strs) {
+
+Arrays.sort(strs); // helps to collect same letter together
+
+StringBuilder ans= new StringBuilder();
+
+String first = strs[0];
+String last = strs[strs.length-1];
+
+int count=0;
+
+// compare the first and last str in array to find similar char b/w them
+while(count< first.length() && count< last.length()){
+    if(first.charAt(count) == last.charAt(count)){
+        count++;  }
+    
+    else{
+        break; }
+    
+}
+
+return first.substring(0,count);
+    }
+}
