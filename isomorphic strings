@@ -1,0 +1,28 @@
+class Solution {
+    public boolean isIsomorphic(String s, String t) {
+
+    Map<Character, Character> map = new HashMap<>();    
+
+if(s.length()!= t.length()){
+    return false; }
+
+for(int i=0; i<s.length(); i++){
+
+    char curr= s.charAt(i);
+    char replacement = t.charAt(i);
+
+    if(map.containsKey(curr)){ // if map already has the s char which is !=char in t
+        if(map.get(curr)!= replacement){
+            return false; } }
+
+    else{
+        if(map.containsValue(replacement)){ // if map already has char in t, then not possible
+            return false ;} }
+
+    map.put(curr, replacement);      }            
+
+
+return true;
+        
+    }
+}
