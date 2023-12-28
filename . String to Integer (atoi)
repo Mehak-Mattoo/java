@@ -1,0 +1,45 @@
+class Solution {
+    public int myAtoi(String s) {
+
+int ans=0 , i=0;
+
+s= s.trim(); // trim white spaces
+
+if(s.isEmpty()){
+    return 0; }
+
+boolean negative= false;
+boolean positive = false;
+
+if(s.charAt(0) =='-'){ // have to take care of signs
+    negative= true; }
+
+if(s.charAt(0)== '+'){
+positive = true; }
+
+if(negative || positive ){
+    i++; }
+
+
+ int MAX = Integer.MAX_VALUE, MIN = Integer.MIN_VALUE;
+
+        while(i< s.length() && Character.isDigit(s.charAt(i))){ // loop only until length or a character is reached
+
+        int curr= s.charAt(i)-'0'; // to convert char into int
+
+
+if(ans > (MAX - curr) / 10){// conditions
+ return negative ? MIN : MAX;}
+    
+
+        ans= ans*10+ curr; // to get the next number 
+     i++; }
+    
+                                    
+       if(negative){
+           ans*= -1; }
+       
+       return ans;
+        
+    }
+}
