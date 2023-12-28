@@ -1,0 +1,38 @@
+class Solution {
+    public String longestPalindrome(String s) {
+
+        int n= s.length(), max=0;
+        String temp= String.valueOf(s.charAt(0));
+
+if(isPalindrome(s)){//if the whole is a palindrome==ans
+    return s; }
+
+ if (n < 2) {
+ return s;   }    
+        
+        for(int i=0; i<n; i++){
+            for(int j=i+1; j<=n-1; j++){
+            String sub = s.substring(i, j+1); //get every substring
+            boolean curr = isPalindrome(sub);// check if its ia palindrome
+
+
+            if(curr && temp.length()< sub.length()){ // if yes, see if its length is bigger        
+                temp= sub; } }}   
+
+       return temp; }
+
+    public static boolean isPalindrome (String s){
+        int i=0, j= s.length()-1;
+
+        while(i<j){
+            if(s.charAt(i) != s.charAt(j)){
+                return false; }  
+
+                i++; 
+                j--; }
+
+        return true;        
+
+
+    }
+}
