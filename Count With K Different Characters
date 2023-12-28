@@ -1,0 +1,40 @@
+import java.util.*;
+public class Solution {
+    public static int countSubStrings(String str, int k) {
+        int ans=0;
+
+        for (int i = 0; i < str.length(); i++) {
+            for (int j = i+1; j <=str.length(); j++) {
+
+String substring = str.substring(i,j);
+int count= distinctChars(substring);
+
+                if(count== k){
+                    ans++; }
+            }
+            
+        }return ans;
+    }
+
+
+    public static int distinctChars(String s){
+        //  Set<Character> set = new HashSet<>();
+
+        //  for(char c:s.toCharArray()){
+        //      set.add(c); }
+         
+        //  return set.size();
+
+        int []visited= new int[26];
+        int count=0;
+
+        for (int i = 0; i < s.length(); i++) {
+            if(visited[s.charAt(i)-'a']!=1){
+                visited[s.charAt(i)- 'a']=1; 
+                count++; }
+            
+            
+        }return count;
+    }
+}
+
