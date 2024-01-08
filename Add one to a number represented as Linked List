@@ -1,0 +1,56 @@
+import java.util.* ;
+import java.io.*; 
+/*************************************************************
+
+Following is the class structure of the Node class:
+
+    class Node {
+		public int data;
+		public Node next;
+
+		Node(int data) {
+			this.data = data;
+			this.next = null;
+	  	}
+    }
+
+*************************************************************/
+
+public class Solution {
+	public static Node addNode(Node head) {
+     Node reversed = reverse(head); // Reverse the linked list first for easier addition
+
+        Node current = reversed;
+        int carry = 1; // Start with the carry as 1 since we're adding 1 to the number
+
+        while (current != null && carry > 0) {
+            int sum = current.data + carry;
+            current.data = sum % 10; // Update the current digit
+            carry = sum / 10; // Update the carry for the next iteration
+
+            if (carry > 0 && current.next == null) {
+                // If there's a carry and we're at the end of the linked list, add a new node
+                Node newNode = new Node(carry);
+                current.next = newNode;
+                carry = 0; // Reset carry since we've used it
+            } else {
+                current = current.next; // Move to the next node
+            }
+        }
+
+        return reverse(reversed); // Reverse the list back to its original form
+    }
+
+    public static Node reverse(Node head) {
+        Node prev = null;
+        Node current = head;
+
+        while (current != null) {
+            Node next = current.next;
+            current.next = prev;
+            prev = current;
+            current = next;
+        }
+
+        return prev;
+    }}
