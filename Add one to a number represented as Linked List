@@ -54,3 +54,52 @@ public class Solution {
 
         return prev;
     }}
+
+
+import java.util.* ;
+
+
+import java.io.*; 
+/*************************************************************
+
+Following is the class structure of the Node class:
+
+    class Node {
+		public int data;
+		public Node next;
+
+		Node(int data) {
+			this.data = data;
+			this.next = null;
+	  	}
+    }
+
+*************************************************************/
+
+public class Solution {
+	public static Node addNode(Node head) {
+
+        int carry = helper(head);
+
+        if(carry==1){
+            Node newNode= new Node(1);
+            newNode.next= head;
+            return newNode; }
+
+        return head;
+
+    }
+
+    public static int helper(Node head) {
+        if(head==null){
+            return 1; }
+        
+nt carry = helper(head.next);
+        int sum = head.data + carry;
+        head.data = sum % 10;
+        
+        return sum / 10;
+
+    
+    
+    }
