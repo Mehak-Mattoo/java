@@ -1,0 +1,26 @@
+public class Solution {
+    public static Node deleteAllOccurrences(Node head, int k) {
+        if (head == null) {
+            return null;
+        }
+        Node dummy=new Node(-1);
+
+        dummy.next= head;
+        head.prev= dummy;
+
+        Node curr = head;
+
+        while (curr != null) {
+            if (curr.data == k) {
+                curr.prev.next= curr.next; // next pointer of previous node == next of curr
+                  if(curr.next!=null) {
+                      curr.next.prev=curr.prev;} // prev pointer of next of curr == prev of curr
+            }
+            curr = curr.next;
+        }
+
+        return dummy.next;
+    }
+
+
+}
