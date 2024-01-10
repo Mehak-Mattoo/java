@@ -1,0 +1,64 @@
+class Solution {
+    public ListNode rotateRight(ListNode head, int k) {
+        if (head == null || k == 0) {
+            return head;        }
+
+        // Get the length of the linked list and the last node
+        int length = 1;
+        ListNode tail = head;
+
+        while (tail.next != null) {
+            length++;
+            tail = tail.next;    }
+
+        // Actual rotations needed
+        k= k%length;
+
+        if(k==0 || k== length){
+            return head; }
+
+        ListNode newTail= head;    
+        
+        for(int i=1; i<length-k; i++){
+            newTail= newTail.next; }
+
+
+        ListNode newHead= newTail.next;
+        newTail.next= null;
+        tail.next=head;
+
+        return newHead;
+       
+    }
+}
+
+
+
+class Solution {
+    public ListNode rotateRight(ListNode head, int k) {
+        if (head == null || k == 0) {
+            return head;        }
+
+        // Get the length of the linked list and the last node
+        int length = 1;
+        ListNode tail = head;
+
+        while (tail.next != null) {
+            length++;
+            tail = tail.next;    }
+
+            tail.next= head; 
+
+        // Actual rotations needed
+        k= k%length;
+        ListNode newTail = head;
+        
+        for(int i=1; i<length-k; i++){
+            newTail= newTail.next; }
+
+            ListNode newHead = newTail.next;
+            newTail.next= null;
+
+       return newHead;
+    }
+}
