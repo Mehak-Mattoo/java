@@ -1,0 +1,69 @@
+class Solution {
+    public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+
+        int[] ans = new int[nums1.length];
+
+        for (int i = 0; i < nums1.length; i++) {
+            ans[i] = lookRight(nums2, nums1[i]);
+
+        }
+        return ans;
+
+    }
+
+    public static int lookRight(int nums[], int element){
+
+        int start=0;
+
+        for(int i=0; i<nums.length; i++){
+            if(nums[i]==element){
+                start=i;  }
+        }
+
+        for(int i=start; i<nums.length; i++){
+            if(nums[i] >element){
+                return nums[i]; } }
+
+    return -1;
+}}
+
+
+
+
+
+class Solution {
+    public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+
+        int[] ans = new int[nums1.length];
+
+        Stack<Integer> stack = new Stack<>();
+        HashMap<Integer, Integer> map= new HashMap<>();
+
+        for (int i = nums2.length-1; i>=0; i--) { 
+
+            int curr = nums2[i];
+
+            while(!stack.isEmpty() && stack.peek()<= curr) { // all smaller num will be popped to get greater
+
+                stack.pop(); }
+            
+            int x= (stack.isEmpty()) ? -1 : stack.peek(); // if stack is empty == no bigger element , else top num == greater element
+
+            stack.push(curr);
+
+            map.put(curr, x);} // stores curr and its next greater element
+            
+
+         for(int i=0; i<nums1.length; i++){ // loop on nums1, to get values from map
+             int curr= nums1[i];
+
+             int val= map.get(curr);
+
+             ans[i] = val;
+         }
+
+        return ans;
+
+    }}
+
+
