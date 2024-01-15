@@ -1,0 +1,30 @@
+import java.util.Stack;
+
+public class Solution {
+    public static int[] countGreater(int []arr, int []query) {
+
+        int ans[]= new int[query.length];
+
+        for (int i = query.length-1; i>=0; i--) {
+            ans[i] = count(query[i],arr); }
+            
+     return ans;   
+
+    }
+
+    public static int count(int end, int []arr){
+
+   
+        int count=0;
+        int curr=arr[end];
+
+
+        for (int i = arr.length-1; i>=end ;i--) {
+            if(arr[i]>curr){
+                count++; }
+            
+
+            
+        }return count;
+    }
+}
