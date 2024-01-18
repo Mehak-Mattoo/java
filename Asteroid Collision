@@ -1,0 +1,41 @@
+class Solution {
+    public int[] asteroidCollision(int[] asteroids) {
+
+        int n = asteroids.length;
+        Stack<Integer> stack = new Stack<>();
+
+        for (int i = 0; i < n; i++) {
+            int curr = asteroids[i];
+
+            while (!stack.isEmpty() && curr < 0 && stack.peek() > 0) { // a collision can happen when curr is -ve and stack top is +ve
+
+                int diff = curr + stack.peek();
+
+                if (diff > 0) { // -ve asteriod lost
+                    curr = 0;
+                } else if (diff < 0) { // -ve asteriod won
+                    stack.pop();
+            
+                } else { // both were of same value -- both loose
+                    curr = 0;
+                    stack.pop();
+                }}
+
+                if(curr!=0){ // asteriod of 0 size will not be counted as they lost
+                    stack.push(curr);
+                }
+            
+
+        }
+
+        int i = 0;
+        int ans[] = new int[stack.size()];
+
+        for (Integer index : stack) {
+            ans[i] = index;
+            i++;
+        }
+        return ans;
+
+    }
+}
