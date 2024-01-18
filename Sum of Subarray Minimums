@@ -1,0 +1,73 @@
+class Solution {
+   public  class Pair {
+        int el;
+        int count;
+
+        public Pair(int element, int numMin) {
+            el = element;
+            count = numMin;
+
+        }
+
+    }
+
+    public int sumSubarrayMins(int[] arr) {
+        int n = arr.length;
+     long sum = 0;
+     // int sum=0;
+        int mod=(int)Math.pow(10,9)+7;
+
+        int[] left = left(arr);
+        int[] right = right(arr);
+        
+for (int i = 0; i < n; i++) {
+   sum = (sum+ (long)arr[i]*left[i]*right[i])%mod;
+
+
+}
+        return (int)sum;
+    }
+
+    public  int[] left(int[] nums) {
+
+        int[] arr = new int[nums.length];
+
+        Stack<Pair> stack = new Stack<>();
+
+        for (int i = 0; i < nums.length; i++) {
+            int curr = nums[i];
+            int count = 1;
+
+            while (!stack.isEmpty() && stack.peek().el > curr) {
+                count += stack.peek().count;
+                stack.pop();
+            }
+
+            stack.push(new Pair(curr, count)); 
+            arr[i] = count;
+        }
+        return arr;
+    }
+
+    public int [] right(int[] nums) {
+
+        int[] arr = new int[nums.length];
+
+        Stack<Pair> stack = new Stack<>();
+
+        for (int i = nums.length - 1; i >= 0; i--) {
+            int curr = nums[i];
+            int count = 1;
+
+            while (!stack.isEmpty() && stack.peek().el >= curr) {
+                count += stack.peek().count;
+                stack.pop();
+            }
+
+            stack.push(new Pair(curr, count));
+            arr[i] = count;
+        }
+        return arr;
+
+    }
+}
