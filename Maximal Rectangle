@@ -1,0 +1,64 @@
+class Solution {
+
+    class Pair {
+        int index;
+        int data;
+
+        public Pair(int i, int d) {
+            this.index = i;
+            this.data = d;
+        }
+    }
+
+    public int maximalRectangle(char[][] matrix) {
+
+        int m = matrix[0].length;
+        int n = matrix.length;
+        int heights[] = new int[m];
+        int maxHeight = 0;
+
+     
+
+        if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
+            return 0;
+        }
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (matrix[i][j] == '1') { // if el ==1 
+                    heights[j] = (matrix[i][j] == '1') ? heights[j] + 1 : 0; // if already 1 is present increment it else set it == 0
+                } else {
+                    heights[j] = 0;
+                }
+
+            }
+ maxHeight = Math.max(maxHeight, largestRectangleArea(heights));
+        }
+
+        return maxHeight;}
+
+
+
+private int largestRectangleArea(int[] heights) {
+
+       Stack<Pair> stack = new Stack<>();
+       int maxHeight = 0;
+
+
+        for (int i = 0; i <= heights.length; i++) {
+            int curr = (i == heights.length) ? 0 : heights[i];
+
+            while (!stack.isEmpty() && stack.peek().data > curr) {
+                Pair popped = stack.pop();
+                int width = (stack.isEmpty()) ? i : i - stack.peek().index - 1;
+                int area = popped.data * width;
+                maxHeight = Math.max(maxHeight, area);
+            }
+
+            stack.push(new Pair(i, curr));
+        }
+
+        return maxHeight;
+
+    }
+}
