@@ -1,0 +1,78 @@
+import java.util.*;
+public class Solution {
+
+ public static int findCelebrity(int n) {
+
+Stack <Integer> st = new Stack<>();
+
+for(int i =0; i<n;i++){
+
+st.push(i);
+
+}
+
+while(st.size()>1){ // the last element will be a potential celebrity
+
+int a = st.pop();
+
+int b = st.pop();
+
+ 
+
+if(Runner.knows(a,b)){ // if a knows b
+
+st.push(b); // b is clearly not a celebrity
+
+}else{
+
+st.push(a);
+
+}
+
+}
+
+int ans = st.pop(); // last element of stack
+
+int rowcheck = 0;// now we have to check that ans is reaaly a celibrity or not
+
+for(int i=0;i<n; i++){ // if yes --> all its rows will be 0
+
+if(!Runner.knows(ans,i)){
+
+rowcheck++;
+
+}
+
+}
+
+if(rowcheck !=n){
+
+return -1;
+
+}
+
+int colcheck = 0;
+
+for(int i =0;i<n;i++){ // if yes --> all its rows will be 1 except its own
+
+if(Runner.knows(i,ans)){
+
+colcheck++;
+
+}
+
+}
+
+if(colcheck != n-1){
+
+return -1;
+
+ }
+
+ 
+
+ return ans;
+
+ }
+
+}
