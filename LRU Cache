@@ -1,0 +1,70 @@
+
+class LRUCache {
+
+    class Node {
+        int key;
+        int value;
+        Node prev;
+        Node next;
+
+        public Node(int key, int value) {
+            this.key = key;
+            this.value = value;
+        }
+    }
+
+    Node head;
+    Node tail;
+    HashMap<Integer, Node> map;
+    int capacity;
+
+    public LRUCache(int capacity) {
+        this.capacity = capacity;
+        map = new HashMap<>();
+        head = new Node(0, 0);
+        tail = new Node(0, 0);
+        head.next = tail;
+        tail.prev = head;
+    }
+
+    // DLL:
+    // head---->last used ->second last used ->third last used->least used--> tail
+
+    private void addToFront(Node node) {
+        node.next = head.next;
+        node.next.prev = node;
+        head.next = node;
+        node.prev = head;
+    }
+
+    private void removeNode(Node node) {
+        node.prev.next = node.next;
+        node.next.prev = node.prev;
+    }
+
+    public int get(int key) {
+        if (map.containsKey(key)) {
+            Node node = map.get(key);
+            removeNode(node); // need to be removed to change orientation
+            addToFront(node); // to get a new node address
+            return node.value;
+        } else {
+            return -1;
+        }
+    }
+
+    public void put(int key, int value) {
+        if (map.containsKey(key)) {
+            Node existingNode = map.get(key);
+            removeNode(existingNode);
+        } else if (map.size() == capacity) { // when size reached, remove last recently used located behind tail
+            Node leastRecentlyUsed = tail.prev;
+            removeNode(leastRecentlyUsed);
+            map.remove(leastRecentlyUsed.key);
+        }
+
+        Node newNode = new Node(key, value);
+        addToFront(newNode);
+        map.put(key, newNode);
+    }
+}
