@@ -1,0 +1,28 @@
+class Solution {
+    public int characterReplacement(String s, int k) {
+        int n = s.length();
+        int[] count = new int[26]; // Assuming only uppercase English characters
+        int maxLen = 0, maxCount = 0;
+        int start = 0;
+
+        for (int end = 0; end < n; end++) {
+            // Update the count of the current character
+            count[s.charAt(end) - 'A']++;
+            
+            // Update the maximum frequency in the current window
+            maxCount = Math.max(maxCount, count[s.charAt(end) - 'A']);
+
+            // If the number of replacements needed is greater than k,
+            // shrink the window by moving the start pointer to the right
+            if (end - start + 1 - maxCount > k) {
+                count[s.charAt(start) - 'A']--; // Remove the leftmost character from the window
+                start++; // Move the start pointer to the right
+            }
+
+            // Update the maximum length of the substring
+            maxLen = Math.max(maxLen, end - start + 1);
+        }
+
+        return maxLen;
+    }
+}
