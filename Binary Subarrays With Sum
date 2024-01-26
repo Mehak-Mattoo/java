@@ -1,0 +1,53 @@
+class Solution {
+    public int numSubarraysWithSum(int[] nums, int goal) {
+        int n = nums.length, l = 0, r = 0, sum = 0, count = 0;
+
+        Map<Integer, Integer> map = new HashMap<>();
+
+        while(r<n){
+            sum+= nums[r];
+
+            if (sum == goal) {
+                count++;
+            }
+
+            int rem= sum-goal;
+
+
+            if(map.containsKey(rem)){
+                count += map.get(rem);
+            }
+                map.put(sum, map.getOrDefault(sum, 0) + 1);
+            r++;
+        }return count;
+
+    }
+}
+
+
+
+
+class Solution {
+    public int numSubarraysWithSum(int[] nums, int goal) {
+        return atmostK(nums, goal) - atmostK(nums, goal - 1);
+    }
+
+    public int atmostK(int[] nums, int goal) {
+
+        int n = nums.length, left = 0, right = 0, sum = 0, count = 0;
+
+        while (right < n) {
+            sum += nums[right];
+
+            while (left <= right && sum > goal) {
+                sum -= nums[left];
+                left++;
+            }
+            count += (right - left) + 1;
+
+            right++;
+        }
+
+        return count;
+    }
+}
