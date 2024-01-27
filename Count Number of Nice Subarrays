@@ -24,3 +24,46 @@ class Solution {
         return ans;
     }
 }
+
+
+
+
+class Solution {
+    public int numberOfSubarrays(int[] nums, int k) {
+        return countKOddWindow(nums, k) - countKOddWindow(nums, k - 1);
+    }
+
+    static int countKOddWindow(int[] arr, int k) {
+        int n = arr.length;
+        Map<Integer, Integer> mp = new HashMap<>();
+        int sum = 0;
+        int count = 0, r = 0, l = 0;
+
+        while (r < n) {
+            int curr = arr[r];
+
+            if (curr % 2 == 1) {
+                sum++;
+            }
+
+            if (sum <= k) {
+                count += r - l + 1;
+            }
+
+            while (l <= r && sum > k) {
+                if (arr[l] % 2 == 1) {
+                    sum--;
+                }
+
+                l++;
+
+            
+            if (sum <= k) {
+                count += r - l + 1;
+            }}
+            r++;
+
+        }
+        return count;
+    }
+}
