@@ -1,0 +1,40 @@
+import java.util.*;
+public class Solution {
+    public static List<Integer> replaceWithRank(List<Integer> arr, int n) {
+       
+        ArrayList<Integer> temp = new ArrayList<>();
+
+        ArrayList<Integer> ans = new ArrayList<>();
+
+        HashMap<Integer,Integer> map = new HashMap<>();
+
+
+
+        for(int i=0 ; i<arr.size() ; i++){
+
+            temp.add(arr.get(i));        }
+
+
+        Collections.sort(temp);
+
+         int rank=1;
+   for(int i=0 ; i<temp.size() ; i++){
+
+            if(map.get(temp.get(i)) == null){
+
+                map.put(temp.get(i), rank);
+                rank++;
+
+            }
+
+        }
+           for(int i=0 ; i<arr.size() ; i++){
+
+            ans.add(map.get(arr.get(i)));   
+
+        }return ans;
+
+        
+
+    }
+}
