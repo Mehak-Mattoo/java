@@ -1,0 +1,31 @@
+class Solution {
+    public boolean isNStraightHand(int[] hand, int groupSize) {
+
+        int n = hand.length;
+        HashMap<Integer, Integer> map = new HashMap<>();
+
+        Arrays.sort(hand);
+
+        for (int i = 0; i < n; i++) {
+            int curr = hand[i];
+
+            map.put(curr, map.getOrDefault(curr, 0) + 1);
+        }
+        for (int card : hand) {
+            if (map.get(card) > 0) {
+                // Start rearranging cards from the current card
+                for (int i = 0; i < groupSize; i++) {
+                    int nextCard = card + i; // to get the consecutive number of cards
+                    // If the next card is not found or its count is 0, return false
+                    if (!map.containsKey(nextCard) || map.get(nextCard) == 0)
+                        return false;
+                    // Decrement the count of the next card
+                    map.put(nextCard, map.get(nextCard) - 1);
+                }
+            }
+
+        }
+
+        return true;
+    }
+}
