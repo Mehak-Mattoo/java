@@ -1,0 +1,40 @@
+import java.util.Scanner;
+
+import java.util.PriorityQueue;
+
+public class solution {
+    static int minCost(int arr[], int n) {
+        /*
+         * Your class should be named Solution.Don't write main().Don't take
+         * input, it is passed as function argument.Don't print output.Taking
+         * input and printing output is handled automatically.
+         */
+
+         PriorityQueue<Integer> heap= new PriorityQueue<>();
+         int i=0, sum=0, cost=0, polledCount=0;
+
+         while(i<n){
+             heap.add(arr[i]);
+             i++;
+         }
+
+         while(!heap.isEmpty()){
+             int polled= heap.poll(); 
+             sum+= polled;
+             polledCount++;
+
+             if(polledCount==2){ // only counting cost when there are two elements to add up
+            
+             cost+= sum;
+             
+             heap.add(sum); // put the sum back in heap
+             polledCount=0;
+             sum=0;
+             }
+
+             
+
+         }return cost;
+
+    }
+}
