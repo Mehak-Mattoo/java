@@ -1,0 +1,23 @@
+import java.util.Arrays;
+public class Solution {
+    public static int assignCookie(int []greed, int []size) {
+        int i=0, j=0, n= greed.length, m= size.length, children=0;
+        Arrays.sort(greed);  
+        Arrays.sort(size);
+
+  while(i<n && j<m){// 
+      if(greed[i]<=size[j]){ // found a cookie, so move all pointers ahead
+          children++;
+          i++;j++;
+
+      }else{// to see if we have a larger cookie ahead
+          j++;
+      }
+  
+           
+       }
+           
+        return children;
+    }
+
+}
