@@ -1,0 +1,31 @@
+import java.util.ArrayList;
+import java.util.List;
+public class Solution {
+    public static List<Integer> MinimumCoins(int n) {
+       int currency[]= {1000, 500, 100, 50, 20,10,5,2,1};
+
+       int i=0, m=currency.length, rem=n;
+
+       ArrayList<Integer>list= new ArrayList<>();
+
+       while(i<m ){
+
+           if(rem==currency[i]){ // if n==50 , then just the num in list and return
+                list.add(currency[i]);
+                return list;     }    
+
+        
+           if(rem>currency[i]){ 
+             
+             list.add(currency[i]);
+                rem-= currency[i];   }
+
+
+               else{ //currency is bigger rn
+                    i++;  }
+           
+       }
+
+       return list;
+    }
+}
