@@ -1,0 +1,31 @@
+class Solution {
+    public boolean lemonadeChange(int[] bills) {
+        int five = 0;
+        int ten = 0;
+
+        for (int bill : bills) {
+            if (bill == 5) {
+                five++;
+            } else if (bill == 10) { // no 5rs left -- not possible
+                if (five == 0) {
+                    return false;
+                }
+                five--; // return 5rs
+                ten++; // keep 10rs
+            } else { // 20rs
+                if (ten > 0 && five > 0) { //  return 15rs
+                    ten--;
+                    five--;
+
+                } else if (five >= 3) { // return 5rs *3
+                    five -= 3;
+                } else {// no money left
+                    return false;
+                }
+            }
+
+        }
+
+        return true;
+    }
+}
