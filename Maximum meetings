@@ -1,0 +1,31 @@
+import java.util.*;
+
+public class Solution {
+    public static int maximumMeetings(int[] start, int[] end) {
+        int n = start.length, meetings=1; // 1 meeting will always happen
+
+        int [][]map= new int[n][2];
+       
+       
+        for (int i = 0; i < n; i++) {
+            map[i][0]= start[i];
+            map[i][1]= end[i];}
+
+          Arrays.sort(map,(a,b)->(a[1]-b[1])); // sort 2d array based on end times
+
+          int e=map[0][1];
+
+          for (int j = 1; j < n; j++) {
+              if(map[j][0]>e){ // the start time of current meeting> end time of last
+                  meetings++;
+                  e= map[j][1]; // update to cuurent end time
+              }
+              
+          }
+
+
+ 
+
+        return meetings;
+    }
+}
