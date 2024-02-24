@@ -1,27 +1,16 @@
 class Solution {
     public boolean canJump(int[] nums) {
+        int last= nums.length-1;
 
-        if(nums.length<=1){
-            return true;
-        }
+        // starting from last and wondering if we can somehow do something to arrive at last index
+
+for(int i=nums.length-2; i>=0; i--){
+    if(i+nums[i]>=last){  // current index + current value can hep us reach current destination and then go back
+        last=i; // last index keeps moving to front
+    }
+}
+
+        return last==0;
         
-        int index= 1;
-        int jump= nums[0];
-
-        while(jump>0){
-            if(index== nums.length-1){// if we reach the last index index,return true
-                return true;}
-            
-            jump= Math.max(jump-1, nums[index]);// jump-1== because in process of moving forward, we have to include current jump as well.
-
-            //deciding whether to take the same step as before or take max jump
-            index++;
-        }
-
-
-
-
-
-        return false;
     }
 }
