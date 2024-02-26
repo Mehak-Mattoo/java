@@ -1,63 +1,35 @@
-package com.java.MyProject;
 import java.util.*;
+public class Solution {
+    public static int[] jobScheduling(int [][]jobs) {
+        int n= jobs.length, profit=0, jobCount=0, maxDeadline=0;
+        
+        Arrays.sort(jobs,(a,b)->(b[2]-a[2])); // sorting based on profits
+
+        for (int i = 0; i < jobs.length; i++) { // get the max number of jobs we can do
+            maxDeadline= Math.max(maxDeadline, jobs[i][1]);
+            
+        }
+
+        boolean visited[]= new boolean[maxDeadline];
 
 
-class Job{
-	
-	char Id;
-	int profit;
-	int deadline;
-	
-	
-	   public Job() {}
-	
-	public Job(char Id, int profit, int deadline) {
-			
-		this.Id = Id;
-		this.profit = profit;
-		this.deadline = deadline;  }
+        for (int i = 0; i < jobs.length; i++) {
+            for (int j = jobs[i][1]-1;j>=0 ;j--) { // start filling the visited array from last to fit shortest deadline first
+                if(visited[j]== false){
+                    visited[j]= true;
+                    jobCount++;
+                    profit+=jobs[i][2];
+                    break;
+                }
+                
+            }
+            
+        }
 
-	public void Schedule(ArrayList<Job> arr, int timeSlots) {
+       
 
-		
-		int n = arr.size();
-			
-		Collections.sort(arr, (a,b)-> b.profit - a.profit); // sorts jobs based on profit
-		
-		boolean timeSlot[]= new boolean[timeSlots];
-		
-		
-		char jobSequence[]= new char[timeSlots];
-		
-        for (int i = 0; i < n; i++) {	
-        for (int j =  Math.min(timeSlots - 1, arr.get(i).deadline - 1); j >= 0; j--) {
-				
-				if(timeSlot[j]== false) {
-					timeSlot[j]= true;
-					jobSequence[j]= arr.get(i).Id;  
-				     break;   }}}
-		
-	for(char i: jobSequence) {
-		System.out.print(i+" - "); }	}}
-	
-	
-public class JobSequencing{	
-	public static void main(String[] args) {
-		
-		ArrayList<Job> arr= new ArrayList<>();
-		
-		    arr.add(new Job('a', 2, 100));
-	        arr.add(new Job('b', 1, 19));
-	        arr.add(new Job('c', 2, 27));
-	        arr.add(new Job('d', 1, 25));
-	        arr.add(new Job('e', 3, 15));
-	        
-	        Job job = new Job();
-	        
-	      
-	job.Schedule(arr, 3);
-	}
+        return new int []{jobCount, profit};
 
+
+    }
 }
-
-
