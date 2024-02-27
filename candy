@@ -1,23 +1,30 @@
 class Solution {
     public int candy(int[] ratings) {
-     int candies=0;
-     int n=ratings.length;
-     int []left= new int[n];
-   int []right= new int[n];
+        int n = ratings.length, ans = 0;
 
-   Arrays.fill(left,1); // each child must get 1 candy
-   Arrays.fill(right,1);
+        int[] candy = new int[n];
 
-   for(int i=1;i<n;i++){// from start
-       if(ratings[i]>ratings[i-1]){ //if previous child has higher rating, then give +1 candy
-           left[i]= left[i-1]+1; }   }
+        Arrays.fill(candy, 1);
 
-for(int i=n-2; i>-1;i--){
-  if(ratings[i]>ratings[i+1]){//if after child has higher rating, then give +1 candy
-      right[i]= right[i+1]+1;}}
+        for (int i = 1; i < n; i++) { // look if we can get children with higher ratings at right side
 
- for(int i=0;i<n;i++){ // the calculate the max out of two arrays
-candies+= Math.max(left[i], right[i]);}
+            if (ratings[i] > ratings[i - 1]) {
+                candy[i]= candy[i-1]+1;          
+        }}
 
-return candies;
-}}
+         for (int i = n-2; i >=0 ; i--) {// there could be children with higher ratings at thier immediate left side
+
+            if (ratings[i] > ratings[i + 1]) {
+                candy[i]= Math.max(candy[i+1]+1, candy[i]);           
+        }}
+
+        for(int i:candy){
+            ans+=i;
+        }
+
+
+
+        return ans;
+
+    }
+}
