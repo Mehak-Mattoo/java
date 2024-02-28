@@ -1,0 +1,36 @@
+import java.util.*;
+
+class Solution {
+    public int[][] insert(int[][] intervals, int[] newInterval) {
+
+        List<int[]> list = new ArrayList<>();
+        List<int[]> merged = new ArrayList<>();
+
+
+        // adding both arrays in arraylist
+
+        for (int[] interval : intervals) {
+            list.add(interval);
+        }
+
+        list.add(newInterval);
+
+        // Sort the list based on the start times of intervals
+        Collections.sort(list, (a, b) -> a[0] - b[0]);
+
+        for(int [] interval:list){
+            if(merged.isEmpty() || interval[0]> merged.get(merged.size()-1)[1]){  // if 0 position> last interval[1]-- there is no overlap
+              
+                merged.add(interval);  // add both 0 and 1
+            }
+            else{ // put the max of current interval & last interval 1
+                merged.get(merged.size()-1)[1]= Math.max(interval[1], merged.get(merged.size()-1)[1]);
+            }
+
+
+        }
+
+        return merged.toArray(new int[merged.size()][]);
+
+    }
+}
