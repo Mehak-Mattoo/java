@@ -1,0 +1,22 @@
+class Solution {
+    public int eraseOverlapIntervals(int[][] intervals) {
+        int n= intervals.length, count=0;
+        Arrays.sort(intervals, (a,b)->a[0]- b[0]);
+        int prevEnd= intervals[0][1];
+// for a non - interval to occur       
+
+        for(int i =1; i<n; i++){
+            if(intervals[i][0] >= prevEnd){ // the 1 of prev < curr 0
+                prevEnd= intervals[i][1];
+                
+            }else{ // else pick the one with shorter 1--> whic gives a greater possibility that next element will not overlap as they are sorted
+                count++;
+                prevEnd= Math.min(prevEnd, intervals[i][1]);
+            }
+
+        }
+
+        return count;
+        
+    }
+}
