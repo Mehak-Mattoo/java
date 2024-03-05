@@ -1,0 +1,71 @@
+import java.util.*;
+
+public class Solution {
+
+    static class Pair{
+
+        TreeNode node;
+
+        int d;
+
+        Pair(TreeNode node, int d){
+
+            this.node = node;
+
+            this.d = d;
+
+        }
+
+    }
+
+ 
+
+    public static ArrayList<Integer> bottomView(TreeNode root) {
+ 
+
+         Map<Integer, Integer> map = new TreeMap<>();
+
+         Queue<Pair> q = new LinkedList<>();
+
+         q.offer(new Pair(root, 0));
+
+ 
+
+         while(!q.isEmpty()){
+
+             Pair curr = q.poll();
+             
+             int d = curr.d;
+
+             TreeNode node = curr.node;
+
+
+ 
+
+             map.put(d, node.val);// Update the map with the latest node at this horizontal distance
+
+             if(node.left != null){
+                  q.offer(new Pair(node.left, d-1));}
+
+             if(node.right != null){
+                  q.offer(new Pair(node.right, d+1));}
+
+         }
+
+ 
+
+         ArrayList<Integer> res = new ArrayList<>();
+
+         for(int e: map.values()){
+
+             res.add(e);
+
+         }
+
+ 
+
+         return res;
+
+    }
+
+}
