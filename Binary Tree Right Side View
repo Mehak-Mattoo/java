@@ -1,0 +1,50 @@
+public class Solution {
+
+    static class Pair {
+        int d;
+        TreeNode node;
+
+        public Pair(int d, TreeNode node) {
+            this.d = d;
+            this.node = node;
+
+        }
+    }
+
+    public List<Integer> rightSideView(TreeNode root) {
+        Map<Integer, Integer> map = new HashMap<>();
+        List<Integer> res = new ArrayList<>();
+
+        if (root == null) {
+            return res;
+        }
+
+        Queue<Pair> q = new LinkedList<>();
+        q.offer(new Pair(0, root));
+
+        while (!q.isEmpty()) {
+            Pair curr = q.poll();
+            int d = curr.d;
+            TreeNode node = curr.node;
+
+            // Update the map with the latest node at this horizontal distance
+            map.put(d, node.val);
+
+            if (node.left != null) {
+                q.offer(new Pair(d + 1, node.left));
+            }
+
+            if (node.right != null) {
+                q.offer(new Pair(d + 1, node.right));
+            }
+        }
+
+        // Add the values of the rightmost nodes to the result list
+        for (int e : map.values()) {
+            res.add(e);
+
+        }
+
+        return res;
+    }
+}
