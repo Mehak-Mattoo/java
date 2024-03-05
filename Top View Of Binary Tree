@@ -1,0 +1,68 @@
+import java.util.*;
+
+public class Solution {
+
+   static class Pair {
+
+        TreeNode node;
+
+        int hd;
+
+       Pair(TreeNode node, int hd) {
+
+            this.node = node; 
+
+           this.hd = hd;
+
+        }
+
+   }
+
+   public static List<Integer> getTopView(TreeNode root) {
+
+        List<Integer> ans = new ArrayList<>(); 
+
+        if(root == null) return ans; 
+
+       Map<Integer, Integer> map = new TreeMap<>();//for ascending order
+
+        Queue<Pair> q = new LinkedList<>();
+
+        q.add(new Pair(root, 0));
+
+         while(!q.isEmpty()) { 
+
+           Pair it = q.remove();  
+
+          int hd = it.hd; 
+
+           TreeNode temp = it.node; 
+
+            if(map.get(hd) == null){
+
+ map.put(hd, temp.data); }// if new distance is seen, put it in map
+
+            if(temp.left != null) {  
+
+              q.add(new Pair(temp.left, hd - 1)); 
+
+            }
+
+            if(temp.right != null) {
+
+                q.add(new Pair(temp.right, hd + 1));
+
+             }
+
+        } 
+
+           for (Map.Entry<Integer,Integer> entry : map.entrySet()) { 
+          ans.add(entry.getValue()); // grt all the node vals
+
+         } 
+
+       return ans; 
+
+    }
+
+ }  
