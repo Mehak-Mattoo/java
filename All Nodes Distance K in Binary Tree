@@ -1,0 +1,90 @@
+class Solution {
+
+    // Helper function to mark parents of nodes in the tree
+    void markParents(TreeNode root, HashMap<TreeNode, TreeNode> parentTrack, TreeNode target) {
+        // Level Order Traversal by taking a queue
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+
+        // Iterate over all nodes
+        while (!queue.isEmpty()) {
+            TreeNode current = queue.poll();
+
+            // Assign parents to left child and right child if they exist
+            if (current.left != null) {
+                parentTrack.put(current.left, current);
+                queue.add(current.left);
+            }
+
+            if (current.right != null) {
+                parentTrack.put(current.right, current);
+                queue.add(current.right);
+            }
+        }
+    }
+
+    // Function to find nodes at a distance K from the target node
+    List<Integer> distanceK(TreeNode root, TreeNode target, int k) {
+        // Map to mark the parents of all nodes
+        HashMap<TreeNode, TreeNode> parentTrack = new HashMap<>();
+        // Mark parents of all nodes
+        markParents(root, parentTrack, target);
+        // Keeps track of visited nodes
+        HashSet<TreeNode> visited = new HashSet<>();
+        // Queue to perform level-order traversal
+        Queue<TreeNode> queue = new LinkedList<>();
+        // Start traversal from the target node
+        queue.add(target);
+        // Tracks the current level while traversing the tree
+        int currLevel = 0;
+
+        // Continue traversal until reaching distance k from the target node
+        while (!queue.isEmpty()) {
+            // Get the number of nodes at the current level
+            int size = queue.size();
+
+            // If the current level matches the required distance (k), break the loop
+            if (currLevel == k) {
+                break;
+            }
+
+            // Traverse the current level of the tree
+            for (int i = 0; i < size; i++) {
+                // Get the front node in the queue
+                TreeNode current = queue.poll();
+                // Mark the current node as visited
+                visited.add(current);
+
+                // Add unvisited left child to the queue
+                if (current.left != null && !visited.contains(current.left)) {
+                    queue.add(current.left);
+                }
+
+                // Add unvisited right child to the queue
+                if (current.right != null && !visited.contains(current.right)) {
+                    queue.add(current.right);
+                }
+
+                // Add unvisited parent node to the queue
+                if (parentTrack.containsKey(current) && !visited.contains(parentTrack.get(current))) {
+                    queue.add(parentTrack.get(current));
+                }
+            }
+
+            // Increment the current level
+            currLevel++;
+        }
+
+        // Stores nodes at distance k from the target
+        List<Integer> result = new ArrayList<>();
+        while (!queue.isEmpty()) {
+            // Extract nodes at distance k from the queue
+            TreeNode current = queue.poll();
+            // Store node values in the result list
+            result.add(current.val);
+        }
+
+        // Return nodes at distance K from the target
+        return result;
+    }
+}
