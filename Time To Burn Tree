@@ -1,0 +1,93 @@
+import java.util.*;
+
+public class Solution {
+    static <T> void markParents(BinaryTreeNode<T> root, HashMap<BinaryTreeNode<T>, BinaryTreeNode<T>> map) {
+        Queue<BinaryTreeNode<T>> q = new LinkedList<>(); // marking parents of all the nodes for smooth movement in all directions
+        q.offer(root);
+
+        while (!q.isEmpty()) {
+            BinaryTreeNode<T> curr = q.poll();
+
+            if (curr.left != null) {
+                q.offer(curr.left);
+                map.put(curr.left, curr);
+            }
+            if (curr.right != null) {
+                q.offer(curr.right);
+                map.put(curr.right, curr);
+            }
+        }
+    }
+
+    static <T> BinaryTreeNode<T> findFirstburn(BinaryTreeNode<T> root, T start) {
+        Queue<BinaryTreeNode<T>> q = new LinkedList<>(); // finding where the start node is present as int form is given in question
+        q.add(root);
+
+        while (!q.isEmpty()) {
+            BinaryTreeNode<T> node = q.poll();
+
+            if (node.data.equals(start)) {
+                return node;
+            }
+
+            if (node.left != null) {
+                q.add(node.left);
+            }
+            if (node.right != null) {
+                q.add(node.right);
+            }
+        }
+
+        return null; // Start value not found in the tree
+    }
+
+    public static <T> int timeToBurnTree(BinaryTreeNode<T> root, T start) {
+      
+	   BinaryTreeNode<T> startNode = findFirstburn(root, start);
+	    if (root == null || root.data == null || startNode==null) {
+            return -1; // Invalid input
+        }
+
+        if (root.left == null && root.right == null) {
+            return 0; // Only one node in the tree
+        }
+
+        HashMap<BinaryTreeNode<T>, BinaryTreeNode<T>> parentTrack = new HashMap<>();
+        markParents(root, parentTrack);
+
+
+        HashMap<BinaryTreeNode<T>, Boolean> visited = new HashMap<>();
+        Queue<BinaryTreeNode<T>> queue = new LinkedList<>();
+        queue.offer(startNode);
+        visited.put(startNode, true);
+
+        int time = 0;
+
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+
+            for (int i = 0; i < size; i++) {
+                BinaryTreeNode<T> current = queue.poll();
+
+                if (current.left != null && !visited.containsKey(current.left)) {
+                    queue.offer(current.left);
+                    visited.put(current.left, true);
+                }
+
+                if (current.right != null && !visited.containsKey(current.right)) {
+                    queue.offer(current.right);
+                    visited.put(current.right, true);
+                }
+
+                if (parentTrack.containsKey(current) && !visited.containsKey(parentTrack.get(current))) {
+                    queue.offer(parentTrack.get(current));
+                    visited.put(parentTrack.get(current), true);
+                }
+            }
+
+            time++;
+        }
+
+        return time - 1; // Subtract 1 to exclude the starting node itself
+    }
+}
