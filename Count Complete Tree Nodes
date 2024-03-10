@@ -1,0 +1,19 @@
+class Solution {
+    public int countNodes(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+
+        int count = 1; // Start with the root node
+
+        if (root.left != null) {
+            count += countNodes(root.left); // Add count of nodes in the left subtree
+        }
+
+        if (root.right != null) {
+            count += countNodes(root.right); // Add count of nodes in the right subtree
+        }
+
+        return count;
+    }
+}
