@@ -1,0 +1,35 @@
+class Solution {
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+
+        HashMap<Integer, Integer> map = new HashMap<>();
+
+        for (int i = 0; i < inorder.length; i++) { // hashing to get the root easily
+            map.put(inorder[i], i);
+        }
+
+        TreeNode root = buildTree(preorder, 0, preorder.length - 1, inorder, 0, inorder.length - 1, map);
+
+        return root;
+
+    }
+
+    static TreeNode buildTree(int[] preorder, int preStart, int preEnd, int[] inorder, int inStart, int inEnd,
+            Map<Integer, Integer> map) {
+
+        if (preStart > preEnd || inStart > inEnd) {// something wrong with array
+            return null;
+        }
+
+        TreeNode root = new TreeNode(preorder[preStart]); // preorder has root at first
+
+        int inRoot = map.get(root.val);
+
+        int x = inRoot - inStart; // get how many indexes we have to take at a time
+
+        root.left = buildTree(preorder, preStart + 1, preStart + x, inorder, inStart, inRoot - 1, map);
+        
+        root.right = buildTree(preorder, preStart + x + 1, preEnd, inorder, inRoot + 1, inEnd, map);
+
+        return root;
+    }
+}
