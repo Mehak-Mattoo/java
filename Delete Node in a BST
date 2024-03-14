@@ -1,0 +1,42 @@
+
+class Solution {
+    public TreeNode deleteNode(TreeNode root, int key) {
+        //search
+        if(root == null ) {
+            return null;
+        }
+        if(root.val<key){
+            root.right = deleteNode(root.right,key);
+        }
+        else if(root.val>key) {
+            root.left = deleteNode(root.left,key);
+        }
+        else{
+            //case 1: leaf node
+            if(root.left == null && root.right == null ) {
+                return null;
+            }
+            //case 2 : one child
+            if(root.left ==  null){
+                return root.right;
+            }
+            else if(root.right ==  null ) {
+                return root.left;
+            }
+            //case 3 : two children
+            TreeNode newRoot = findMin(root.right); // to keep a tree bst, we have to find them min val in that subtree
+            root.val = newRoot.val; // and replace its value with root
+
+            
+            root.right = deleteNode(root.right, newRoot.val);// then delete it
+        }
+        return root;
+
+    }
+    private TreeNode findMin(TreeNode root){
+        while(root.left != null){
+            root = root.left;
+        }
+        return root;
+    }
+}
