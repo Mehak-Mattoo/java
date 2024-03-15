@@ -1,0 +1,35 @@
+import java.util.*;
+
+class Solution {
+    public TreeNode bstFromPreorder(int[] preorder) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+
+        int[] inorder = Arrays.copyOf(preorder, preorder.length);
+        Arrays.sort(inorder);
+        
+        for (int i = 0; i < inorder.length; i++) {
+            map.put(inorder[i], i);
+        }
+
+        return buildTree(preorder, 0, preorder.length - 1, inorder, 0, inorder.length - 1, map);
+    }
+
+    private TreeNode buildTree(int[] preorder, int preStart, int preEnd, int[] inorder, int inStart, int inEnd,
+            Map<Integer, Integer> map) {
+        if (preStart > preEnd || inStart > inEnd) {
+            return null; // Base case: empty subtree
+        }
+
+        TreeNode root = new TreeNode(preorder[preStart]); // Root is the first element in preorder
+
+        int inRoot = map.get(root.val); // Find the index of the root in inorder
+
+        int leftSubtreeSize = inRoot - inStart + 1; // Calculate the size of the left subtree
+
+        // Recursively build left and right subtrees
+        root.left = buildTree(preorder, preStart + 1, preStart + leftSubtreeSize - 1, inorder, inStart, inRoot - 1, map);
+        root.right = buildTree(preorder, preStart + leftSubtreeSize, preEnd, inorder, inRoot + 1, inEnd, map);
+
+        return root;
+    }
+}
