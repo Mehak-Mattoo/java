@@ -1,0 +1,31 @@
+import java.util.*;
+public class Solution {
+    public static int[][] printAdjacency(int n, int m, int[][] edges) {
+  
+   ArrayList<Integer>[] list = new ArrayList[n];
+
+  int matrix[][]= new int [n][];
+
+for (int i = 0; i < n; i++) {
+    list[i]= new ArrayList<>();} //to stores all edges
+
+   for (int i = 0; i < m; i++) {
+       int u= edges[i][0]; 
+       int v= edges[i][1];
+
+       list[u].add(v); //vice versa edges connections
+       list[v].add(u);
+ 
+}
+
+for (int i = 0; i < n; i++) {
+    list[i].add(0,i);// to store index of rows
+    int size= list[i].size();
+
+    matrix[i]= new int[size];
+    for (int j = 0; j < size; j++) {
+        matrix[i][j]= list[i].get(j);
+        
+    }  }
+    return matrix;
+    }}
