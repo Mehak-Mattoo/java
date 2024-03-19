@@ -1,0 +1,26 @@
+import java.util.*;
+public class Solution {
+    public static List<Integer> bfsTraversal(int n, List<List<Integer>> adj){
+       
+        ArrayList<Integer> list = new ArrayList<>();
+      
+        int[] visited = new int[n];
+     
+        Queue<Integer> q = new LinkedList<>();
+        q.offer(0);
+        visited[0] = 1;
+        while(!q.isEmpty()){
+            int node = q.poll();
+            list.add(node);
+            //get all the adj nodes of polled node from adj list
+            //if not visited first mark visited and then enqueue it;
+            for(int it:adj.get(node)){
+                if(visited[it]==0){
+                    visited[it]=1;
+                    q.offer(it);
+                }
+            }
+        }
+        return list;
+    }
+}
