@@ -1,0 +1,69 @@
+class Solution {
+    static class Pair {
+        int first;
+        int second;
+        int time;
+
+        public Pair(int first, int second, int time) {
+            this.first = first;
+            this.second = second;
+            this.time = time;
+        }
+    }
+
+    public int orangesRotting(int[][] grid) {
+
+        int n = grid.length, m = grid[0].length, time = 0, count = 0, fresh = 0;
+        Queue<Pair> q = new LinkedList<>();
+        int[][] vis = new int[n][m];
+
+        if (n == 0 || grid == null) {
+            return 0;
+        }
+
+        for (int i = 0; i < n; i++) { // first we get how many rotten oranges are there and put its position in queue
+            for (int j = 0; j < m; j++) {
+                if (grid[i][j] == 2) {
+                    q.add(new Pair(i, j, 0));
+                    vis[i][j] = 2;
+
+                }
+                if (grid[i][j] == 1) { // get how many are fresh
+                    fresh++;
+                }
+
+            }
+        }
+
+        int x[] = { 0, 0, 1, -1 }; // movement of elements 
+        int y[] = { 1, -1, 0, 0 };
+
+        while (!q.isEmpty()) {
+            int r = q.peek().first;
+            int c = q.peek().second;
+            int t = q.peek().time;
+
+            time = Math.max(time, t);
+            q.poll();
+            for (int i = 0; i < 4; i++) {
+                int nrow = r + x[i];
+                int ncol = c + y[i];
+
+                if (nrow >= 0 && nrow < n && ncol >= 0 && ncol < m && vis[nrow][ncol] == 0 && grid[nrow][ncol] == 1) {// should be within bounds , not visited and fresh
+                    vis[nrow][ncol] = 2; // rot it
+                    q.add(new Pair(nrow, ncol, t + 1)); // increase the time
+                    count++;// count fresh oranges
+                }
+
+            }
+
+        }
+
+        if (count != fresh) { // not possible to rot them all
+            return -1;
+        }
+
+        return time;
+    }
+
+}
