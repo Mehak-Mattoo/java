@@ -1,0 +1,61 @@
+class Solution {
+
+    class Pair {
+        int first;
+        int second;
+        int third;
+
+        public Pair(int first, int second, int third) {
+            this.first = first;
+            this.second = second;
+            this.third = third;
+        }
+    }
+
+    public int[][] updateMatrix(int[][] mat) {
+        int n = mat.length, m = mat[0].length;
+
+        int vis[][] = new int[n][m];
+        int dist[][] = new int[n][m];// marks the distance of nearest 0
+        Queue<Pair> q = new LinkedList<Pair>();
+
+        for (int i = 0; i < n; i++) { // first get position of all 0s to start bfs from
+            for (int j = 0; j < m; j++) {
+                if (mat[i][j] == 0) {
+                    q.add(new Pair(i, j, 0));
+                    vis[i][j] = 1;
+
+                } else {
+                    vis[i][j] = 0;
+                }
+
+            }
+        }
+
+        int x[] = { -1, 0, +1, 0 }; // movement of elements
+        int y[] = { 0, +1, 0, -1 };
+
+        while (!q.isEmpty()) {
+            int r = q.peek().first;
+            int c = q.peek().second;
+            int steps = q.peek().third;
+
+            dist[r][c] = steps;// mark the steps st curr index
+
+            q.poll();
+
+            for (int i = 0; i < 4; i++) {
+                int nrow = r + x[i];
+                int ncol = c + y[i];
+
+                if (nrow >= 0 && nrow < n && ncol >= 0 && ncol < m && vis[nrow][ncol] == 0) {
+                    vis[nrow][ncol] = 1;
+                    q.add(new Pair(nrow, ncol, steps + 1)); //steps increases
+                }
+            }
+        }
+
+        return dist;
+
+    }
+}
