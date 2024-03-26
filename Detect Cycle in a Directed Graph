@@ -1,0 +1,51 @@
+public class Solution {
+     public static Boolean isCyclic(int[][] edges, int v, int e)
+
+    {
+       boolean[] pathVis=new boolean[v];
+
+        boolean vis[]=new boolean[v];
+
+        for(int i=0;i<v;i++){
+
+            if(!vis[i])  {
+
+            if(dfs(edges,i,vis,pathVis)){
+            return true;  }
+
+            } 
+        }
+
+        return false;
+
+    }
+
+     public static boolean dfs(int[][] g,int curr, boolean vis[],boolean []pathVis) {
+
+      vis[curr]=true;
+      pathVis[curr]=true;
+
+      for(int i=0;i<g.length;i++)  {   
+
+          if(g[i][0]==curr) { 
+
+          int e=g[i][1];
+         
+         if(!vis[e]){ // when the node is not visited 
+              if(dfs(g,e,vis,pathVis)){
+                  return true;}    }
+
+          // if the node has been previously visited
+            // but it has to be visited on the same path 
+         if(pathVis[e]) {
+             return true;}
+      } 
+      }
+
+      pathVis[curr]=false; //bactracking
+
+      return false;
+
+    }
+
+}
