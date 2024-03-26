@@ -1,0 +1,36 @@
+class Solution {
+    public boolean isBipartite(int[][] graph) {
+        int n = graph.length;
+        int[] color = new int[n];
+        for (int i = 0; i < n; i++) {
+            color[i] = -1; // Initialize all nodes as uncolored (-1)
+        }
+        boolean ans = true;
+        for (int i = 0; i < n; i++) {
+            if (color[i] == -1) {
+                ans &= dfs(i, 0, graph, color); // Use bitwise AND to update ans
+            }
+        }
+        return ans;
+    }
+
+    public boolean dfs(int node, int currColor, int[][] graph, int[] color) {
+
+        color[node] = currColor;
+
+        for (int neighbor : graph[node]) {
+
+            if (color[neighbor] == currColor) {
+                return false; // Neighbor has the same color as the current node
+
+            } else if (color[neighbor] == -1) {
+                // Neighbor hasn't been visited yet, recursively call dfs
+                
+                if (!dfs(neighbor, 1 - currColor, graph, color)) {
+                    return false; // If dfs returns false, the graph is not bipartite
+                }
+            }
+        }
+        return true; // If all neighbors can be colored differently, the graph is bipartite
+    }
+}
