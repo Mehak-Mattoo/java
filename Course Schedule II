@@ -1,0 +1,55 @@
+class Solution {
+    public int[] findOrder(int numCourses, int[][] prerequisites) {
+        int n = prerequisites.length;
+
+        List<ArrayList<Integer>> adj = new ArrayList<>();
+
+        // forming the graph
+
+        for (int i = 0; i < numCourses; i++) {
+            adj.add(new ArrayList<>());
+        }
+
+        for (int i = 0; i < n; i++) {
+            adj.get(prerequisites[i][1]).add(prerequisites[i][0]);
+
+        }
+
+        int[] indegree = new int[numCourses];
+
+        for (int i = 0; i < numCourses; i++) { // indegree-> how many eges are coming in that node
+            for (int x : adj.get(i)) {// make the indegree array
+                indegree[x]++;
+            }
+        }
+
+        Queue<Integer> q = new LinkedList<>();
+
+        for (int i = 0; i < indegree.length; i++) { // get the indegree with 0 first as they do not have any depenedency
+            if (indegree[i] == 0) {
+                q.add(i);
+            }
+        }
+
+        int topo[] = new int[numCourses];
+        int topoIndex = 0; 
+
+        while (!q.isEmpty()) {
+            int curr = q.poll();
+            topo[topoIndex++] = curr;
+
+            for (int neighbour : adj.get(curr)) {
+                indegree[neighbour]--; // remove its depenency
+                if (indegree[neighbour] == 0) {
+                    q.add(neighbour);
+                }
+            }
+        }
+
+        if (topoIndex == numCourses) {
+            return topo; // If all vertices were processed, return the topological ordering
+        } else {
+            return new int[0]; // Return an empty array if there is a cycle
+        }
+    }
+}
