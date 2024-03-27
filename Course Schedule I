@@ -1,0 +1,53 @@
+public class Solution {
+
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
+        int n = prerequisites.length;
+
+        List<ArrayList<Integer>> adj = new ArrayList<>();
+
+        // forming the graph
+
+        for (int i = 0; i < numCourses; i++) {
+            adj.add(new ArrayList<>());
+        }
+
+        for (int i = 0; i < n; i++) {
+            adj.get(prerequisites[i][0]).add(prerequisites[i][1]);
+
+        }
+
+        int[] indegree = new int[numCourses];
+
+        for (int i = 0; i < numCourses; i++) { // indegree-> how many eges are coming in that node
+            for (int x : adj.get(i)) {// make the indegree array
+                indegree[x]++;
+            }
+        }
+
+        Queue<Integer> q = new LinkedList<>();
+
+        for (int i = 0; i < indegree.length; i++) { // get the indegree with 0 first as they do not have any depenedency
+            if (indegree[i] == 0) {
+                q.add(i);
+            }
+        }
+
+        int vertices = 0;
+
+        while (!q.isEmpty()) {
+            int curr = q.poll();
+            vertices++;
+
+            for (int neighbour : adj.get(curr)) {
+                indegree[neighbour]--; // remove its depenency
+                if (indegree[neighbour] == 0) {
+                    q.add(neighbour);
+                }
+            }
+        }
+
+        return vertices == numCourses;// if all vertices were there, then there is no cycle and hence all tasks can be done
+
+    }
+
+}
