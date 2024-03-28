@@ -1,0 +1,69 @@
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+
+public class Solution {
+    public static String getAlienLanguage(String []dictionary, int k) {
+  
+
+        int n=dictionary.length;
+        List<List<Integer>> adj = new ArrayList<>();
+        for(int i=0;i<k;i++){
+            adj.add(new ArrayList<>());
+        }
+
+        for(int i=0;i<n-1;i++){
+            String s1=dictionary[i];
+            String s2=dictionary[i+1];
+
+            int len = Math.min(s1.length(), s2.length()); // iterate upto min of two lenghts
+
+            for(int j=0;j<len;j++){
+                if(s1.charAt(j)!=s2.charAt(j)){// when they become inequal
+                    adj.get(s1.charAt(j)-'a').add(s2.charAt(j)-'a'); // make a edge between them and break
+                    break;
+                }
+            }
+        }
+
+        List<Integer> list = topoSort(k,adj);
+
+
+        StringBuilder sb = new StringBuilder();
+for (int it : list) {
+    sb.append((char) (it + 'a'));
+}
+
+return  sb.toString();
+    }
+    private static List<Integer> topoSort(int V,List<List<Integer>> adj){ // normal topo sort
+
+        int[] indegree=new int[V];
+        for(int i=0;i<V;i++){
+            for(int it:adj.get(i)){
+                indegree[it]++;
+            }
+        }
+
+        Queue<Integer> q=new LinkedList<>();
+        for(int i=0;i<V;i++){
+            if(indegree[i]==0){
+                q.add(i);
+            }
+        }
+
+        List<Integer> topo=new ArrayList<>();
+        while(!q.isEmpty()){
+            int node =q.remove();
+            topo.add(node);
+            for(int it:adj.get(node)){
+                indegree[it]--;
+                if(indegree[it]==0){
+                    q.add(it);
+                }
+            }
+        }
+        return topo;
+    }
+}
