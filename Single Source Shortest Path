@@ -1,0 +1,55 @@
+import java.util.*;
+public class Solution {
+    static class Pair {
+        int node;
+        int distance;
+
+        public Pair(int node, int distance) {
+            this.node = node;
+            this.distance = distance;
+        }
+    }
+
+    public static int[] shortestPath(int n, int[][] edges, int src) {
+        List<List<Integer>> adj = new ArrayList<>();
+
+        for (int i = 0; i < n; i++) {
+            adj.add(new ArrayList<>());
+        }
+
+        // Constructing the adjacency list
+        for (int[] edge : edges) {
+            adj.get(edge[0]).add(edge[1]);
+            adj.get(edge[1]).add(edge[0]); // Assuming the graph is undirected
+        }
+
+        Queue<Pair> q = new LinkedList<>();
+        int[] dist = new int[n];
+        Arrays.fill(dist, Integer.MAX_VALUE); // filling with max value for easier comparision
+
+        dist[src] = 0;
+        q.add(new Pair(src, 0));
+
+        while (!q.isEmpty()) {
+            Pair curr = q.poll();
+            int node = curr.node;
+            int currDistance = curr.distance;
+
+            for (int neighbour : adj.get(node)) {
+               if (currDistance + 1 < dist[neighbour]) {  // only fill min distance in array
+                    dist[neighbour] = currDistance + 1 ;
+                    q.add(new Pair(neighbour, currDistance + 1));
+              
+            }
+            }
+        }
+
+        // Handling nodes that are not reachable
+        for (int i = 0; i < n; i++) {
+            if (dist[i] == Integer.MAX_VALUE) {
+                dist[i] = -1;
+            }
+        }
+
+        return dist;
+    }}
