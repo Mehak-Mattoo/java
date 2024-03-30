@@ -1,0 +1,60 @@
+import java.util.*;
+
+public class Solution {
+    
+    static class Pair {
+        int node;
+        int distance;
+
+        public Pair(int node, int distance) {
+            this.node = node;
+            this.distance = distance;
+        }
+    }
+    public static int[] shortestPathInDAG(int n, int m, int [][]edges) {
+     
+        List<List<int[]>> adj = new ArrayList<>(); // to store src, destination and weight
+
+        for (int i = 0; i < n; i++) {
+            adj.add(new ArrayList<>());
+        }
+
+        for (int[] edge : edges) {
+            int src= edge[0];
+            int destination= edge[1];
+            int distance= edge[2];
+
+            adj.get(src).add(new int[]{destination, distance});
+        }
+
+        Queue<Pair> q = new LinkedList<>();
+        int[] dist = new int[n];
+        Arrays.fill(dist, -1); // filling with max value for easier comparision
+
+        q.add(new Pair(0, 0));
+        dist[0]=0;
+
+        while(!q.isEmpty()){
+            int node= q.peek().node;
+            int currDistance = q.peek().distance;
+
+            q.poll();
+
+            for(int [] neighbour  : adj.get(node)){
+                int nextNode= neighbour[0];
+                int weight = neighbour[1];
+                int newWeight= currDistance+weight;
+
+                if(newWeight<  dist[nextNode] || dist[nextNode]== -1){ // if currweight < curr weight in distance array
+                    dist[nextNode] = newWeight;
+                     q.add(new Pair(nextNode, newWeight));
+                }
+            } 
+        }
+
+
+
+        return dist;
+
+    }
+}
