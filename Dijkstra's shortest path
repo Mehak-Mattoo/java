@@ -1,0 +1,60 @@
+import java.util.*;
+
+public class Solution {
+    static class Pair {
+        int dest;
+        int wt;
+
+        Pair(int dest, int wt) {
+            this.dest = dest;
+            this.wt = wt;
+        }
+    }
+
+    public static List<Integer> dijkstra(int[][] edge, int v, int edges, int source) {
+
+        ArrayList<ArrayList<Pair>> adj = new ArrayList<>();
+
+        for (int i = 0; i < v; i++) {
+            adj.add(new ArrayList<>());
+        }
+
+        for (int i = 0; i < edges; i++) {
+            adj.get(edge[i][0]).add(new Pair(edge[i][1], edge[i][2]));
+            adj.get(edge[i][1]).add(new Pair(edge[i][0], edge[i][2]));
+        }
+
+        PriorityQueue<Pair> pq = new PriorityQueue<>((x, y) -> x.wt - y.wt);
+
+        int[] dist = new int[v];
+        Arrays.fill(dist, Integer.MAX_VALUE);
+        dist[source] = 0;
+        pq.add(new Pair(source, 0));
+
+        while (!pq.isEmpty()) {
+            Pair it = pq.poll();
+            int node = it.dest;
+            int dis = it.wt;
+
+            if (dis > dist[node]) { //skip node if its distance from the source >  distance already recorded
+                continue;
+            }
+
+            for (Pair neighbour : adj.get(node)) {
+                int adjNode = neighbour.dest;
+                int wt = neighbour.wt;
+                if (dis + wt < dist[adjNode]) {
+                    dist[adjNode] = dis + wt;
+                    pq.add(new Pair(adjNode, dist[adjNode])); // Corrected to add updated distance
+                }
+            }
+        }
+
+        List<Integer> shortestDistances = new ArrayList<>();
+        for (int d : dist) {
+            shortestDistances.add(d == Integer.MAX_VALUE ? -1 : d);
+        }
+
+        return shortestDistances;
+    }
+}
