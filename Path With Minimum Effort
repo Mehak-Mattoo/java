@@ -1,0 +1,57 @@
+public class Solution {
+    static class Pair {
+        int x;
+        int y;
+        int effort; // Store the effort required to reach this cell
+
+        public Pair(int x, int y, int effort) {
+            this.x = x;
+            this.y = y;
+            this.effort = effort;
+        }
+    }
+
+    public int minimumEffortPath(int[][] heights) {
+        int n = heights.length, m = heights[0].length;
+
+        boolean[][] vis = new boolean[n][m];
+
+        int ans = Integer.MAX_VALUE;
+
+        PriorityQueue<Pair> q = new PriorityQueue<>((a, b) -> a.effort - b.effort);
+
+        q.offer(new Pair(0, 0, 0));
+        vis[0][0] = true;
+
+        int x[] = { -1, 0, +1, 0 };
+        int y[] = { 0, +1, +0, -1 };
+
+        while (!q.isEmpty()) {
+            int r = q.peek().x;
+            int c = q.peek().y;
+            int effort = q.peek().effort;
+
+            q.poll();
+
+            if (r == n - 1 && c == m - 1) {
+                return effort;
+            }
+            // Mark the current cell as visited
+            vis[r][c] = true;
+
+            for (int k = 0; k < 4; k++) {
+                int nrow = r + x[k];
+                int ncol = c + y[k];
+
+                if (nrow >= 0 && nrow < n && ncol >= 0 && ncol < m && !vis[nrow][ncol]) {
+
+                    int newEffort = Math.abs(heights[r][c] - heights[nrow][ncol]); // diff bw height of neighbour and curr
+                    q.add(new Pair(nrow, ncol,  Math.max(effort, newEffort)));
+                    
+                }
+            }
+        }
+
+        return -1;
+    }
+}
