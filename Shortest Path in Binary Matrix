@@ -1,0 +1,56 @@
+public class Solution {
+    
+    static class Pair {
+        int x;
+        int y;
+
+        public Pair(int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
+    }
+
+    public int shortestPathBinaryMatrix(int[][] edges) {
+        int n = edges.length, m = edges[0].length;
+
+        int vis[][]= new int [n][m];
+
+        if (edges[0][0] == 1 || edges[n - 1][n - 1] == 1) {
+            return -1; // Destination or source is blocked
+        }
+
+        Queue<Pair> q = new LinkedList<>();
+        q.offer(new Pair(0, 0));
+
+        int[] x = { -1, -1, -1, 0, 1, 1, 1, 0 };
+        int[] y = { -1, 0, 1, 1, 1, 0, -1, -1 };
+
+        int pathLength = 1;
+
+        while (!q.isEmpty()) {
+            int size = q.size(); // To track the number of nodes at this level
+            for (int j = 0; j < size; j++) { // Process all nodes at this level
+                Pair node = q.poll();
+                int r = node.x;
+                int c = node.y;
+
+                if (r == n - 1 && c == n - 1) {
+                    return pathLength; // Reached destination
+                }
+
+                for (int i = 0; i < 8; i++) {
+                    int nrow = r + x[i];
+                    int ncol = c + y[i];
+
+                    if (nrow >= 0 && nrow < n && ncol >= 0 && ncol < m && edges[nrow][ncol] == 0 && vis[nrow][ncol] == 0) {
+                        q.add(new Pair(nrow, ncol));
+                        vis[nrow][ncol] = 1;
+                    }
+                }
+            }
+            pathLength++; // Increment pathLength after processing all nodes at this level
+        }
+
+        return -1; // No path found
+    }
+}
