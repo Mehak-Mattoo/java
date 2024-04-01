@@ -54,3 +54,73 @@ public class Solution {
         return -1; // No path found
     }
 }
+
+
+
+
+
+public class Solution {
+    
+    static class Pair {
+        int x;
+        int y;
+        int distance;
+
+        public Pair(int x, int y,int distance) {
+            this.x = x;
+            this.y = y;
+            this.distance= distance;
+        }
+    }
+
+    public int shortestPathBinaryMatrix(int[][] edges) {
+        int n = edges.length, m = edges[0].length;
+
+        int dist[][]= new int [n][m];
+
+        for(int [] i: dist){
+            Arrays.fill(i, Integer.MAX_VALUE);
+        }
+
+        dist[0][0]=1;
+
+
+        if (edges[0][0] == 1 || edges[n - 1][m - 1] == 1) {
+            return -1; // Destination or source is blocked
+        }
+
+        PriorityQueue<Pair> q = new PriorityQueue<Pair>((a,b)->a.distance- b.distance);
+        q.offer(new Pair(0, 0,1 ));
+
+        int[] x = { -1, -1, -1, 0, 1, 1, 1, 0 };
+        int[] y = { -1, 0, 1, 1, 1, 0, -1, -1 };
+
+
+        while (!q.isEmpty()) {
+                Pair node = q.poll();
+                int r = node.x;
+                int c = node.y;
+                int distance= node.distance;
+
+
+                if (r == n - 1 && c == m - 1) {
+                    return distance; // Reached destination
+                }
+
+                for (int i = 0; i < 8; i++) {
+                    int nrow = r + x[i];
+                    int ncol = c + y[i];
+
+                    if (nrow >= 0 && nrow < n && ncol >= 0 && ncol < m && edges[nrow][ncol] == 0 && dist[nrow][ncol] > dist[r][c]+1) {
+                        
+                        dist[nrow][ncol]= dist[r][c]+1;
+                        q.add(new Pair(nrow, ncol, dist[nrow][ncol]));
+                     
+                    }
+                }
+            }
+
+        return -1; // No path found
+    }
+}
+
