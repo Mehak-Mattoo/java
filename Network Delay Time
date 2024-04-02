@@ -1,0 +1,64 @@
+import java.util.*;
+
+public class Solution {
+    static class Pair {
+        int first; // start
+        int second; // time
+
+        public Pair(int first, int second) {
+            this.first = first;
+            this.second = second;
+        }
+    }
+
+    public int networkDelayTime(int[][] times, int n, int k) {
+
+        List<List<Pair>> adj = new ArrayList<>();
+        for (int i = 0; i <= n; i++) { // make the graph
+            adj.add(new ArrayList<>());
+        }
+
+        int m = times.length;
+        for (int i = 0; i < m; i++) {
+            adj.get(times[i][0]).add(new Pair(times[i][1], times[i][2]));
+        }
+
+        int[] dist = new int[n + 1];
+        Arrays.fill(dist, Integer.MAX_VALUE);
+        dist[k] = 0;
+
+        PriorityQueue<Pair> pq = new PriorityQueue<>((a, b) -> a.second - b.second);
+        pq.add(new Pair(k, 0));
+
+        while (!pq.isEmpty()) {
+            Pair it = pq.remove();
+            int src = it.first;
+            int time = it.second;
+
+            if (time > dist[src]) {
+                continue;
+            }
+
+            for (Pair neighbour : adj.get(src)) {
+                int nextPole = neighbour.first;
+                int additionalTime = neighbour.second;
+
+                if (time + additionalTime < dist[nextPole]) {
+                    dist[nextPole] = time + additionalTime;
+                    pq.add(new Pair(nextPole, time + additionalTime));
+                }
+            }
+        }
+
+        // Find the maximum delay among all nodes
+        int maxDelay = 0;
+        for (int i = 1; i <= n; i++) {
+            if (dist[i] == Integer.MAX_VALUE) {
+                return -1; // Some nodes are unreachable, return -1
+            }
+            maxDelay = Math.max(maxDelay, dist[i]);
+        }
+
+        return maxDelay;
+    }
+}
