@@ -1,54 +1,26 @@
-package com.Myproject.java;
+import java.util.*;
+public class Solution {
+  static int floydWarshall(int n, int m, int src, int dest, ArrayList<ArrayList<Integer>> edges) {
 
-
-public class FloydWarshallAlgorithm {
-	
-final static int i = 9999;  // infinity
- static	int vertices= 4;
-	
-	
-	static void Algorithm(int [][] distance) {
-		
-		int i, j,k;
-		
-		for ( k = 0; k < vertices; k++) {  // picks all vertices as source one by one
-		for ( i = 0; i < vertices; i++) { // picks all vertices as destination for the selected source
-		for ( j = 0; j < vertices; j++) { // if the picked vertex shows the shortest path from i-j , 
-					                      // then update the value of distance i-j.
-			
-			distance[i][j]= Math.min(distance[i][j], distance[i][k]+ distance[k][j]); }}}	
-		
-	Print(distance);  }
-	
-	
-	
-static void Print(int distance[][]) {  // helps in printing values
-	
-System.out.println("The shortest distances between every pair of vertices");
-	 
-	 for (int k = 0; k < vertices; k++) {
-         for (int j = 0; j < vertices; j++) {
-             if (distance[k][j] == i) {
-                 System.out.print("Max\t");}  // max= infinity
-             else {
-                 System.out.print(distance[k][j] + "\t"); }}
-         System.out.println(); }}
-
-
-
-public static void main(String[] args) {
-	
-	FloydWarshallAlgorithm f= new FloydWarshallAlgorithm();
-	
-	
-	 int matrix [][] = { { 0, 5, i, 10 },
-             { i, 0, 3, i },
-             { i, i, 0, 1 },
-             { i, i, i, 0 } };
-	 
-	 f.Algorithm(matrix);
-}
-
-
+    int dis[][]=new int[n+1][n+1];
+    for(int[] a:dis) {
+    Arrays.fill(a,(int)(1e9));}
+    
+    for(int i=0;i<edges.size();i++){
+        int u=edges.get(i).get(0), v=edges.get(i).get(1),w=edges.get(i).get(2);
+        dis[u][v]=w;
+        dis[u][u]=0;
+        dis[v][v]=0;
+    }
+    for(int k=1;k<=n;k++){
+      for(int i=1;i<=n;i++){
+        for(int j=1;j<=n;j++){
+           if(dis[i][k]!=(int)(1e9) && dis[k][j]!=(int)(1e9)){
+          dis[i][j]=Math.min(dis[i][j], dis[i][k]+dis[k][j]);
+        }}
+      }
+    }
+    return dis[src][dest];
+  }
 
 }
