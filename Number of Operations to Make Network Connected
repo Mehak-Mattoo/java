@@ -1,0 +1,77 @@
+
+class DisjointSet {
+
+    List<Integer> parent = new ArrayList<>();
+    List<Integer> size = new ArrayList<>();
+
+    public DisjointSet(int n) {
+        for (int i = 0; i <= n; i++) {
+            parent.add(i);
+            size.add(1);
+        }
+    }
+
+    public int findParent(int node) {
+        if (node == parent.get(node)) {
+            return node;
+        }
+        int ultimateP = findParent(parent.get(node));// recursively find parent until ultimate is found
+        parent.set(node, ultimateP); // pat compression
+        return parent.get(node); // return ultimste parent
+
+    }
+
+    public void unionBySize(int u, int v) {
+        int UltimateofU = findParent(u);
+        int UltimateofV = findParent(v);
+
+        if (UltimateofU == UltimateofV) {// when ultimate parent is same , they are already connected
+            return;
+        }
+
+        if (size.get(UltimateofU) < size.get(UltimateofV)) {
+            parent.set(UltimateofU, UltimateofV);
+            size.set(UltimateofV, size.get(UltimateofV) + size.get(UltimateofU));
+        } else {
+            parent.set(UltimateofV, UltimateofU);
+            size.set(UltimateofU, size.get(UltimateofU + size.get(UltimateofV)));
+        }
+
+    }
+}
+
+class Solution {
+    public int makeConnected(int n, int[][] connections) {
+        int m = connections.length, extraEdges = 0;
+
+        DisjointSet ds = new DisjointSet(n);
+
+        for (int i = 0; i < m; i++) {
+            int u = connections[i][0];
+            int v = connections[i][1];
+
+            if (ds.findParent(u) == ds.findParent(v)) { // if they have same parent, then they are connected already
+                extraEdges++; // meaning we have a extra edge
+            } else {
+                ds.unionBySize(u, v); // connect them
+
+            }
+        }
+        int components = 0;
+
+        for (int i = 0; i < n; i++) {
+            if (ds.parent.get(i) == i) { // if parent ==i meaning there are i number of diff. compenents
+                components++;
+            }
+        }
+
+        int ans = components - 1; // diff componets can be connected by n-1 edges
+
+        if (extraEdges >= ans) { // we should have comparable extra edges to connect diff. components
+            return ans;
+        }
+
+        return -1; // else not possible
+
+    }
+}
