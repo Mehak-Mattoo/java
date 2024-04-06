@@ -1,0 +1,86 @@
+class DisjointSet {
+    List<Integer> parent = new ArrayList<>();
+    List<Integer> size = new ArrayList<>();
+
+    public DisjointSet(int n) {
+        for (int i = 0; i <= n; i++) {
+            parent.add(i);
+            size.add(1);
+        }
+    }
+
+    public int findParent(int node) {
+        if (node == parent.get(node)) {
+            return node;
+        }
+        int ultimateP = findParent(parent.get(node));// recursively find parent until ultimate is found
+        parent.set(node, ultimateP); // path compression
+        return parent.get(node); // return ultimate parent
+    }
+
+    public void unionBySize(int u, int v) {
+        int UltimateofU = findParent(u);
+        int UltimateofV = findParent(v);
+
+        if (UltimateofU == UltimateofV) {// when ultimate parent is same, they are already connected
+            return;
+        }
+
+        if (size.get(UltimateofU) < size.get(UltimateofV)) {
+            parent.set(UltimateofU, UltimateofV);
+            size.set(UltimateofV, size.get(UltimateofV) + size.get(UltimateofU));
+        } else {
+            parent.set(UltimateofV, UltimateofU);
+            size.set(UltimateofU, size.get(UltimateofU) + size.get(UltimateofV));
+        }
+    }
+}
+
+class Solution {
+    public List<List<String>> accountsMerge(List<List<String>> accounts) {
+        int n = accounts.size();
+
+        DisjointSet ds = new DisjointSet(n);
+        HashMap<String, Integer> map = new HashMap<>();
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 1; j < accounts.get(i).size(); j++) { // at 1 --> mails are stored
+                String mail = accounts.get(i).get(j);// getting all mails
+                if (map.containsKey(mail)) { // if map already has curr mail, then join them--> belonging to same person
+                    ds.unionBySize(i, map.get(mail));
+                } else {
+                    map.put(mail, i);
+                }
+            }
+        }
+
+        ArrayList<ArrayList<String>> mergedMail = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            mergedMail.add(new ArrayList<>());
+        }
+
+        for (Map.Entry<String, Integer> it : map.entrySet()) {
+            String mail = it.getKey();
+            int node = ds.findParent(it.getValue()); // finding ultimate parent
+            mergedMail.get(node).add(mail);
+        }
+
+        List<List<String>> ans = new ArrayList<>();
+
+        for (int i = 0; i < n; i++) {
+            if (mergedMail.get(i).isEmpty()) {// if curr mail is empty--> all mails were somebody else mails who was already encountered
+                continue;
+            }
+            Collections.sort(mergedMail.get(i)); // sort them
+
+            List<String> temp = new ArrayList<>();
+            temp.add(accounts.get(i).get(0)); // place their name first
+           for (String it : mergedMail.get(i)) {// then their emails
+                temp.add(it);
+            }
+            ans.add(temp);// join them together
+        }
+
+        return ans;
+    }
+}
