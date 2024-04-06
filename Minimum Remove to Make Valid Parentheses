@@ -1,0 +1,38 @@
+class Solution {
+    public String minRemoveToMakeValid(String s) {
+        int n = s.length();
+        int open = 0;
+        StringBuilder sb = new StringBuilder();
+        char[] charArray = s.toCharArray();
+
+        // Remove excess closing parentheses from the beginning
+        for (int i = 0; i < n; i++) {
+            if (charArray[i] == '(') {
+                open++;
+            } else if (charArray[i] == ')') {
+                if (open == 0) {
+                    charArray[i] = '*'; // Mark for removal
+                } else {
+                    open--;
+                }
+            }
+        }
+
+        // Remove excess opening parentheses from the end
+        for (int i = n - 1; i >= 0; i--) {
+            if (charArray[i] == '(' && open > 0) {
+                charArray[i] = '*'; // Mark for removal
+                open--;
+            }
+        }
+
+        // Append non-marked characters to the StringBuilder
+        for (char c : charArray) {
+            if (c != '*') {
+                sb.append(c);
+            }
+        }
+
+        return sb.toString();
+    }
+}
