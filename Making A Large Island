@@ -1,0 +1,115 @@
+class DisjointSet {
+
+    List<Integer> parent = new ArrayList<>();
+    List<Integer> size = new ArrayList<>();
+
+    public DisjointSet(int n) {
+        for (int i = 0; i <= n; i++) {
+            parent.add(i);
+            size.add(1);
+        }
+    }
+
+    public int findParent(int node) {
+        if (node == parent.get(node)) {
+            return node;
+        }
+        int ultimateP = findParent(parent.get(node)); // recursively find parent until ultimate is found
+        parent.set(node, ultimateP); // path compression
+        return parent.get(node); // return ultimate parent
+    }
+
+    public void unionBySize(int u, int v) {
+        int UltimateofU = findParent(u);
+        int UltimateofV = findParent(v);
+
+        if (UltimateofU == UltimateofV) { // when ultimate parent is same , they are already connected
+            return;
+        }
+
+        if (size.get(UltimateofU) < size.get(UltimateofV)) {
+            parent.set(UltimateofU, UltimateofV);
+            size.set(UltimateofV, size.get(UltimateofV) + size.get(UltimateofU));
+        } else {
+            parent.set(UltimateofV, UltimateofU);
+            size.set(UltimateofU, size.get(UltimateofU) + size.get(UltimateofV));
+        }
+
+    }
+}
+
+class Solution {
+    public int largestIsland(int[][] grid) {
+
+        int n = grid.length, maxSize=0;
+
+        DisjointSet ds = new DisjointSet(n * n);
+        //1--> join all cells with 1
+
+        for (int row = 0; row < n; row++) {
+            for (int col = 0; col < n; col++) {
+                if (grid[row][col] == 0) {
+                    continue;
+                }
+                int x[] = { -1, 0, 1, 0 };
+                int y[] = { 0, -1, 0, 1 };
+
+                for (int j = 0; j < 4; j++) {
+                    int nrow = row + x[j];
+                    int ncol = col + y[j];
+
+                    if (nrow >= 0 && nrow < n && ncol >= 0 && ncol < n && grid[nrow][ncol] == 1) { // when a island is
+                                                                                                   // seen
+                        int nodeNum = (row * n) + col; // to get row & col in serial number 1-n
+                        int adjNodeNum = (nrow * n) + ncol;
+
+                        ds.unionBySize(nodeNum, adjNodeNum);
+
+                    }
+                }
+            }
+
+        }
+
+        // 2--> changing 0 to 1 
+        for (int row = 0; row < n; row++) {
+            for (int col = 0; col < n; col++) {
+
+                if (grid[row][col] == 1) {
+                    continue;
+                }
+
+                HashSet<Integer> set = new HashSet<>(); // stores ultimate parent of neighbour to skip storing duplicate component size
+                int x[] = { -1, 0, 1, 0 };
+                int y[] = { 0, -1, 0, 1 };
+
+                for (int j = 0; j < 4; j++) {
+                    int nrow = row + x[j];
+                    int ncol = col + y[j];
+
+                    if (nrow >= 0 && nrow < n && ncol >= 0 && ncol < n) { // when a island is
+                        int currCell = (nrow * n )+ ncol;
+
+                        if (grid[nrow][ncol] == 1) {
+                            set.add(ds.findParent(currCell));
+                        }
+
+                    }
+                }
+                int size = 0;
+
+                for (int parents : set) {// getting the size of components
+                    size += ds.size.get(parents); 
+                }
+                maxSize = Math.max(size + 1, maxSize); // along with a additional cell that converted
+            }
+        }
+
+        for (int i = 0; i < n * n; i++) { //  now if all cells were 1 
+            maxSize = Math.max(maxSize, ds.size.get(ds.findParent(i)));// fetting the size of ultimate parent
+        }
+
+        return maxSize;
+
+    }
+}
