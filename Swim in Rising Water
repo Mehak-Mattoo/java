@@ -1,0 +1,58 @@
+class Solution {
+    static class Pair {
+        int x;
+        int y;
+        int effort;
+
+        public Pair(int x, int y, int effort) {
+            this.x = x;
+            this.y = y;
+            this.effort = effort;
+        }
+    }
+
+    public int swimInWater(int[][] heights) {
+
+        int n = heights.length, m = heights[0].length;
+
+        int[][] dist = new int[n][m];
+        for (int i = 0; i < n; i++) {
+            Arrays.fill(dist[i], Integer.MAX_VALUE);
+        }
+
+        dist[0][0] = heights[0][0];// should be filled by first value
+
+        PriorityQueue<Pair> q = new PriorityQueue<>((a, b) -> a.effort - b.effort);
+        q.offer(new Pair(0, 0,  heights[0][0]));
+
+        int x[] = { -1, 0, +1, 0 };
+        int y[] = { 0, +1, +0, -1 };
+
+        while (!q.isEmpty()) {
+            int r = q.peek().x;
+            int c = q.peek().y;
+            int effort = q.peek().effort;
+            q.poll();
+
+            if (r == n - 1 && c == m - 1) {
+                return effort;
+            }
+            for (int k = 0; k < 4; k++) {
+                int nrow = r + x[k];
+                int ncol = c + y[k];
+
+                if (nrow >= 0 && nrow < n && ncol >= 0 && ncol < m) {
+                    int newEffort = Math.max(heights[nrow][ncol], effort); // Maximum of current time and cell height
+
+                    if (newEffort < dist[nrow][ncol]) { // Update the minimum time if the new time is less
+                        dist[nrow][ncol] = newEffort;
+                        q.add(new Pair(nrow, ncol, newEffort));
+                    }
+                }
+            }
+        }
+
+        return -1;
+
+    }
+}
