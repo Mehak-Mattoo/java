@@ -1,0 +1,39 @@
+class Solution {
+    public int countStudents(int[] students, int[] sandwiches) {
+        int n = students.length, hungry = 0;
+
+        // Stack<Integer> food = new Stack<>();
+        Queue<Integer> food = new LinkedList<>();
+        Queue<Integer> stu = new LinkedList<>();
+
+        for (int i = 0; i < n; i++) {
+            stu.add(students[i]);
+            food.add(sandwiches[i]);
+            // food.push(sandwiches[n - i - 1]); // to manipulate stack
+        }
+
+        while (true) {
+            int f = food.peek();
+            int s = stu.peek();
+
+            if (f == s) { // if types match
+                hungry = 0; // curr student served
+                stu.poll();
+                // food.pop();
+                food.poll();
+
+            } else {
+                hungry++; // else move them at end of line
+                stu.offer(stu.poll());
+
+            }
+
+            if (stu.size() == hungry) { // hungry students at end of line--> queue left with unservable students
+                break;
+            }
+        }
+
+        return hungry;
+
+    }
+}
