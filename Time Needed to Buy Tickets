@@ -1,0 +1,23 @@
+class Solution {
+    public int timeRequiredToBuy(int[] tickets, int k) {
+
+        int n = tickets.length, time = 0;
+
+        while (tickets[k] != 0) {
+
+            for (int i = 0; i < n; i++) {
+                if (tickets[k] == 0) {
+                    break;
+                }
+
+                if (tickets[i] != 0) {// keep decrements tickets 
+                    tickets[i] = --tickets[i];
+                    time++; //& increasing time
+                }
+            }
+        }
+
+        return time;
+
+    }
+}
