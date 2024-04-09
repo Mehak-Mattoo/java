@@ -19,3 +19,41 @@ while(!s.isEmpty()){
 	return stack;
 	}
 }
+
+
+
+
+import java.util.* ;
+import java.io.*; 
+public class Solution {
+	public static Stack<Integer> sortStack(Stack<Integer> s) {
+
+		 if (s.isEmpty()) {
+            return s; // Return an empty stack if s is empty
+        }
+
+		int top= s.pop();
+
+		sortStack(s);
+		helper(s, top);
+
+return s;
+
+}
+
+public static  void helper(Stack<Integer> s, int top){
+
+if(s.isEmpty() || s.peek() <=top){
+	s.push(top);
+	return ;
+}
+
+int curr=s.pop();
+
+	 helper(s, top); 
+	 s.push(curr);
+
+
+}
+}
+
