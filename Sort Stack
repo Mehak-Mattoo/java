@@ -1,0 +1,21 @@
+import java.util.* ;
+import java.io.*; 
+public class Solution {
+	public static Stack<Integer> sortStack(Stack<Integer> s) {
+		Stack<Integer> stack = new Stack<>();
+
+
+while(!s.isEmpty()){
+	int curr= s.pop();
+
+	while(!stack.isEmpty() && stack.peek()> curr){ // if sorted stack top> curr element
+		int big= stack.pop(); // push the bigger number back into original stack
+		s.push(big);
+	}
+	
+	stack.push(curr);
+
+}
+	return stack;
+	}
+}
