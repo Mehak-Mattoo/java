@@ -1,0 +1,31 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class Solution {
+    public static List<String> generateString(int n) {
+        List<String> list = new ArrayList<>();
+        StringBuilder str = new StringBuilder();
+        
+        helper(n, str, list, false);
+        return list;
+    }
+
+    private static void helper(int n, StringBuilder str, List<String> list, boolean isPrevOne) {
+        if (str.length() == n) {
+            list.add(str.toString());
+            return;
+        }
+
+        // Append '0' and recursively call helper
+        str.append('0');
+        helper(n, str, list, false);
+        str.deleteCharAt(str.length() - 1); // Backtrack
+
+        // Append '1' only if the previous character is not '1'
+        if (!isPrevOne) {
+            str.append('1');
+            helper(n, str, list, true);
+            str.deleteCharAt(str.length() - 1); // Backtrack
+        }
+    }
+}
