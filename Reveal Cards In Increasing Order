@@ -1,0 +1,53 @@
+class Solution {
+    public int[] deckRevealedIncreasing(int[] deck) {
+
+
+        /* the idea is to
+
+        1. sort the array 
+
+        2. Put up a boolean gateway to skip one place everytime
+
+        3. at first all even positions in ans array will be filled by the
+        sorted order of deck elements.
+
+        4. after repeatedily putting  cards back, we will be left with odd places in queue.*/
+
+
+        int n = deck.length;
+
+        int[] ans = new int[n];
+        Arrays.sort(deck);
+
+        if(n==2){ 
+            return deck;
+        }
+
+        Queue<Integer> q = new LinkedList<>();
+
+        for (int i = 0; i < n; i++) {
+            q.add(i); // storing indexes only
+        }
+
+        int index=0;
+        boolean pop= true;
+
+        while(!q.isEmpty()){
+            int curr= q.poll();
+
+            if(pop){  // fills indexes by skipping one place everytime
+                ans[curr]= deck[index]; 
+                ++index;
+                pop= false; // so next time it can go inside queue again
+            }
+            else{
+                q.offer(curr);
+                pop=true;
+            }
+            
+
+        }
+        return ans;
+
+    }
+}
