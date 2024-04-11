@@ -1,0 +1,37 @@
+class Solution {
+    public List<String> generateParenthesis(int n) {
+
+        List<String> list = new ArrayList<>();
+
+        if (n < 0 || n == 0) {
+            return list;
+        }
+
+        StringBuilder str = new StringBuilder();
+
+        helper(0, 0, n, str, list);
+        return list;
+    }
+
+    public static void helper(int open, int close, int n, StringBuilder str, List<String> list) {
+
+        if (open == n && close == n) {
+            list.add(str.toString());
+            return;
+        }
+
+        if (open < n) {
+
+            str.append('(');
+            helper(open + 1, close, n, str, list);
+            str.deleteCharAt(str.length() - 1);
+        }
+
+        if (close < open) {
+            str.append(')');
+            helper(open, close + 1, n, str, list);
+            str.deleteCharAt(str.length() - 1);
+
+        }
+    }
+}
