@@ -15,7 +15,7 @@ class HelloWorld {
         }
     }
     public static void helper( int i,int n, int []arr){
-        if(i>n|| i==n){ // for even--> i>n at middle
+        if(i>=n){ // for even--> i>n at middle
             return; // for odd--> i== n at middle
         }
           int temp = arr[i]; // swap values
