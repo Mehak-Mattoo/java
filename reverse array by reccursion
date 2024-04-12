@@ -1,0 +1,29 @@
+// Online Java Compiler
+// Use this editor to write, compile and run your Java code online
+
+class HelloWorld {
+    public static void main(String[] args) {
+        
+        int arr[]= {1,2,3,6};
+        int n= arr.length;
+        int dup[]= new int[n];
+        
+      //  helper(0,n-1,arr, dup );
+      helper(0, n-1, arr);
+        for(int i:arr){
+            System.out.print(i+"");
+        }
+    }
+    public static void helper( int i,int n, int []arr){
+        if(i>n|| i==n){ // for even--> i>n at middle
+            return; // for odd--> i== n at middle
+        }
+          int temp = arr[i]; // swap values
+        arr[i] = arr[n];
+        arr[n] = temp;
+        
+        helper(i+1, n-1, arr);
+    }
+    
+    
+}
