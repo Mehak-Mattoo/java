@@ -1,0 +1,27 @@
+class Solution {
+    public List<List<Integer>> subsets(int[] nums) {
+
+        int n = nums.length;
+
+        List<List<Integer>> list = new ArrayList<>();
+        List<Integer> insideList = new ArrayList<>();        
+
+        helper(0, nums, n, insideList, list);
+        return list;
+
+    }
+
+    public static void helper(int i, int[] nums, int n, List<Integer> insideList, List<List<Integer>> list) {
+
+        if (i>=n) {
+             list.add(new ArrayList<>(insideList)); // Create a new ArrayList with the current content of insideList
+             return;
+        }
+        insideList.add(nums[i]);// take curr element
+
+       helper(i+1, nums, n, insideList, list);
+       insideList.remove(insideList.size()-1); // Backtrack by removing the last element
+       helper(i+1, nums, n, insideList, list); // not taking curr element
+
+    }
+}
