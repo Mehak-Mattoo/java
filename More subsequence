@@ -1,0 +1,76 @@
+import java.util.*;
+
+public class Solution {
+    public static String moreSubsequence(int n, int m, String a, String b) {
+        Set<String> setA = new HashSet<>();
+        Set<String> setB = new HashSet<>();
+
+// genertes all subsequences  and then calculates the set size-> takes longggg time
+
+        helper(0, n, a, new StringBuilder(), setA);
+        helper(0, m, b, new StringBuilder(), setB);
+
+        if (setA.size() < setB.size()) {
+            return b;
+        }
+
+        return a;
+    }
+
+    public static void helper(int i, int n, String s, StringBuilder stBuilder, Set<String> set) {
+        if (i >= n) {
+            set.add(stBuilder.toString()); // Add the string representation to the set
+            return;
+        }
+
+        stBuilder.append(s.charAt(i));
+        helper(i + 1, n, s, stBuilder, set);
+        stBuilder.deleteCharAt(stBuilder.length() - 1);
+        helper(i + 1, n, s, stBuilder, set);
+    }
+}
+
+
+
+
+
+import java.util.*;
+
+public class Solution {
+    public static String moreSubsequence(int n, int m, String a, String b) {
+
+
+/*just by counting the numbe rf distinct chars in both string and figuring out which has more --> ans*/
+      int first= helper(n, a);
+      int second= helper(m, b);
+
+
+if(first>second){ 
+    return a;
+}
+else if(first== second){
+    if(n>=m){
+        return a;
+    }
+}
+
+        return b;
+    }
+
+    public static int helper(int n, String s) {
+
+        if(s.length()==0){
+            return 0;
+        }
+    
+    Set<Character> set = new HashSet<>();
+
+
+    for (int j = 0; j < s.length(); j++) {
+        set.add(s.charAt(j));
+
+        
+    }
+    return set.size();
+    }
+}
