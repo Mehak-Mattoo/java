@@ -1,0 +1,31 @@
+import java.util.HashMap;
+
+public class Solution {
+    public static boolean isSubsetPresent(int n, int k,int []a) {
+
+
+return helper( 0, 0,n, a, k);
+    }
+
+
+    public static boolean helper(int i,int sum, int n, int [] arr, int k){
+        if(i==n){
+            return sum==k; // when we reach the arr end, see if we find that sum== k
+        }
+   if(sum>k){
+        return false;}
+
+
+       if( helper(i+1, sum+ arr[i], n, arr, k)){// taking
+           return true; // if we get sum==k, return --> no need to look further
+       }
+
+        if( helper(i+1, sum, n, arr, k)){ // not taking
+           return true;
+       }
+
+        return false;
+
+
+    }
+}
