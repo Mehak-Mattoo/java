@@ -1,81 +1,57 @@
-package com.MyProject.java;
+
+class Solution {
+    public int sumNumbers(TreeNode root) {
+       return helper(root, 0); 
+    }
 
 
-class Node{
-	
-	Node left, right;
-     int  data;
-
-public Node(int data) {
-	 this.data= data;  }}
-
-
-class BinaryTree{
-	static Node root;
-
-static void add(int data) {
-
-	Node newNode= new Node(data);
+public  static int helper(TreeNode root, int sum) {
 	
 	if(root== null) {
-		root= newNode;  }
-	
-	else {
-		Node focusNode= root;
-		Node parent;
-		
-		while(true) {
-			parent= focusNode;
-			
-			if(data< focusNode.data) { //  smaller data will be at left side
-				focusNode= focusNode.left;  // changing focus to left side
-				if(focusNode== null) {
-					parent.left= newNode;
-					return;   }}
-				
-				else {
-					focusNode= focusNode.right;  // changing focus to right side
-					if(focusNode== null) {
-						parent.right= newNode;
-						return;  }}
-		
-	
-}}}
-
-public  static int helper(Node root, int sum) {
-	
-	if(root== null) {  
 		return 0;}
 	
-	sum= sum*10 + root.data;  // to move ahead fr next digit
+	sum= sum*10 + root.val;
 	
 	
-	if(root.right== null && root.left == null) {  // when leaf node is encountered, return sum
+	if(root.right== null && root.left == null) {
 		return sum;	}
 	
 	
 	
-	return helper(root.left, sum)+ helper(root.right, sum);}  // keep on adding left and children
-
-
-public  static int sumNumbers(Node root) {
-	
-	return helper(root, 0); }
-
+	return helper(root.left, sum)+ helper(root.right, sum);}
 
 }
-public class SumRootToLeaf {
-	public static void main(String[] args) {
-		
-		BinaryTree tree= new BinaryTree()	;
 
-		tree.root=new Node(2);
-		tree.root.left = new Node(4);
-		tree.root.right= new Node(3);
-		tree.root.left.left = new Node(13);
-		
-		
-	System.out.println(	tree.sumNumbers(tree.root));
-	}
 
+
+
+class Solution { // with stringbuilder
+
+    public int sumNumbers(TreeNode root) {
+
+        return helper(root, new StringBuilder());
+
+    }
+
+    public int helper(TreeNode root, StringBuilder str) {
+        if (root == null) {
+            return 0;
+        }
+
+        str.append(root.val);
+
+        if (root.left == null && root.right == null) { // when encountered a leaf node
+            int sum = Integer.parseInt(str.toString());
+            str.deleteCharAt(str.length() - 1); // delete the last num to reuse it
+            return sum;
+        }
+
+        int left = helper(root.left, str);
+        int right = helper(root.right, str);
+
+        str.deleteCharAt(str.length() - 1); // when there are no children , going back , it deletes all last num
+
+        return left + right;
+
+    }
 }
