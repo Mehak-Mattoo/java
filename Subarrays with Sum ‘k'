@@ -1,0 +1,28 @@
+import java.util.*;
+
+public class Solution {
+    public static List<List<Integer>> subarraysWithSumK(int[] a, long k) {
+        List<List<Integer>> list = new ArrayList<>();
+        List<Integer> temp = new ArrayList<>();
+
+        long sum = 0;
+        int i = 0;
+
+        for (int j = 0; j < a.length; j++) {
+            sum += a[j];
+            temp.add(a[j]);
+
+            while (i < j && sum > k) {
+                sum -= a[i]; // Remove the first element from temp
+                temp.remove(Integer.valueOf(a[i]));
+                i++;
+            }
+
+            if (sum == k) {
+                list.add(new ArrayList<>(temp));
+            }
+        }
+
+        return list;
+    }
+}
