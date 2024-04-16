@@ -1,0 +1,78 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ * int val;
+ * TreeNode left;
+ * TreeNode right;
+ * TreeNode() {}
+ * TreeNode(int val) { this.val = val; }
+ * TreeNode(int val, TreeNode left, TreeNode right) {
+ * this.val = val;
+ * this.left = left;
+ * this.right = right;
+ * }
+ * }
+ */
+class Solution {
+    static class Pair {
+        TreeNode root;
+        int depth;
+
+        public Pair(TreeNode root, int depth) {
+            this.root = root;
+            this.depth = depth;
+        }
+    }
+
+    public TreeNode addOneRow(TreeNode root, int val, int depth) {
+
+        Queue<Pair> q = new LinkedList<>();
+
+        q.offer(new Pair(root, 1));
+
+        if (depth == 1) {
+            TreeNode newRoot = new TreeNode(val);
+            newRoot.left = root; // condition
+
+            return newRoot;
+        }
+
+        while (!q.isEmpty()) {
+            Pair curr = q.poll();
+            TreeNode r = curr.root;
+            int d = curr.depth;
+
+            if (d == depth - 1) { // make 2 new roots
+                TreeNode left = new TreeNode(val);
+                TreeNode right = new TreeNode(val);
+
+                left.left = r.left; // attach the leftsubtree to new left
+                right.right = r.right; // vice-versa
+
+                r.left = left; // curr root --> new left
+                r.right = right;
+
+            }
+
+            if (r.left != null) {
+                q.offer(new Pair(r.left, d + 1));
+            }
+
+            if (r.right != null) {
+                q.offer(new Pair(r.right, d + 1));
+            }
+
+        }
+
+        return root;
+
+    }
+
+    // public static TreeNode helper(TreeNode root, int val, int currDepth, int
+    // depth) {
+    // if (currDepth == depth) {
+
+    // }
+
+    // }
+}
