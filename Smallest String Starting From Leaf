@@ -1,0 +1,52 @@
+import java.util.LinkedList;
+import java.util.Queue;
+
+class Solution {
+  
+
+    static class Pair {
+        TreeNode curr;
+        StringBuilder alphabet;
+
+        public Pair(TreeNode curr, StringBuilder alphabet) {
+            this.curr = curr;
+            this.alphabet = alphabet;
+        }
+    }
+
+    public String smallestFromLeaf(TreeNode root) {
+        StringBuilder ans = new StringBuilder();
+        Queue<Pair> q = new LinkedList<>();
+
+
+        q.offer(new Pair(root, new StringBuilder().append((char) (root.val + 97)))); // converting to char representation
+
+        while (!q.isEmpty()) {
+            Pair c = q.poll();
+            TreeNode temp = c.curr;
+            StringBuilder alpha = c.alphabet;
+
+            // Check if temp is a leaf node
+            if (temp.left == null && temp.right == null) {
+                String currentString = alpha.reverse().toString(); // reversing as ques stated leaf to root
+
+                // If ans is empty or currentString is lexicographically smaller than ans
+                if (ans.length() == 0 || currentString.compareTo(ans.toString()) < 0) {
+                    ans = new StringBuilder(currentString);
+                }
+            }
+
+            // Traverse left child
+            if (temp.left != null) {
+                q.add(new Pair(temp.left, new StringBuilder(alpha).append((char) (temp.left.val + 97)))); // append root with current left child val
+            }
+
+            // Traverse right child
+            if (temp.right != null) {
+                q.add(new Pair(temp.right, new StringBuilder(alpha).append((char) (temp.right.val + 97))));
+            }
+        }
+
+        return ans.toString();
+    }
+}
