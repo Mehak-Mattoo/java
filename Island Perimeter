@@ -1,0 +1,31 @@
+class Solution {
+    public int islandPerimeter(int[][] grid) {
+        int n = grid.length, m = grid[0].length, perimeter = 0;
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (grid[i][j] == 1) { // when we find land
+
+                 if (i == 0 || (grid[i - 1][j] == 0 && i > 0)) {// if upper cell is water
+                        perimeter++;
+                    }
+
+                    if (j == 0 || (grid[i][j - 1] == 0 && j > 0)) { // if left cell is water
+                        perimeter++;
+                    }
+
+                    if ( j== m-1 || (grid[i][j+1] == 0 && j < m-1)) { // if right cell is water
+                        perimeter++;
+                    }
+                     if ( i== n-1 || (grid[i+1][j] == 0 && i < n-1)) {// if below cell is water
+                        perimeter++;
+                    }
+
+                }
+            }
+        }
+
+        return perimeter;
+
+    }
+}
