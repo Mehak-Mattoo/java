@@ -1,0 +1,79 @@
+
+class Solution { ///bruce
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+
+        int n = candidates.length;
+
+        Set<List<Integer>> list = new HashSet<>();
+        List<Integer> insideList = new ArrayList<>();
+        Set<List<Integer>> set = new HashSet<>();
+
+        Arrays.sort(candidates);
+
+        helper(0, target, candidates, n, insideList, list);
+
+        return new ArrayList<>(list);
+
+    }
+
+    public static void helper(int i, int target, int arr[], int n, List<Integer> insideList, Set<List<Integer>> list) {
+        if (i == n) {
+             if (target == 0) {
+            list.add(new ArrayList<>(insideList)); }
+            return;
+        }
+
+       
+
+        insideList.add(arr[i]);
+
+        helper(i + 1, target - arr[i], arr, n, insideList, list);
+        insideList.remove(insideList.size() - 1);
+        helper(i + 1, target, arr, n, insideList, list);
+    }
+}
+
+
+
+
+class Solution {
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+
+        int n = candidates.length;
+
+        List<List<Integer>> list = new ArrayList<>();
+        List<Integer> insideList = new ArrayList<>();
+        // Set<List<Integer>> set = new HashSet<>();
+
+        Arrays.sort(candidates);
+
+        helper(0, target, candidates, n, insideList, list);
+
+        return list;
+
+    }
+
+    public static void helper(int start, int target, int arr[], int n, List<Integer> insideList,
+            List<List<Integer>> list) {
+
+        if (target == 0) {
+            list.add(new ArrayList<>(insideList));
+            return;
+        }
+
+        for (int i = start; i < n; i++) {
+            if (start < i && arr[i] == arr[i - 1]) {//  skip duplicates  && when it is not the first time picking the element
+                continue;
+            }
+            if (arr[i] > target) {//because array is sorted
+                break;
+            }
+            insideList.add(arr[i]);
+
+            helper(i + 1, target - arr[i], arr, n, insideList, list);
+            insideList.remove(insideList.size() - 1);
+
+        }
+
+    }
+}
