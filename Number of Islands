@@ -1,0 +1,102 @@
+class Solution {
+
+    static class Pair {
+        int r;
+        int c;
+
+        public Pair(int r, int c) {
+            this.r = r;
+            this.c = c;
+        }
+    }
+
+    public int numIslands(char[][] grid) {
+
+        int n = grid.length, m = grid[0].length, island = 0;
+
+        int[][] vis = new int[n][m];
+
+        Queue<Pair> q = new LinkedList<>();
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (vis[i][j] == 0 && grid[i][j] == '1') {
+                    island++;
+                    bfs(i, j, vis, grid, n, m);
+
+                }
+            }
+        }
+        return island;
+
+    }
+
+    public static void bfs(int r, int c, int[][] vis, char[][] grid, int n, int m) {
+
+        Queue<Pair> q = new LinkedList<>();
+        q.offer(new Pair(r, c));
+        vis[r][c] = 1;
+
+        int[] x = { -1, 0, 1, 0 };
+        int[] y = { 0, 1, 0, -1 };
+
+        while (!q.isEmpty()) {
+            Pair curr = q.poll();
+            int row = curr.r;
+            int col = curr.c;
+
+            for (int i = 0; i < 4; i++) {
+                int nrow = row + x[i];
+                int ncol = col + y[i];
+
+                if (nrow >= 0 && ncol >= 0 && nrow < n && ncol < m && vis[nrow][ncol] == 0 && grid[nrow][ncol] == '1') {
+                    vis[nrow][ncol] = 1;
+                    q.offer(new Pair(nrow, ncol));
+                }
+            }
+
+        }
+
+    }
+}
+
+
+
+
+class Solution {
+
+    public int numIslands(char[][] grid) {
+
+        int n = grid.length, m = grid[0].length, island = 0;
+
+        int[][] vis = new int[n][m];
+
+        Queue<Pair> q = new LinkedList<>();
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (vis[i][j] == 0 && grid[i][j] == '1') { // first unvisited cell
+                    island++;
+                    dfs(i, j, vis, grid, n, m); // after this, all its connecting neighbours will be made into a giant island
+
+                }
+            }
+        }
+        return island;
+
+    }
+
+    public static void dfs(int r, int c, int[][] vis, char[][] grid, int n, int m) {
+
+        if (r < 0 || c < 0 || c >= m ||r >= n || vis[r][c]==1 || grid[r][c]=='0') {
+            return;
+        }
+
+        vis[r][c] = 1;
+
+        dfs(r - 1, c, vis, grid, n, m); // up
+        dfs(r, c + 1, vis, grid, n, m);// right
+        dfs(r + 1, c, vis, grid, n, m);// down
+        dfs(r, c - 1, vis, grid, n, m);// left
+    }
+}
