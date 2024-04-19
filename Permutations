@@ -1,0 +1,24 @@
+class Solution {
+    public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> list = new ArrayList<>();
+ int n=nums.length;
+        backtrack(n,list, new ArrayList<>(), nums);
+        return list;
+    }
+
+    private void backtrack(int n, List<List<Integer>> list, List<Integer> insideList, int[] nums) {
+       
+        if (insideList.size() == n) {
+            list.add(new ArrayList<>(insideList));
+            return;
+        } 
+            for (int i = 0; i < n; i++) {
+                if (insideList.contains(nums[i]))
+                    continue; // element already exists, skip
+                insideList.add(nums[i]);
+                backtrack(n,list, insideList, nums);
+                insideList.remove(insideList.size() - 1);
+            }
+        
+    }
+}
