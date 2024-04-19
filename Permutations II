@@ -1,0 +1,36 @@
+class Solution {
+    public List<List<Integer>> permuteUnique(int[] nums) {
+        Arrays.sort(nums);
+        int n = nums.length;
+
+        List<List<Integer>> list = new ArrayList<>();
+        boolean[] flag = new boolean[n]; // shows which index is used at the time
+
+        helper(n, nums, flag, new ArrayList<>(), list);
+        return list;
+    }
+
+    public static void helper(int n, int[] nums, boolean[] flag, List<Integer> insideList, List<List<Integer>> list) {
+
+        if (insideList.size() == n && !list.contains(insideList)) { // list may contain duplicate inner list, ignore them
+            list.add(new ArrayList<>(insideList));
+            return;
+        }
+
+        for (int i = 0; i < n; i++) {
+
+            if (flag[i]) {// while dealing with duplicates, do not use same index again
+                continue;
+            }
+            flag[i] = true;
+
+            insideList.add(nums[i]);
+
+            helper(n, nums, flag, insideList, list);
+            flag[i] = false;
+            insideList.remove(insideList.size() - 1);
+
+        }
+
+    }
+}
