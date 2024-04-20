@@ -1,0 +1,112 @@
+class Solution {
+    public List<List<Integer>> subsetsWithDup(int[] nums) {
+
+        List<List<Integer>> list = new ArrayList<>();
+        List<Integer> insideList = new ArrayList<>();
+
+        int n = nums.length;
+        Arrays.sort(nums);
+
+        helper(0, n,nums, insideList, list);
+
+        return list;
+
+    }
+
+    public static void helper(int i, int n, int[]nums, List<Integer> insideList,  List<List<Integer>> list ){
+
+        if(i>=n ){
+             if( !list.contains(insideList)){
+            list.add(new ArrayList<>(insideList));}
+            return;
+        }
+
+        insideList.add( nums[i]);
+
+        helper(i+1, n, nums, insideList, list);
+        insideList.remove(insideList.size()-1);
+        helper(i+1, n, nums, insideList, list);
+
+
+
+    }
+}
+
+
+
+
+
+class Solution {
+    public List<List<Integer>> subsetsWithDup(int[] nums) {
+
+        List<List<Integer>> list = new ArrayList<>();
+        List<Integer> insideList = new ArrayList<>();
+
+        int n = nums.length;
+        boolean []flag= new boolean[n];
+        Arrays.sort(nums);
+
+        helper(0, n,nums,flag ,insideList, list);
+
+        return list;
+
+    }
+
+    public static void helper(int i, int n, int[]nums, boolean []flag, List<Integer> insideList,  List<List<Integer>> list ){
+
+        if(i>=n ){
+             if( !list.contains(insideList)){
+            list.add(new ArrayList<>(insideList));}
+            return;
+        }
+
+        if(!flag[i]){ // current index not used
+
+        insideList.add( nums[i]);
+        flag[i]=true;}
+
+        helper(i+1, n, nums, flag, insideList, list);
+        insideList.remove(insideList.size()-1);
+        flag[i]= false;
+        helper(i+1, n, nums,flag, insideList, list);
+
+
+
+    }
+}
+
+
+
+
+class Solution { // fastest
+    public List<List<Integer>> subsetsWithDup(int[] nums) {
+
+        List<List<Integer>> list = new ArrayList<>();
+        List<Integer> insideList = new ArrayList<>();
+
+        int n = nums.length;
+        Arrays.sort(nums);
+
+        helper(0, n,nums,insideList, list);
+
+        return list;
+
+    }
+
+    public static void helper(int start, int n, int[]nums, List<Integer> insideList,  List<List<Integer>> list ){
+       
+        list.add(new ArrayList<>(insideList)); // at first call, a empty list will be stored
+           
+      for(int i=start; i<n;i++){
+
+        if(start<i&& nums[i]==nums[i-1]){ // skip duplicates
+            continue;
+        }
+
+        insideList.add(nums[i]);
+
+        helper(i+1, n, nums, insideList, list);
+        insideList.remove(insideList.size()-1);
+      }
+    }
+}
