@@ -1,0 +1,39 @@
+import java.util.* ;
+
+import java.io.*; 
+public class Solution {
+    public static ArrayList<Integer> subsetSum(int num[]) {
+      
+      ArrayList<Integer> list= new ArrayList<>();
+      ArrayList<Integer> insideList= new ArrayList<>();
+
+      int n= num.length;
+
+      helper(0,n, num, insideList, list );
+
+      Collections.sort(list);
+
+      return list;
+    }
+
+    public static void helper(int i,  int n, int []nums, ArrayList<Integer> insideList, ArrayList<Integer> list){
+
+        if(i==n){
+              int sum = 0;
+            for (int j = 0; j < insideList.size(); j++) {
+                sum += insideList.get(j);
+            }
+            list.add(sum);
+
+            return;
+          
+        }
+
+        insideList.add(nums[i]);
+
+        helper(i+1, n, nums, insideList, list);
+        insideList.remove(insideList.size()-1);
+        helper(i+1, n, nums, insideList, list);
+    }
+
+}
