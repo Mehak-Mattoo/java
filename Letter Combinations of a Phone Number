@@ -1,0 +1,51 @@
+class Solution {
+    public List<String> letterCombinations(String digits) {
+
+        int n = digits.length();
+
+        List<String> list = new ArrayList<>();
+
+        if (n == 0) {
+            return list;
+        }
+
+        HashMap<Character, String> map = new HashMap<>();
+
+        map.put('2', "abc");
+        map.put('3', "def");
+        map.put('4', "ghi");
+        map.put('5', "jkl");
+        map.put('6', "mno");
+        map.put('7', "pqrs");
+        map.put('8', "tuv");
+        map.put('9', "wxyz");
+
+        helper(0, new StringBuilder(), digits, n, map, list);
+
+        return list;
+
+    }
+
+    public static void helper(int index, StringBuilder str, String digits, int n, HashMap<Character, String> map,
+            List<String> list) { // eg-23
+
+        if (index >= n) {
+            list.add(str.toString());
+            return;
+        }
+
+        char digit = digits.charAt(index);  // get the curr int value of digit ->2  // next->3
+        String letters = map.get(digit); // then gets its associated string  ->abc // --def
+
+        for (int i = 0; i < letters.length(); i++) { // we go upto the length of string- 3 //still 3
+
+            str.append(letters.charAt(i)); // -> a // ad // the we print them
+
+            helper(index + 1, str, digits, n, map, list); // then next time 
+            str.deleteCharAt(str.length() - 1);
+
+        }
+
+    }
+
+}
