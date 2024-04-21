@@ -1,0 +1,66 @@
+
+class DisjointSet {
+
+    List<Integer> parent = new ArrayList<>();
+    List<Integer> size = new ArrayList<>();
+
+    public DisjointSet(int n) {
+        for (int i = 0; i <= n; i++) {
+            parent.add(i);
+            size.add(1);
+        }
+    }
+
+    public int findParent(int node) {
+        if (node == parent.get(node)) {
+            return node;
+        }
+        int ultimateP = findParent(parent.get(node));// recursively find parent until ultimate is found
+        parent.set(node, ultimateP); // pat compression
+        return parent.get(node); // return ultimste parent
+
+    }
+
+    public void unionBySize(int u, int v) {
+        int UltimateofU = findParent(u);
+        int UltimateofV = findParent(v);
+
+        if (UltimateofU == UltimateofV) {// when ultimate parent is same , they are already connected
+            return;
+        }
+
+        if (size.get(UltimateofU) < size.get(UltimateofV)) {
+            parent.set(UltimateofU, UltimateofV);
+            size.set(UltimateofV, size.get(UltimateofV) + size.get(UltimateofU));
+        } else {
+            parent.set(UltimateofV, UltimateofU);
+            size.set(UltimateofU, size.get(UltimateofU + size.get(UltimateofV)));
+        }
+
+    }
+}
+
+class Solution {
+    public boolean validPath(int n, int[][] edges, int source, int destination) {
+
+        DisjointSet ds = new DisjointSet(n);
+
+        for (int i = 0; i < edges.length; i++) {
+            int u = edges[i][0];
+            int v = edges[i][1];
+
+            if (ds.findParent(u) != ds.findParent(v)) {
+                ds.unionBySize(u, v);
+            }
+        }
+
+        // if sorce ans dest have same parent , there must be some path bw them
+
+        if (ds.findParent(source) == ds.findParent(destination)) {
+            return true;
+        }
+
+        return false;
+
+    }
+}
