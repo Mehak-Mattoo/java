@@ -1,0 +1,32 @@
+class Solution {
+    public List<List<Integer>> combinationSum3(int k, int n) {
+        List<List<Integer>> list = new ArrayList<>();
+        List<Integer> insideList = new ArrayList<>();
+
+        int[] nums = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+
+        helper(0, nums, n, k, insideList, list); // Start with index 0
+        return list;
+    }
+
+    public static void helper(int start, int[] nums, int target, int size, List<Integer> insideList,
+            List<List<Integer>> list) {
+
+        if (insideList.size() == size) {
+            if (target == 0) {
+                list.add(new ArrayList<>(insideList));
+            }
+            return;
+        }
+
+        for (int i = start; i < nums.length; i++) {
+            if (nums[i] > target) {
+                break;
+            }
+
+            insideList.add(nums[i]); 
+            helper(i + 1, nums, target - nums[i], size, insideList, list);
+            insideList.remove(insideList.size() - 1);
+        }
+    }
+}
