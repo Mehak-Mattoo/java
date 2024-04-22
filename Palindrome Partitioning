@@ -1,0 +1,48 @@
+class Solution {
+    public List<List<String>> partition(String s) {
+
+        int n = s.length();
+        List<List<String>> list = new ArrayList<>();
+        List<String> insideList = new ArrayList<>();
+
+        helper(0, s, n, insideList, list);
+
+        return list;
+
+    }
+
+    public static void helper(int index,  String s, int n, List<String> insideList,
+            List<List<String>> list) {
+
+        if (index == n) {
+            list.add(new ArrayList<>(insideList));
+            return;
+        }
+
+        for (int i = index; i < n; i++) {
+            String substring= s.substring(index, i+1);
+
+            if (isPalindrome(substring)) {
+                insideList.add(substring);
+
+                helper(i + 1, s, n, insideList, list);
+                insideList.remove(insideList.size() - 1);
+            }
+
+        }
+
+    }
+
+    public static boolean isPalindrome(String s) {
+
+        int low = 0, high = s.length() - 1;
+
+        while (low <= high) {
+            if (s.charAt(low++) != s.charAt(high--)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+}
