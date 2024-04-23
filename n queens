@@ -1,0 +1,79 @@
+
+class Solution {
+    public List<List<String>> solveNQueens(int n) {
+
+        char[][] board = new char[n][n];
+        int m = board.length;
+
+        for (int i = 0; i < n; i++) { // make a empty chess board
+            for (int j = 0; j < n; j++) {
+                board[i][j] = '.';
+            }
+        }
+
+        List<List<String>> list = new ArrayList<List<String>>();
+        helper(0, m, board, list);
+        return list;
+    }
+
+    static void helper(int col, int n, char[][] board, List<List<String>> list) {
+
+        if (col == n) {
+            list.add(construct(board, n));
+            return;
+        }
+
+        for (int row = 0; row < n; row++) {
+
+            if (validate(board, n, row, col)) { // if we can place a queen , place it
+                board[row][col] = 'Q';
+                helper(col + 1, n, board, list); // check for next column
+                board[row][col] = '.'; // bactrack
+            }
+        }
+    }
+
+    static List<String> construct(char[][] board, int n) { // construct 
+
+        List<String> res = new LinkedList<String>();
+
+        for (int i = 0; i < n; i++) {
+            String s = new String(board[i]);
+            res.add(s);
+        }
+        return res;
+    }
+
+    static boolean validate(char[][] board, int n, int row, int col) {
+        int duprow = row;
+        int dupcol = col;
+
+        while (row >= 0 && col >= 0) { // check upper diagonal
+            if (board[row][col] == 'Q')
+                return false;
+            row--;
+            col--;
+        }
+
+        row = duprow;
+        col = dupcol;
+
+        while (col >= 0) {  // check left side
+            if (board[row][col] == 'Q')
+                return false;
+            col--;
+        }
+
+        row = duprow;
+        col = dupcol;
+
+        
+        while (col >= 0 && row < n) {  // check bottom left diagonal
+            if (board[row][col] == 'Q')
+                return false;
+            col--;
+            row++;
+        }
+        return true;
+    }
+}
