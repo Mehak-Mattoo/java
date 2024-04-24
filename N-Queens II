@@ -1,0 +1,88 @@
+class Solution {
+    public int totalNQueens(int n) {
+
+        char[][] board = new char[n][n];
+        int m = board.length;
+
+        for (int i = 0; i < n; i++) { // make a empty chess board
+            for (int j = 0; j < n; j++) {
+                board[i][j] = '.';
+            }
+        }
+
+        List<List<String>> list = new ArrayList<List<String>>();
+
+        helper(0, m, board, list);
+
+        return list.size();
+
+    }
+
+    public static void helper(int col, int n, char[][] board, List<List<String>> list) {
+
+        if (col == n) {
+            list.add(construct(board, n));
+            return;
+        }
+
+        for (int row = 0; row < n; row++) {
+            if (canPlace(row, col, board, n)) {
+                board[row][col] = 'Q';
+                helper(col + 1, n, board, list);
+                board[row][col] = '.';
+            }
+        }
+    }
+
+    public static List<String> construct(char[][] board, int n) {
+
+        List<String> list = new ArrayList<>();
+
+        for (int i = 0; i < n; i++) {
+            String s = new String(board[i]);
+            list.add(s);
+        }
+
+        return list;
+    }
+
+    public static boolean canPlace(int r, int c, char[][] board, int n) {
+
+        int dupRow = r, dupCol = c;
+
+        while (r >= 0 && c >= 0) {
+            if (board[r][c] == 'Q') {
+                return false;
+            }
+            r--;
+            c--;
+        }
+
+     
+        r = dupRow;
+        c = dupCol;
+
+        while(c>=0){
+             if (board[r][c] == 'Q') {
+                return false;
+            }
+            c--;
+
+        }
+       
+        r = dupRow;
+        c = dupCol;
+
+        while(r<n&& c>=0){
+             if (board[r][c] == 'Q') {
+                return false;
+            }
+
+            r++;
+            c--;
+        }
+
+        return true;
+
+    }
+}
