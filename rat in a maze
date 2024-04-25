@@ -1,0 +1,42 @@
+import java.util.*;
+
+public class Solution {
+
+    public static List<String> ratMaze(int [][]mat) {
+      
+      List<String> list = new ArrayList<>();
+      int n = mat.length;
+      boolean [][]vis = new boolean[n][n];
+
+      if(mat[n-1][n-1]==0){
+           list.add("-1");
+           return list;
+      }
+
+      if (mat[0][0] == 1) {
+          helper(0, 0, n, new StringBuilder(), list, mat, vis);
+      }
+
+      return list;
+    }
+
+    public static void helper(int row, int col, int n, StringBuilder str, List<String> list, int [][]mat, boolean [][]vis) {
+        if (row == n - 1 && col == n - 1) {
+            list.add(str.toString());
+            return;
+        }
+
+        if (row < 0 || col < 0 || row >= n || col >= n || vis[row][col] || mat[row][col] == 0) {
+            return;
+        }
+
+        vis[row][col] = true;
+
+        helper(row + 1, col, n, new StringBuilder(str).append("D"), list, mat, vis);
+        helper(row - 1, col, n, new StringBuilder(str).append("U"), list, mat, vis);
+        helper(row, col + 1, n, new StringBuilder(str).append("R"), list, mat, vis);
+        helper(row, col - 1, n, new StringBuilder(str).append("L"), list, mat, vis);
+
+        vis[row][col] = false; // bactracking to get all possible paths
+    }
+}
