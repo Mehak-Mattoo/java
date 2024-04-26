@@ -1,0 +1,56 @@
+class Solution {
+    public void solveSudoku(char[][] board) {
+
+        int n = board.length, m = board[0].length;
+
+        helper(n, m, board);
+    }
+
+    public static boolean helper(int n, int m, char[][] board) {
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+
+                if (board[i][j] == '.') {// if we find a empty spot
+                    for (char k = '1'; k <= '9'; k++) { 
+                        if (canPut(i, j, k, board)) { // check if we can put curr char in curr place
+                            board[i][j] = k;
+
+                            if (helper(n, m, board)) {
+                                return true;
+                            }
+                            board[i][j] = '.'; //bactrack
+
+                        }
+
+                    }
+                    return false; // if we could not place any digit
+
+                }
+
+            }
+        }
+
+        return true;
+    }
+
+    public static boolean canPut(int row, int col, char k, char[][] board) {
+
+        for (int i = 0; i < 9; i++) {
+            if (board[row][i] == k) {// checking whole row
+                return false;
+            }
+
+            if (board[i][col] == k) {// checking whole column
+                return false;
+            }
+
+            if (board[3 * (row / 3) + i / 3][3 * (col / 3) + i % 3] == k) {// checking 3*3 grid
+                return false;
+            }
+        }
+        return true;
+
+    }
+
+}
