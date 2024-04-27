@@ -1,0 +1,68 @@
+class Solution { // gives tle
+    public int climbStairs(int n) {
+
+        int sum=0;
+
+        return  helper( 0, n);
+
+    }
+
+    public static int helper(int curr, int n) {
+
+        if(curr==n){
+            return 1;
+
+        }
+        if(curr>n){
+            return 0;
+        }
+
+        
+int l= helper(curr+1, n );
+
+int r= helper(curr+ 2, n);
+
+return l+r;
+    }
+}
+
+
+
+
+
+class Solution { // accepted
+    public int climbStairs(int n) {
+
+        HashMap<Integer, Integer> map = new HashMap<>();
+
+        return helper(0, n, map);
+
+        // return sum;
+
+    }
+
+    public static int helper(int curr, int n, HashMap<Integer, Integer> map) {
+
+        if (curr == n) {
+            return 1;
+
+        }
+        if (curr > n) {
+            return 0;
+        }
+
+        if (map.containsKey(curr)) {
+            return map.get(curr);
+        }
+
+        int l = helper(curr + 1, n, map);
+
+        int r = helper(curr + 2, n, map);
+
+        int res = l + r;
+
+        map.put(curr, res);
+
+        return res;
+    }
+}
