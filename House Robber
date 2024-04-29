@@ -1,0 +1,123 @@
+class Solution {
+    public int rob(int[] nums) {
+
+        return helper(nums.length - 1, nums);
+
+    }
+
+    public static int helper(int i,  int[] nums) {
+        if (i == 0) {
+            return nums[i];
+        }
+
+        if (i < 0) {
+            return 0;
+        }
+
+        int pick = nums[i] + helper(i - 2, nums);
+
+        int notPick = helper(i - 1,  nums);
+
+
+ return Math.max(pick, notPick);
+
+    }
+}
+
+
+
+
+class Solution {
+    public int rob(int[] nums) {
+
+        HashMap<Integer, Integer> map = new HashMap<>();
+
+        return helper(nums.length - 1, nums, map);
+
+    }
+
+    public static int helper(int i,  int[] nums,  HashMap<Integer, Integer> map) {
+        if (i == 0) {
+            return nums[i];
+        }
+
+        if (i < 0) {
+            return 0;
+        }
+
+        if(map.containsKey(i)){
+            return map.get(i);
+        }
+
+        int pick = nums[i] + helper(i - 2, nums, map);// while picking , next time we will not pick adjacent house
+
+        int notPick = helper(i - 1,  nums, map); // picking adjacent house
+
+       int max=   Math.max(pick, notPick);
+
+        map.put(i,max );
+
+
+ return max;
+
+    }
+}
+
+
+
+
+
+class Solution {
+    public int rob(int[] nums) {
+        int[] dp = new int[nums.length];
+        dp[0] = nums[0];
+
+        if (nums.length == 2) {
+            return Math.max(nums[0], nums[1]);
+        }
+
+        for (int i = 1; i < dp.length; i++) {
+            int pick = nums[i]; // Set pick to the current house value by default
+            
+            if (i >= 2) {
+                pick += dp[i - 2]; // Add the maximum from two houses ago if available
+            }
+            
+            int notPick = dp[i - 1]; // Maximum amount without picking the current house
+            
+            dp[i] = Math.max(pick, notPick);
+        }
+
+        return dp[dp.length - 1];
+    }
+}
+
+
+
+
+class Solution {
+    public int rob(int[] nums) {
+
+        int prev = nums[0], prev2 = 0;
+
+       
+        for (int i = 1; i < nums.length; i++) {
+            int pick = nums[i]; // Set pick to the current house value by default
+
+            if (i > 1) {
+               pick +=  prev2; // Add the maximum from two houses ago if available
+            }
+
+            int notPick = prev; // Maximum amount without picking the current house
+
+            int curr = Math.max(pick, notPick);
+            prev2= prev;
+            prev= curr;
+
+        }
+
+        return prev;
+    }
+}
+
+
