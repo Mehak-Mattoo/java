@@ -1,0 +1,41 @@
+class Solution {
+    public int rob(int[] nums) {
+
+        int n = nums.length;
+
+        if(n==1){
+            return nums[0];
+        }
+        // as 1 and last house are adjacent
+
+        int[] arr1 = Arrays.copyOfRange(nums, 0, n - 1);  // taking sepearte arrays- > 1. 0- second last
+        int[] arr2 = Arrays.copyOfRange(nums, 1, n); //2. 1 to last
+
+        int first = helper(arr1);
+        int second = helper(arr2);
+
+        return Math.max(first, second); // maximize the loot
+
+    }
+
+    public static int helper(int[] nums) {
+        int prev = nums[0], prev2 = 0;
+
+        for (int i = 1; i < nums.length; i++) {
+            int pick = nums[i]; // Set pick to the current house value by default
+
+            if (i > 1) {
+                pick += prev2; // Add the maximum from two houses ago if available
+            }
+
+            int notPick = prev; // Maximum amount without picking the current house
+
+            int curr = Math.max(pick, notPick);
+            prev2 = prev;
+            prev = curr;
+
+        }
+
+        return prev;
+    }
+}
