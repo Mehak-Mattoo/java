@@ -1,0 +1,96 @@
+class Solution {
+    public int minimumTotal(List<List<Integer>> triangle) {
+
+        int n = triangle.size();
+
+        int[][] dp = new int[n][n];
+
+        return helper(0, 0, triangle, dp, n);
+
+    }
+
+    public static int helper(int r, int c, List<List<Integer>> triangle, int[][] dp, int n) {
+
+        if (r == n - 1) {
+            return triangle.get(r).get(c);
+        }
+
+        if (dp[r][c] != 0) {
+            return dp[r][c];
+        }
+
+        int down = triangle.get(r).get(c) + helper(r + 1, c, triangle, dp, n);
+        int downAndSide = triangle.get(r).get(c) + helper(r + 1, c + 1, triangle, dp, n);
+
+        return dp[r][c] = Math.min(down , downAndSide);
+
+    }
+
+}
+
+
+
+
+class Solution {
+    public int minimumTotal(List<List<Integer>> triangle) {
+
+        int n = triangle.size();
+
+        int[][] dp = new int[n][n];
+
+      for (int j = 0; j < n; j++) {
+            dp[n - 1][j] = triangle.get(n-1).get(j);
+        }
+
+        for (int i = n-2; i >=0; i--) {
+            for (int j = i; j >=0; j--) {
+
+
+                int down = triangle.get(i).get(j) + dp[i + 1][j];
+                int downAndSide = triangle.get(i).get(j) + dp[i + 1][j + 1];
+
+                dp[i][j] = Math.min(down, downAndSide);
+            }
+
+        }
+
+        return dp[0][0];
+
+    }
+
+}
+
+
+
+
+class Solution {
+    public int minimumTotal(List<List<Integer>> triangle) {
+
+        int n = triangle.size();
+
+        int[] prev = new int[n];
+
+        for (int j = 0; j < n; j++) {
+            prev[j] = triangle.get(n - 1).get(j); // mention all bottom rows as bases cases
+        }
+
+        for (int i = n - 2; i >= 0; i--) { // bcuz n-1 is already done
+        int[] curr = new int[n];
+
+            for (int j = i; j >= 0; j--) { // j will run only upto i -> bcuz triangle
+
+                int down = triangle.get(i).get(j) + prev[j];
+                int downAndSide = triangle.get(i).get(j) + prev[j + 1];
+
+                curr[j] = Math.min(down, downAndSide);
+            }
+
+            prev = curr;
+
+        }
+
+        return prev[0];
+
+    }
+
+}
