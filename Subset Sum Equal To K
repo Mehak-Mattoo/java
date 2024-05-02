@@ -1,0 +1,117 @@
+import java.util.*;
+
+public class Solution {
+    public static boolean subsetSumToK(int n, int k, int arr[]) {
+        return helper(0, k, arr, new ArrayList<>());
+    }
+
+    public static boolean helper(int i, int target, int[] arr, List<Integer> list) {
+        if (target == 0) {
+            return true;
+        }
+
+        if (i == arr.length || target < 0) {
+            return false;
+        }
+
+        list.add(arr[i]);
+
+        if (helper(i + 1, target - arr[i], arr, list)) {
+            return true;
+        }
+
+        list.remove(list.size() - 1);
+
+           if (helper(i + 1, target, arr, list)) {
+            return true;
+        }
+
+        return false;
+  
+    }
+}
+
+
+
+import java.util.*;
+
+public class Solution {
+    public static boolean subsetSumToK(int n, int k, int arr[]) {
+
+        int dp[][] = new int[n][k + 1];
+        return helper(0, k, arr, new ArrayList<>(), dp);
+    }
+
+    public static boolean helper(int i, int target, int[] arr, List<Integer> list, int dp[][]) {
+       
+        if (target == 0) {
+            return true;
+        }
+
+        if (i == arr.length || target < 0) {
+            return false;
+        }
+
+        if(dp[i][target]!=0){
+            return dp[i][target]==0?false:true;
+        }
+
+        list.add(arr[i]);
+
+        boolean take= helper(i + 1, target - arr[i], arr, list, dp) ;
+        
+        list.remove(list.size() - 1);
+
+           boolean notTake = helper(i + 1, target, arr, list,dp) ;
+
+
+dp[i][target]=  take|| notTake? 1:0;
+        
+
+        return  take|| notTake;
+ 
+  
+    }
+}
+
+
+
+
+
+
+
+
+public class Solution {
+    public static boolean subsetSumToK(int n, int k, int arr[]) {
+
+        boolean dp[][] = new boolean[n][k + 1];
+
+        for (int i = 0; i < dp.length; i++) {
+            dp[i][0]= true;
+        }
+
+        if(arr[0]<=k){
+             dp[0][arr[0]] = true;
+        }
+
+
+for (int i = 1; i < n; i++) {
+   for (int target = 1 ; target <= k ; target++) {
+
+         boolean take = false;
+                if (arr[i] <= target) {
+                    take = dp[i - 1][target - arr[i]];
+                }
+
+      boolean notTake = dp[i - 1][target];
+
+                dp[i][target] = notTake || take;
+       
+   } }
+
+   return dp[n - 1][k];
+
+ 
+  
+    }
+}
