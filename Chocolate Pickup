@@ -1,0 +1,47 @@
+import java.util.*;
+
+public class Solution {
+    public static int maximumChocolates(int r, int c, int[][] grid) {
+        int n = grid.length, m = grid[0].length;
+
+        int[][][] dp = new int[n][m][m];
+
+        return helper(0, 0, m - 1, n, m, grid, dp); // using just one row as both alice & bob move together in same row
+    }
+
+    public static int helper(int r, int c1, int c2, int n, int m, int[][] grid, int[][][] dp) {
+
+        if (c1 < 0 || c1 >= m || c2 < 0 || c2 >= m) { // out of bounds
+            return (int) (-Math.pow(10, 9)); 
+        }
+
+        if (r == n - 1) { // reached the last row
+            if (c1 == c2) { // if both reach same column
+                return grid[r][c1]; // return its value once
+            } else {
+                return grid[r][c1] + grid[r][c2]; // else return both cell values
+            }
+        }
+
+        if (dp[r][c1][c2] != 0) {
+            return dp[r][c1][c2];
+        }
+
+        int max = Integer.MIN_VALUE;
+
+        for (int i = -1; i <= 1; i++) { // movement across all 9 paths
+            for (int j = -1; j <= 1; j++) {
+                int ans;
+
+                if (c1 == c2) { // same column
+                    ans = grid[r][c1] + helper(r + 1, c1 + i, c2 + j, n, m, grid, dp);
+                } else {
+                    ans = grid[r][c1] + grid[r][c2] + helper(r + 1, c1 + i, c2 + j, n, m, grid, dp);
+                    max = Math.max(max, ans);
+                }
+            }
+        }
+
+        return dp[r][c1][c2] = max;
+    }
+}
