@@ -1,0 +1,43 @@
+class Solution {
+    public int findMaxK(int[] nums) {
+
+        int n = nums.length, max = Integer.MIN_VALUE, ans = -1;
+
+        // Create a HashMap to store the indices of the elements
+        HashMap<Integer, Integer> map = new HashMap<>();
+
+        // Populate the HashMap with the indices of the elements
+        for (int i = 0; i < n; i++) {
+            map.put(nums[i], i);
+        }
+
+        // Iterate through the array
+        for (int i = 0; i < n; i++) {
+            int curr = nums[i];
+
+            // Check if the current element is negative
+            if (curr < 0) {
+                // Check if the absolute value of the current element exists in the map
+                if (map.containsKey(Math.abs(curr))) {
+                    // Update the maximum value and answer if necessary
+                    if (Math.abs(curr) > max) {
+                        max = Math.abs(curr);
+                        ans = max;
+                    }
+                }
+            } else {
+                // Check if the negative of the current element exists in the map
+                if (map.containsKey(-curr)) {
+                    // Update the maximum value and answer if necessary
+                    if (-curr > max) {
+                        max = -curr;
+                        ans = max;
+                    }
+                }
+            }
+        }
+
+        return ans;
+    }
+}
+. Largest Positive Integer That Exists With Its Negative
