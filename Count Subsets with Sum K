@@ -1,0 +1,77 @@
+public class Solution {
+    public static int findWays(int num[], int tar) {
+
+        int n= num.length;
+        int [][] dp= new int [n][tar+1];
+      
+      return helper(0,tar, n, num, new ArrayList<>(), dp);
+    }
+
+    public static int helper(int i, int target, int n, int [] nums, List<Integer> list, int [][] dp){
+
+        if(target==0){
+            return 1;
+        }
+
+      
+    if (i == n || target < 0) { // If target becomes negative, return 0
+        return 0;
+    }
+
+        if(dp[i][target]!=0){
+            return dp[i][target];
+        }
+
+       list.add(nums[i]);
+
+       int take= helper(i+1, target-nums[i], n, nums, list, dp);
+
+       list.remove(list.size()-1);
+
+       int notTake= helper(i+1, target, n, nums, list, dp);
+
+       return dp[i][target]= take+ notTake;
+    }
+}
+
+
+
+
+import java.util.*;
+
+public class Solution {
+    public static int findWays(int nums[], int tar) {
+
+        int n = nums.length;
+
+        int[][] dp = new int[n][tar + 1];
+
+        for (int i = 0; i < n; i++) {
+            dp[i][0] = 1; // Initialize the base case where target sum is 0
+        }
+
+        if (nums[0] <= tar) {
+            dp[0][nums[0]] = 1;
+        }
+
+        for (int i = 1; i < n; i++) {
+            for (int target = 0; target <= tar; target++) { // Corrected iteration from 0 to tar
+
+                int taken = 0;
+
+                if (nums[i] <= target) {
+                    taken = dp[i - 1][target - nums[i]];
+                }
+
+                int notTaken = dp[i - 1][target];
+
+                dp[i][target] = taken + notTaken;
+
+            }
+        }
+
+        return dp[n - 1][tar];
+
+    }
+}
+
