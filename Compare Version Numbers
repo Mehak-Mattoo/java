@@ -1,0 +1,37 @@
+class Solution {
+    public int compareVersion(String version1, String version2) {
+        int index1 = 0, index2 = 0;
+        int n1, n2;
+
+        while (index1 < version1.length() || index2 < version2.length()) {
+            n1 = 0;
+            n2 = 0;
+
+            // Parse number from version1
+            while (index1 < version1.length() && version1.charAt(index1) != '.') {
+                n1 = n1 * 10 + (version1.charAt(index1) - '0');
+                index1++;
+            }
+
+            // Parse number from version2
+            while (index2 < version2.length() && version2.charAt(index2) != '.') {
+                n2 = n2 * 10 + (version2.charAt(index2) - '0');
+                index2++;
+            }
+
+            // Compare parsed numbers
+            if (n1 < n2) {
+                return -1;
+            } else if (n1 > n2) {
+                return 1;
+            }
+
+            // Move to the next character after the dot
+            index1++;
+            index2++;
+        }
+
+        // If versions are equal up to the smallest part, return 0
+        return 0;
+    }
+}
