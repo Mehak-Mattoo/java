@@ -1,0 +1,38 @@
+class Solution {
+    public int coinChange(int[] coins, int amount) {
+        int n = coins.length;
+
+        if (amount == 0) {
+            return 0;
+        }
+
+        int dp[][] = new int[n][amount + 1];
+
+        int result = helper(n - 1, coins, amount, dp);
+        return result == (int) Math.pow(10, 9) ? -1 : result;
+    }
+
+    public static int helper(int i, int[] coins, int amount, int dp[][]) {
+
+        if (i == 0) {
+            if (amount % coins[0] == 0) { //if amount is divisible by the coin , then we can make up the target
+                return amount / coins[0];
+            }
+            return (int) Math.pow(10, 9);
+        }
+
+        if (dp[i][amount] != 0) {
+            return dp[i][amount];
+        }
+
+        int take = (int) Math.pow(10, 9);
+
+        if (coins[i] <= amount) {
+            take = 1 + helper(i, coins, amount - coins[i], dp); // keep on taking same coin
+        }
+
+        int notTake = helper(i - 1, coins, amount, dp);
+
+        return dp[i][amount] = Math.min(take, notTake);
+    }
+}
