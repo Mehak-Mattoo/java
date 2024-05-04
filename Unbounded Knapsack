@@ -1,0 +1,102 @@
+public class Solution {
+    public static int unboundedKnapsack(int n, int w, int[] profit, int[] weight) {
+
+        int [][] dp = new int [n][w+1];
+        return helper(n - 1, w, profit, weight, dp);
+    }
+
+    public static int helper(int i, int w, int[] profit, int[] weight, int [][] dp) {
+        if (i == 0) {
+         return (w/weight[0]* profit[0]);
+        }
+
+        if(dp[i][w]!=0){
+            return dp[i][w];
+        }
+
+        int notTake = helper(i - 1, w, profit, weight, dp);
+        int take = Integer.MIN_VALUE;
+
+        if (weight[i] <= w) {
+            take = profit[i] + helper(i, w - weight[i], profit, weight, dp); // Update the remaining capacity
+        }
+
+        return  dp [i][w]= Math.max(notTake, take);
+    }
+}
+
+
+
+
+
+public class Solution {
+    public static int unboundedKnapsack(int n, int w, int[] profit, int[] weight) {
+
+      int[][] dp = new int[n][w + 1];
+
+        // Base condition: Initialize the dp array for the first item
+        for (int i = weight[0]; i <= w; i++) {
+            dp[0][i] = ((int) i / weight[0]) * profit[0];
+        }
+
+      
+        for (int ind = 1; ind < n; ind++) {
+            for (int cap = 0; cap <= w; cap++) {
+                // Calculate the maximum profitue when the current item is not taken
+                int notTaken = 0 + dp[ind - 1][cap];
+
+                // Initialize the maximum profitue when the current item is taken as the minimum integer profitue
+                int taken = Integer.MIN_VALUE;
+
+                // If the weight of the current item is less than or equal to the current capacity (cap),
+                // calculate the maximum profitue when the current item is taken
+                if (weight[ind] <= cap)
+                    taken = profit[ind] + dp[ind][cap - weight[ind]];
+
+                // Store the result in the dp array
+                dp[ind][cap] = Math.max(notTaken, taken);
+            }
+        }
+
+        return dp[n - 1][w]; 
+
+    } 
+}
+
+
+
+public class Solution {
+    public static int unboundedKnapsack(int n, int w, int[] profit, int[] weight) {
+
+      int[][] dp = new int[n][w + 1];
+
+      int []prev = new int [w+1];
+
+       
+        for (int i = weight[0]; i <= w; i++) {
+            prev[i] = ((int) i / weight[0]) * profit[0];
+        }
+
+      
+        for (int ind = 1; ind < n; ind++) {
+              int []curr = new int [w+1];
+
+            for (int cap = 0; cap <= w; cap++) {
+               
+                int notTaken =  prev[cap];
+
+                int taken = Integer.MIN_VALUE;
+
+                if (weight[ind] <= cap)
+                    taken = profit[ind] + curr[cap - weight[ind]];
+
+        
+                curr[cap] = Math.max(notTaken, taken);
+            }
+            prev= curr;
+        }
+
+        return prev[w]; 
+
+    } 
+}
