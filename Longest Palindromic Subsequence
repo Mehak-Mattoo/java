@@ -1,0 +1,65 @@
+class Solution {
+    public int longestPalindromeSubseq(String s) {
+
+        int n = s.length();
+
+        StringBuilder reversed = new StringBuilder(s).reverse();
+         int [][] dp = new int[n][n];
+        
+        return helper(n-1, n-1, s, reversed.toString(), dp);
+
+       
+    }
+
+  
+    public static int helper(int index1, int index2, String s1, String s2, int [][] dp){
+
+        if(index1<0 || index2<0){// there is nothing to compare
+            return 0;
+        }
+
+        if(dp[index1][index2]!=0){
+            return  dp[index1][index2];
+        }
+
+        if(s1.charAt(index1) == s2.charAt(index2)){
+            return dp[index1][index2]= 1+ helper(index1-1, index2-1, s1, s2, dp);
+        }
+
+        return dp[index1][index2]= Math.max(helper(index1, index2-1, s1, s2, dp), helper(index1-1, index2, s1, s2, dp));
+    }
+}
+
+
+
+
+class Solution {
+    public int longestPalindromeSubseq(String s) {
+
+        int n = s.length();
+
+        StringBuilder reversed = new StringBuilder(s).reverse();
+
+        
+        int prev[] = new int[n + 1];
+
+        for (int i = 1; i <= n; i++) {
+            int curr[] = new int[n + 1];
+
+            for (int j = 1; j <= n; j++) {
+                if (s.charAt(i - 1) ==  reversed.charAt(j - 1)) {
+                    curr[j] = 1 + prev[j - 1];
+                } else {
+                    curr[j] = Math.max(prev[j], curr[j - 1]);
+                }
+            }
+            prev = curr;
+
+        }
+
+        return prev[n];
+       
+    }
+
+  
+}
