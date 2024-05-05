@@ -1,0 +1,30 @@
+public class Solution {
+    public static String findLCS(int n, int m, String s1, String s2) {
+      
+        StringBuilder str = new StringBuilder();
+        
+        int[][] dp = new int[n + 1][m + 1];
+
+        helper(n, m, s1, s2, dp, str);
+
+        return str.reverse().toString(); // Reverse the StringBuilder before converting to String
+    }
+
+    public static int helper(int index1, int index2, String s1, String s2, int[][] dp, StringBuilder str) {
+        if (index1 == 0 || index2 == 0) {
+            return 0;
+        }
+
+        if (dp[index1][index2] != 0) {
+            return dp[index1][index2];
+        }
+
+        if (s1.charAt(index1 - 1) == s2.charAt(index2 - 1)) {
+            return dp[index1][index2] = 1 + helper(index1 - 1, index2 - 1, s1, s2, dp, str.append(s1.charAt(index1 - 1)));
+
+        }
+
+      return dp[index1][index2]= Math.max(helper(index1, index2 - 1, s1, s2, dp, str), helper(index1 - 1, index2, s1, s2, dp, str));
+ 
+    }
+}
