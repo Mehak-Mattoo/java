@@ -1,0 +1,62 @@
+import java.util.*;
+
+public class Solution {
+    public static int lcs(String str1, String str2) {
+        int n = str1.length();
+        int m = str2.length();
+        int[][] dp = new int[n + 1][m+ 1];
+
+		int ans=0;
+
+		for (int i = 1; i <= n; i++) {
+			for (int j = 1; j <= m; j++) {
+
+				if(str1.charAt(i-1)==str2.charAt(j-1)){
+					int val = 1 + dp[i - 1][j - 1];
+                    dp[i][j] = val;
+                    ans = Math.max(ans, val); 
+				}
+				else{
+					dp[i][j]=0;
+				}	
+			}
+		}
+		return ans;
+    
+    }
+}
+
+
+
+import java.util.*;
+
+public class Solution {
+    public static int lcs(String str1, String str2) {
+	
+	int n = str1.length();
+        int m = str2.length();
+
+      
+		int [] prev= new int [m+1];
+        int ans = 0; 
+
+        for (int i = 1; i <= n; i++) {
+				int [] curr= new int [m+1];
+            for (int j = 1; j <= m; j++) {
+                // If the characters at the current indices are the same, extend the LCS
+                if (str1.charAt(i - 1) == str2.charAt(j - 1)) {
+                    int val = 1 + prev[j - 1];
+                    curr[j] = val;
+                    ans = Math.max(ans, val); // Update the maximum LCS length
+                } else {
+                    curr[j] = 0; // Reset LCS length if characters don't match
+                }
+            }
+
+			prev= curr;
+        }
+
+        return ans; // Return the length of the Longest Common Substring (LCS)
+    
+	
+	}}
