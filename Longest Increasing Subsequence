@@ -30,3 +30,37 @@ class Solution {
         return dp[prevIndex + 1][currIndex] = Math.max(take, notTake);
     }
 }
+
+
+
+
+
+
+
+
+class Solution {
+    public int lengthOfLIS(int[] nums) {
+        int n = nums.length, ans = 1;
+
+        List<Integer> list = new ArrayList<>();
+
+        list.add(nums[0]);
+
+        for (int i = 1; i < n; i++) {
+            if (nums[i] > list.get(list.size() - 1)) { // keep on putting when increasing subseq. found
+                list.add(nums[i]);
+                ans++;
+            } else {
+                int ind = Collections.binarySearch(list, nums[i]); // else do a BS to correctly put the smaller element
+
+                if (ind < 0) {// if nums[i] is not present in list, the binarySearch method returns - val, negate ind to get the correct insertion point.
+                    ind = -ind - 1;
+                }
+
+                list.set(ind, nums[i]);
+            }
+        }
+
+        return ans;
+    }
+}
