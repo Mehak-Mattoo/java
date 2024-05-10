@@ -1,0 +1,32 @@
+class Solution {
+    public int lengthOfLIS(int[] nums) {
+
+        int n = nums.length;
+        int[][] dp = new int[n + 1][n]; 
+
+        return helper(-1, 0, nums, dp);
+    }
+
+    public static int helper(int prevIndex, int currIndex, int[] nums, int[][] dp) {
+        if (currIndex == nums.length) {
+            return 0; // Base case: end of array reached, return 0
+        }
+
+        if (dp[prevIndex + 1][currIndex] != 0) {
+            return dp[prevIndex + 1][currIndex];
+        }
+
+        int take = 0;
+
+        // If the current element can be included in the LIS
+        if (prevIndex == -1 || nums[currIndex] > nums[prevIndex]) {
+            take = 1 + helper(currIndex, currIndex + 1, nums, dp);
+        }
+
+  
+        int notTake = helper(prevIndex, currIndex + 1, nums, dp);
+
+
+        return dp[prevIndex + 1][currIndex] = Math.max(take, notTake);
+    }
+}
