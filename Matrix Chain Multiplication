@@ -1,0 +1,33 @@
+import java.util.* ;
+import java.io.*; 
+
+public class Solution {
+	public static int matrixMultiplication(int[] arr , int N) {
+
+		int [][]dp= new int [N][N];
+		
+
+		return helper(1, N-1, arr, dp);
+		
+	}
+
+	public static int helper(int i, int j,  int [] arr, int[][]dp){
+
+		if(i==j){
+			return 0;
+		}
+
+		if(dp[i][j]!=0){
+			return dp[i][j];
+		}
+
+		int min= Integer.MAX_VALUE;
+
+		for (int k = i; k <=j-1; k++) {
+			int steps= helper(i, k, arr, dp)+ helper(k+1, j, arr, dp)+ arr[i-1]* arr[k]* arr[j];
+			min= Math.min(min, steps);
+		}
+
+		return  dp[i][j]= min;
+	}
+}
