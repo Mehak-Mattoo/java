@@ -1,0 +1,37 @@
+class Solution {
+    public int minCost(int n, int[] cuts) {
+        int m = cuts.length;
+
+        int[][] dp = new int[m + 2][m + 2];
+       
+
+        ArrayList<Integer> list = new ArrayList<>();
+        for (int ele : cuts) {
+            list.add(ele);
+        }
+        list.add(n);
+        list.add(0, 0);
+        Collections.sort(list);
+
+        for (int i = m; i >= 1; i--) {
+            for (int j = 1; j <= m; j++) {
+
+                if (i > j) {
+                    continue;
+                }
+                int min = Integer.MAX_VALUE;
+
+                for (int k = i; k <= j; k++) {
+                    int cost = list.get(j + 1) - list.get(i - 1) + dp[i][k - 1] + dp[k + 1][j];
+                    min = Math.min(min, cost);
+
+                    dp[i][j] = min;
+                }
+
+            }
+        }
+
+        return dp[1][m];
+    }
+
+}
