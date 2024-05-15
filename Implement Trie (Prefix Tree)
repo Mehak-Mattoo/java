@@ -1,0 +1,84 @@
+class Node {
+    Node links[] = new Node[26];
+    boolean flag = false;
+
+    // Check if the node contains a specific character
+    boolean containsKey(char c) {
+        return links[c - 'a'] != null;
+    }
+
+    // Put a new node for a specific character
+    void put(char c, Node node) {
+        links[c - 'a'] = node;
+    }
+
+    // Get the node for a specific character
+    Node get(char c) {
+        return links[c - 'a'];
+    }
+
+    // Mark the end of a word
+    void setEnd() {
+        flag = true;
+    }
+
+    // Check if the node is the end of a word
+    boolean hasEnd() {
+        return flag;
+    }
+}
+
+class Trie {
+    private Node root;
+
+    public Trie() {
+        root = new Node();
+    }
+
+   
+    public void insert(String word) {
+        Node node = root;
+        for (int i = 0; i < word.length(); i++) {
+            char currentChar = word.charAt(i);
+
+            if (!node.containsKey(currentChar)) { // make a new trie
+                node.put(currentChar, new Node());
+            }
+            node = node.get(currentChar); // move to next trie
+        }
+        node.setEnd(); // Mark the end of the word
+    }
+
+  
+    public boolean search(String word) {
+        Node node = root;
+        for (int i = 0; i < word.length(); i++) {
+            char currentChar = word.charAt(i);
+            if (!node.containsKey(currentChar)) {
+                return false; // If the character is not found, return false
+            }
+            node = node.get(currentChar);
+        }
+        return node.hasEnd(); // Return true if the end of the word is reached
+    }
+
+    public boolean startsWith(String prefix) {
+        Node node = root;
+        for (int i = 0; i < prefix.length(); i++) {
+            char currentChar = prefix.charAt(i);
+            if (!node.containsKey(currentChar)) {
+                return false; // If the prefix is not found, return false
+            }
+            node = node.get(currentChar);
+        }
+        return true; // If the prefix is found, return true
+    }
+}
+
+/**
+ * Your Trie object will be instantiated and called as such:
+ * Trie obj = new Trie();
+ * obj.insert(word);
+ * boolean param_2 = obj.search(word);
+ * boolean param_3 = obj.startsWith(prefix);
+ */
