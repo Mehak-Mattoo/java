@@ -1,0 +1,29 @@
+class Solution {
+    public int minAddToMakeValid(String s) {
+
+        int n = s.length();
+
+        if (n == 0) {
+            return 0;
+        }
+
+        int count = 0, close = 0;
+
+        for (int i = 0; i < n; i++) {
+            char curr = s.charAt(i);
+
+            if (curr == '(') {
+                count++;
+            }
+
+            else if (curr == ')' && count > 0) { // pairs found
+                count--;
+
+            } else {  // extra closing brackets
+                close++;
+            }
+        }
+        return count + close; // extra closing + pairs
+
+    }
+}
