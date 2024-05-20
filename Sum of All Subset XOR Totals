@@ -1,0 +1,23 @@
+class Solution {
+    public int subsetXORSum(int[] nums) {
+
+        List<Integer> insideList = new ArrayList<>();
+        List<List<Integer>> list = new ArrayList<>();
+
+        return helper(0, nums.length, 0, nums);
+
+    }
+
+    public static int helper(int i, int n, int currentXOR, int[] nums) {
+
+        if (i == n) {
+            return currentXOR;
+
+        }
+        int left =   helper(i + 1, n,  nums[i] ^ currentXOR,nums);
+        int right =  helper(i + 1, n,  currentXOR, nums );
+
+        return left + right;
+
+    }
+}
