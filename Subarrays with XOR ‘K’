@@ -1,0 +1,31 @@
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+    public static int subarraysWithSumK(int []a, int b) {
+
+return helper(0,0,  a.length, a, b);
+
+    }
+
+    public static int helper(int i, int count,  int n,  int []arr, int b){
+
+        if(i==n){
+            return count;
+        }
+        int xor = 0;
+
+        for (int j = i; j < n; j++) {
+xor^=arr[j];
+
+if(xor==b){
+    count++;
+}         
+        }
+
+return helper(i+1, count, n, arr, b);
+      
+
+
+    }
+}
