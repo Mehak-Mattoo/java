@@ -65,3 +65,32 @@ class Solution {
         return longest;
     }
 }
+
+
+
+
+class Solution {
+    public int longestConsecutive(int[] nums) {
+
+        Set<Integer> set = new HashSet<>();
+        int n = nums.length, longest = 0, last = Integer.MIN_VALUE;
+
+        for (int i : nums) {
+            set.add(i);
+        }
+
+        for (int i : set) {
+            if (!set.contains(i - 1)) {// if set doesnt contain previous element-> then the curr element is the starting of the subsequence
+                int count = 1;// and can be the potential ans
+
+                while (set.contains(i + 1)) {// look if it has greater consecutive num
+                    count++;
+                    i++;
+                }
+                longest = Math.max(count, longest);
+            }
+
+        }
+        return longest;
+    }
+}
