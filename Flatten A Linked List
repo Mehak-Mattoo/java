@@ -42,3 +42,62 @@ public class Solution {
  }
 }
  
+
+
+
+
+
+
+ollowing is the class structure of the Node class:
+
+public class Solution {
+    public static Node flattenLinkedList(Node head) {
+
+        if(head==null|| head.next==null){
+            return head;
+        }
+
+Node merged = flattenLinkedList(head.next); // going to the last of list
+
+return convert(head, merged);// we start merging the last list with one previous one
+
+ }
+
+
+ public static Node convert( Node first , Node second){ 
+
+Node dummy= new Node(0);
+ Node curr = dummy;
+
+while(first!=null&& second!=null){
+  
+    if(first.data< second.data){
+        curr.child= first;
+        curr=first;
+        first= first.child;
+    }
+    else{
+        curr.child= second;
+        curr= second;
+        second= second.child;
+
+    }
+    curr.next=null;
+}
+
+if(first!=null){
+    curr.child= first;
+}
+
+if(second!=null){
+    curr.child= second;
+}
+
+
+return dummy.child;
+
+
+  
+ }
+}
+ 
