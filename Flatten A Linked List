@@ -1,0 +1,44 @@
+public class Solution {
+    public static Node flattenLinkedList(Node head) {
+
+        List<Integer> tempList= new ArrayList<>();
+
+        Node temp = head;
+
+        while(temp!=null){
+            Node down = temp;
+
+            while(down!=null){// get all child nodes
+                tempList.add(down.data); //put in temp list
+                down= down.child;
+            }
+
+            temp= temp.next;
+        }
+
+        Collections.sort(tempList);// sort them
+
+        return convert(tempList);
+
+ }
+
+
+ public static Node convert( List<Integer> tempList){ // convert into a vertical list
+
+     if(tempList.size()==0){
+         return null;
+     }
+
+     Node head = new Node(tempList.get(0));
+     Node temp= head;
+
+     for (int i = 1; i < tempList.size(); i++) {
+
+         Node newNode = new Node(tempList.get(i));// make a new vertical list
+         temp.child= newNode;
+         temp= temp.child;       
+     }
+     return head;
+ }
+}
+ 
