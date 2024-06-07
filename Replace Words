@@ -1,0 +1,30 @@
+import java.util.HashMap;
+import java.util.List;
+
+class Solution {
+    public String replaceWords(List<String> dictionary, String sentence) {
+
+        // Create a HashSet for fast lookup
+        HashSet<String> set = new HashSet<>(dictionary);
+        StringBuilder result = new StringBuilder();
+
+        // Split the sentence into words
+        String[] words = sentence.split(" ");
+
+        for (String word : words) {
+            String prefix = "";
+            // Try to find the shortest prefix for the word
+            for (int i = 1; i <= word.length(); i++) {
+                prefix = word.substring(0, i);
+                if (set.contains(prefix)) {
+                    break;
+                }
+            }
+            // Append the prefix (or the word itself if no prefix found) to the result
+            result.append(prefix).append(" ");
+        }
+
+        // Remove the trailing space and return the result
+        return result.toString().trim();
+    }
+}
