@@ -1,0 +1,46 @@
+class Solution {
+    public int[] relativeSortArray(int[] arr1, int[] arr2) {
+
+        int n = arr1.length, m = arr2.length;
+
+        int ans[] = new int[n];
+
+        HashMap<Integer, Integer> map = new HashMap<>();
+
+        for (int i = 0; i < m; i++) {
+            map.put(arr2[i], i);
+        }
+
+        int j = 0, k = 0;
+
+        while (j < m) { // putting all elements in ans acc. to relative order of arr2
+            for (int i = 0; i < n; i++) {
+
+                if (arr2[j] == arr1[i]) {
+                    ans[k] = arr1[i];
+                    k++;
+                }
+            }
+            j++;
+        }
+
+        int[] left = new int[n - k]; 
+        int leftIndex = 0;
+
+        for (int i = 0; i < n; i++) {
+
+            if (!map.containsKey(arr1[i])) {// elements not present in arr2
+                left[leftIndex++] = arr1[i];
+            }
+        }
+
+        Arrays.sort(left, 0, leftIndex);// sort them
+
+        for (int i = 0; i < leftIndex; i++) {// put them in end of ans
+            ans[k++] = left[i];
+        }
+
+        return ans;
+
+    }
+}
