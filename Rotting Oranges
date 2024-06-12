@@ -1,69 +1,77 @@
 class Solution {
-    static class Pair {
-        int first;
-        int second;
+
+    class Pair {
+        int r;
+        int c;
         int time;
 
-        public Pair(int first, int second, int time) {
-            this.first = first;
-            this.second = second;
+        public Pair(int r,
+                int c,
+                int time) {
+
+            this.r = r;
+            this.c = c;
             this.time = time;
+
         }
     }
 
     public int orangesRotting(int[][] grid) {
 
-        int n = grid.length, m = grid[0].length, time = 0, count = 0, fresh = 0;
         Queue<Pair> q = new LinkedList<>();
-        int[][] vis = new int[n][m];
+
+        int n = grid.length, m = grid[0].length;
 
         if (n == 0 || grid == null) {
             return 0;
         }
 
-        for (int i = 0; i < n; i++) { // first we get how many rotten oranges are there and put its position in queue
+        int vis[][] = new int[n][m];
+
+        for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
                 if (grid[i][j] == 2) {
                     q.add(new Pair(i, j, 0));
                     vis[i][j] = 2;
-
                 }
-                if (grid[i][j] == 1) { // get how many are fresh
-                    fresh++;
-                }
-
             }
         }
 
-        int x[] = { 0, 0, 1, -1 }; // movement of elements 
-        int y[] = { 1, -1, 0, 0 };
+        int time=0;
+
+        int x[] = { -1, 0, +1, 0 }; // movement of elements
+        int y[] = { 0, +1, 0, -1 };
 
         while (!q.isEmpty()) {
-            int r = q.peek().first;
-            int c = q.peek().second;
-            int t = q.peek().time;
+            Pair curr = q.poll();
+            int r = curr.r;
+            int c = curr.c;
+            int t = curr.time;
 
-            time = Math.max(time, t);
-            q.poll();
+time=Math.max(time, t);
+
             for (int i = 0; i < 4; i++) {
                 int nrow = r + x[i];
                 int ncol = c + y[i];
 
-                if (nrow >= 0 && nrow < n && ncol >= 0 && ncol < m && vis[nrow][ncol] == 0 && grid[nrow][ncol] == 1) {// should be within bounds , not visited and fresh
-                    vis[nrow][ncol] = 2; // rot it
-                    q.add(new Pair(nrow, ncol, t + 1)); // increase the time
-                    count++;// count fresh oranges
+                if (nrow >= 0 && ncol >= 0 && nrow < n && ncol < m && vis[nrow][ncol] == 0 && grid[nrow][ncol] == 1) { // Changed '||' to '&&'
+                    q.add(new Pair(nrow, ncol, t + 1));
+                    vis[nrow][ncol] = 2;
                 }
 
             }
-
         }
 
-        if (count != fresh) { // not possible to rot them all
-            return -1;
+        // Check for any fresh oranges left
+            for (int i = 0; i < n; i++) { 
+            for (int j = 0; j < m; j++) {
+                if (grid[i][j] == 1 && vis[i][j] != 2) {
+                    return -1;
+                }
+            }
         }
+
 
         return time;
     }
-
 }
