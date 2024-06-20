@@ -1,0 +1,24 @@
+class Solution {
+    public boolean judgeSquareSum(int c) {
+
+        long low = 0, high = (long) Math.sqrt(c);
+
+        while (low <= high) {
+            long curr = low * low + high * high;
+
+            if (curr > c) {
+                high--;
+            } else if (curr == c) {
+                return true;
+            }
+
+            else {
+                low++;
+            }
+
+        }
+
+        return false;
+
+    }
+}
