@@ -1,40 +1,141 @@
+import React from "react";
+import { Link } from "react-router-dom";
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import NavDropdown from "react-bootstrap/NavDropdown";
+import Login from "../Login";
+import "./Navbar.css";
+import DarkAnim from "../DarkAnim";
+import ThemeToggle from "../ThemeToggle";
 
-// https://ibb.co/mHMxTKX
-// https://ibb.co/8NRtCRv
+export default function CustomNavbar() {
+  return (
+    <Navbar expand="lg" className="navbar-custom">
+      <Container>
+        <Navbar.Brand as={Link} to="/">
+          Open Source Galaxy
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="me-auto">
+            <Nav.Link as={Link} to="/">
+              Home
+            </Nav.Link>
+            <Nav.Link as={Link} to="/about">
+              About
+            </Nav.Link>
 
-// import React from "react";
-// import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-// import Home from "./components/Home/Home";
-// import About from "./components/About/About";
-// import ClosedApplications from "./components/ClosedProject/ClosedApplication";
-// import Navbar from "./components/Navbar/CustomNavbar";
-// import UpcomingApplications from "./components/UpcomingProject/UpcomingProject";
-// import OpenApplications from "./components/OpenProjects/OpenApplication";
-// import Blogs from "./components/Blogs/Blogs";
-// import Login from "./components/Login";
-// import Signup from "./components/SignUp";
+            <NavDropdown title="Projects" id="basic-nav-dropdown">
+              <NavDropdown.Item as={Link} to="/open-projects">
+                Open Projects
+              </NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/upcoming-projects">
+                Upcoming Projects
+              </NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/closed-projects">
+                Closed Projects
+              </NavDropdown.Item>
+            </NavDropdown>
+            <Nav.Link as={Link} to="/blogs">
+              Blogs
+            </Nav.Link>
 
-// function App() {
-//   return (
-//     <Router>
-//       <>
-//         <Navbar />
-//         <Routes>
-//           <Route exact path="/" element={<Home />} />
-//           <Route path="/about" element={<About />} />
-//           <Route path="/closed-applications" element={<ClosedApplications />} />
-//           <Route path="/open-applications" element={<OpenApplications />} />
-//           <Route
-//             path="/upcoming-applications"
-//             element={<UpcomingApplications />}
-//           />
-//           <Route path="/blogs" element={<Blogs />} />
-//           <Route path="/log-in" element={<Login />} />
-//           <Route path="/sign-up" element={<Signup />} />
-//         </Routes>
-//       </>
-//     </Router>
-//   );
-// }
+            {/* <DarkAnim /> */}
+          </Nav>
+          <Form className="d-flex mb-3 mb-lg-0">
+            <Row className="align-items-center gx-2">
+              <Col>
+                <Form.Control type="text" placeholder="Search" />
+              </Col>
+              <Col>
+                <Button className="button ">Submit</Button>
+              </Col>
+            </Row>
+          </Form>
 
-// export default App;
+          <Login />
+          {/* <ThemeToggle className="fixed" /> */}
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
+  );
+}
+
+
+
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playwrite+NG+Modern:wght@100..400&display=swap");
+.navbar-custom {
+  background-color: #ef5941;
+  transition: all 0.3s ease;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.navbar-custom .navbar-brand {
+  font-size: 1.6rem;
+  font-weight: 900;
+  padding-top: 0.4rem;
+
+  align-items: center;
+  color: white;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+.navbar-custom .navbar-brand:hover {
+  color: white;
+}
+
+.navbar-custom .button {
+  background: #8d200f;
+  border: none;
+  color: white;
+}
+
+.navbar-custom .button:hover {
+  background: #8d200f;
+  transform: scale(1.03);
+}
+
+.navbar-custom .nav-link {
+  margin-right: 0.3rem;
+  letter-spacing: 1px;
+  font-weight: 500;
+}
+
+.navbar-custom .nav-link,
+.navbar-custom .nav-dropdown-item,
+.navbar-custom .navbar-toggler,
+#basic-nav-dropdown {
+  color: white;
+}
+
+.navbar-custom .nav-link:hover,
+.navbar-custom .nav-dropdown-item:hover {
+  color: white !important;
+}
+
+.navbar-custom .navbar-toggler {
+  border-color: #fff;
+}
+
+.navbar-custom .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+/* Add margin beneath the dropdown on smaller screens when the navbar is collapsed */
+@media (max-width: 992px) {
+  .navbar-collapse .dropdown-menu {
+    margin-bottom: 15px;
+  }
+
+  .navbar-collapse {
+    transition: all 0.3s ease;
+  }
+}
