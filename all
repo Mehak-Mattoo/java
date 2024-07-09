@@ -1,0 +1,99 @@
+        <!-- <div class="flex p-5 items-center justify-center ml-5 mr-5">
+          <div class="sm:w-full md:w-2/4">
+            <div class="mr-5">
+            <h1 class="text-4xl font-semibold sm:text-5xl md:text-6xl text-black mb-4">
+              The <span style="color: rgb(219, 127, 219);">#1</span> Sorting 
+              
+              <p class="mt-3">Visualization Tool</p>
+            </h1>
+            
+            <p class="mb-4 text-base sm:text-sm md:text-lg text-black">
+              Our sorting visualizer tool provides an interactive way to visualize sorting algorithms in action helping users understand how different algorithm work and their efficiency in sorting data.
+            </p>
+          </div>
+            <a class="mr-3 p-2 rounded-md font-semibold text-white" style="background: rgb(219, 127, 219);" href="visual.html">
+              <button>Get Started</button>
+            </a>
+            <a class="mr-3 bg-gray-300 p-2 rounded-md font-semibold hover:text-purple-700" href="#programs-section">
+              <button class="items-center">Explore <span class="text-2xl">&#x203A;</span></button>
+            </a>
+          </div>
+          <div class="w-2/4 md:flex hidden">
+            <img  src="./images/home.jpg" alt="">
+          </div>
+        </div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          
+    <nav class="navbar navbar-expand-lg fixed-top bg-white" >
+ 
+      <div class="container-fluid">
+        <div class="flex items-center"> <img src="images/fevicon.png" class="h-6 mr-2" alt=""><a class="navbar-brand" style="font-weight: 900 ; color:rgb(219, 127, 219);" href="#">Visual Sort</a></div>  
+          <button class="navbar-toggler" style=" background-color: rgb(202, 111, 202) ;color: black;" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon " ></span>
+          </button>
+          <div class="collapse navbar-collapse justify-content-end " id="navbarNav">
+              <ul class="navbar-nav ms-auto">
+                  <li class="nav-item" >
+                      <a class="nav-link"  href="#home-section">Home</a>
+                  </li>
+
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle font-medium" href="./visual.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Sorting Visualizers
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="Bubble.html">Bubble Sort</a></li>
+                      <li><a class="dropdown-item" href="selectionsort.html">Selection Sort</a></li>
+                      <li><a class="dropdown-item" href="Insertion.html">Insertion Sort</a></li>
+                      <li><a class="dropdown-item" href="">Comb Sort</a></li>
+                      <li><a class="dropdown-item" href="mergesort.html">Merge Sort</a></li>
+                      <li><a class="dropdown-item" href="">Heap Sort</a></li>
+                      <li><a class="dropdown-item" href="">Quick Sort</a></li>
+                  
+                    </ul>
+                  </li>
+                  <!-- <li class="nav-item">
+                      <a class="nav-link" style="font-weight: 600;" href="#algorithm-section">Sorting Visualizers</a>
+                  </li> -->
+                     <!-- <li class="nav-item dropdown">
+          <a  class="nav-link" style="font-weight: 600;" href="./visual.html">
+            Sorting Visualizers
+          </a>
+        </li>
+                  <li class="nav-item"> -->
+                      <a class="nav-link" style="font-weight: 500;" href="#programs-section">Algorithms</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" style="font-weight: 500;" href="#features-section">Features</a>
+                </li>
+                  <li class="nav-item">
+                      <a class="nav-link" style="font-weight: 500;" href="#About-Us">About Us</a>
+                  </li>
+                  <li class="nav-item ">
+                    <a class="nav-link log px-3" href="login.html">Login</a>
+                </li>
+                <!-- <li class="nav-item">
+                  <a class="nav-link log" style="font-weight: 600;  background-color:  rgb(219, 127, 219); border-radius: 0.4rem; margin-left: 0.7rem;" href="signup.html">Sign Up</a>
+              </li> -->
+               
+              </ul>
+          </div>
+      </div>
+      </nav>
