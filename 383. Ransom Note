@@ -1,0 +1,25 @@
+class Solution {
+    public boolean canConstruct(String ransomNote, String magazine) {
+
+        // Array to store the count of each character in magazine
+        int[] letters = new int[26];
+
+        // Increment the count for each character in magazine
+        for (int i = 0; i < magazine.length(); i++) {
+            letters[magazine.charAt(i) - 'a']++;
+        }
+
+        // Decrement the count for each character in ransomNote
+        for (int i = 0; i < ransomNote.length(); i++) {
+            letters[ransomNote.charAt(i) - 'a']--;
+
+            // If at any point, the count goes below 0, 
+            // it means magazine doesn't have enough of that character
+            if (letters[ransomNote.charAt(i) - 'a'] < 0) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+}
