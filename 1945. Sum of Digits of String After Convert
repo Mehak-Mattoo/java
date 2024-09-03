@@ -1,0 +1,31 @@
+class Solution {
+    public int getLucky(String s, int k) {
+        HashMap<Character, Integer> map = new HashMap<>();
+
+        // Populate the HashMap with letters a-z and values 1-26
+        for (char ch = 'a'; ch <= 'z'; ch++) {
+            map.put(ch, ch - 'a' + 1);
+        }
+
+        StringBuilder str = new StringBuilder();
+
+        for (int i = 0; i < s.length(); i++) {
+            str.append(map.get(s.charAt(i)));
+        }
+
+        String newStr = str.toString();
+        int num = 0;
+        while (k > 0) {
+            num=0;
+
+            for (int i = 0; i < newStr.length(); i++) {
+                num += Character.getNumericValue(newStr.charAt(i));
+            }
+
+            newStr = String.valueOf(num);
+            k--;
+
+        }
+        return num;
+    }
+}
