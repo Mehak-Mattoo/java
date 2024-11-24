@@ -1,29 +1,23 @@
 class Solution {
     public int uniquePaths(int m, int n) {
 
-        return helper(m-1, n-1);
+        return helper(0, 0, m-1, n-1);
 
     }
 
-    public static int helper(int r, int c) {
+    public static int helper(int down, int right, int m, int n) {
 
-        if (r == 0 && c == 0) {
+        if(down==m ||right==n){//on the way to reach finish
             return 1;
         }
 
-        if (r < 0 || c < 0) {
-            return 0;
-        }
+       int s1= helper(down+1, right, m ,n);
+       int s2= helper(down, right+1, m ,n);
 
-        int right = helper(r -1, c);
-        int down = helper(r, c - 1);
-
-        return right + down;
+       return s1+s2;
 
     }
 }
-
-
 
 class Solution { // memoized
     public int uniquePaths(int m, int n) {
