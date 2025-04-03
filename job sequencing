@@ -1,35 +1,50 @@
 import java.util.*;
-public class Solution {
-    public static int[] jobScheduling(int [][]jobs) {
-        int n= jobs.length, profit=0, jobCount=0, maxDeadline=0;
-        
-        Arrays.sort(jobs,(a,b)->(b[2]-a[2])); // sorting based on profits
 
-        for (int i = 0; i < jobs.length; i++) { // get the max number of jobs we can do
-            maxDeadline= Math.max(maxDeadline, jobs[i][1]);
-            
+class Solution {
+    public ArrayList<Integer> jobSequencing(int[] deadline, int[] profit) {
+        int n = deadline.length;
+        ArrayList<Integer> result = new ArrayList<>();
+
+        // Store jobs as {deadline, profit} pairs
+        List<int[]> jobs = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            jobs.add(new int[]{deadline[i], profit[i]});
         }
 
-        boolean visited[]= new boolean[maxDeadline];
+        // Sort jobs in descending order of profit
+        jobs.sort((a, b) -> b[1] - a[1]);
 
+        // Find the maximum deadline
+        int maxDeadline = 0;
+        for (int i = 0; i < n; i++) {
+            maxDeadline = Math.max(maxDeadline, jobs.get(i)[0]);
+        }
 
-        for (int i = 0; i < jobs.length; i++) {
-            for (int j = jobs[i][1]-1;j>=0 ;j--) { // start filling the visited array from last to fit shortest deadline first
-                if(visited[j]== false){
-                    visited[j]= true;
+        // Slot availability tracker (1-based index)
+        boolean[] slots = new boolean[maxDeadline + 1];
+
+        int totalProfit = 0, jobCount = 0;
+
+        // Assign jobs to the latest available slot before their deadline
+        for (int[] job : jobs) {
+            int d = job[0];  // Job deadline
+            int p = job[1];  // Job profit
+
+            // Find a free slot from deadline d to 1
+            for (int j = d; j > 0; j--) {
+                if (!slots[j]) { // If slot is free
+                    slots[j] = true;
+                    totalProfit += p;
                     jobCount++;
-                    profit+=jobs[i][2];
                     break;
                 }
-                
             }
-            
         }
 
-       
+        // Add results to the list
+        result.add(jobCount);
+        result.add(totalProfit);
 
-        return new int []{jobCount, profit};
-
-
+        return result;
     }
 }
