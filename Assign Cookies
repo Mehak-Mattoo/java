@@ -1,23 +1,24 @@
-import java.util.Arrays;
-public class Solution {
-    public static int assignCookie(int []greed, int []size) {
-        int i=0, j=0, n= greed.length, m= size.length, children=0;
-        Arrays.sort(greed);  
-        Arrays.sort(size);
+class Solution {
+    public int findContentChildren(int[] g, int[] s) {
 
-  while(i<n && j<m){// 
-      if(greed[i]<=size[j]){ // found a cookie, so move all pointers ahead
-          children++;
-          i++;j++;
+     int n = s.length, m = g.length;
+        Arrays.sort(g); // Sort children by greed
+        Arrays.sort(s); // Sort cookies by size
 
-      }else{// to see if we have a larger cookie ahead
-          j++;
-      }
-  
-           
-       }
-           
-        return children;
+        int i = 0; // child pointer
+        int j = 0; // cookie pointer
+        int count = 0;
+
+        while (i<m && j<n) {
+            if (s[j] >= g[i]) {
+                count++; // child got content
+                i++;// dusra child ko khush krte h ab
+             
+            }
+             j++;// dukhi bcha 
+        }
+
+        return count;
+
     }
-
 }
