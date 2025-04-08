@@ -1,0 +1,31 @@
+
+
+// User function Template for Java//User function Template for Java
+class Solution {
+    public ArrayList<Integer> subsetSums(int[] arr) {
+        
+        
+        ArrayList<Integer> list = new ArrayList<>();
+         helper(0, 0, list, arr, arr.length);
+        Collections.sort(list);
+        
+        return list;
+        
+        
+        // code here
+    }
+    
+    
+     public void helper(int index, int sum, ArrayList<Integer> list, int[] arr, int n) {
+         
+         if(index==n){
+             list.add(sum);
+             return;
+         }
+         
+         helper(index+1, arr[index]+sum, list,arr, n );
+          helper(index+1, sum, list,arr, n );
+         
+       
+    }
+}
