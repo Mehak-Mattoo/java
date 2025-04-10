@@ -1,34 +1,29 @@
 class Solution {
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
 
-        int n = candidates.length;
-        List<List<Integer>> list = new ArrayList<>();
-        List<Integer> insideList = new ArrayList<>();
+        List<List<Integer>> big = new ArrayList<>();
+        helper(0,target,candidates.length, candidates, new ArrayList<>(), big  );
 
-        helper(0, target, n, candidates, insideList, list);
-
-        return list;
+        return big;
 
     }
 
-    public static void helper(int i, int target, int n, int[] arr, List<Integer> insideList, List<List<Integer>> list) {
+    public static void helper(int i, int target, int n, int[] candidates, List<Integer> small,
+            List<List<Integer>> big) {
 
         if (i == n) {
+            if (target == 0) {
+                big.add(new ArrayList<>(small));
+            }
             return;
         }
+        if (candidates[i] <= target) {
+            small.add(candidates[i]);
+            helper(i, target - candidates[i], n, candidates, small, big);
+            small.remove(small.size() - 1);
 
-        if (target == 0) {// we found a match
-            list.add(new ArrayList<>(insideList));
-            return;
         }
-
-        if (arr[i] <= target) {// when we can still pick up a element yo make up the target
-            insideList.add(arr[i]);
-            helper(i, target - arr[i], n, arr, insideList, list); // picking the same index multiple times && updating the target+ curr element
-            insideList.remove(insideList.size() - 1);
-        }
-
-        helper(i + 1, target, n, arr, insideList, list);// not taking curr index
+        helper(i + 1, target, n, candidates, small, big);
 
     }
 }
